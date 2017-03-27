@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>NerdBook - Profilo</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Edoardo Demuru">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Nerdbook Social Network sogni profilo personale post">
+        <meta name="description" content="Profilo personale utente">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    </head>
+    
+    <body>
+        <header>
+            <h1>Nerdbook - Il Social Network dei Sogni</h1>
+        </header>
+        
+        <div id="formProfilo">
+            <h2>Profilo</h2>         
+            <form action="profilo.html" method="post">
+                <div id="formContent">
+                  <h3>Inserisci o modifica i tuoi dati</h3>
+                  <label for="nome">Nome</label>
+                  <input type="text" name="nome" value="Luigi" id="nome">
+                  <br>
+                  <label for="cognome">Cognome</label>
+                  <input type="text" name="cognome" value="Puddu" id="cognome">
+                  <br>
+                  <label for="url">Url foto profilo</label>
+                  <input type="url" name="url" id="url">
+                  <br>
+                  <label for="frase">Frase di presentazione</label>
+                  <textarea rows="4" cols="20" name="frase" id="frase">Ciò che non ti uccide ti rende più forte</textarea>
+                  <br>
+                  <label for="data">Data di nascita</label>
+                  <input type="date" id="data" name="data">
+                  <br>
+                  <label for="passw">Password</label>
+                  <input type="password" name="password" value="abcd" id="passw">
+                  <br>
+                  <label for="confpassw">Conferma Password</label>
+                  <input type="password" name="password" value="abcd" id="confpassw">
+                  <br>
+                  <button type="submit" name="modifica" id="modifica">Modifica i dati</button>
+                </div>
+            </form>
+            
+            
+        </div>
+        
+        <nav id="link">
+            <h2>Dove vuoi andare?</h2>
+            <ol>
+                <li><a href="descrizione.html">Informazioni sul Social Network</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ol>
+        </nav>
+        
+        
+    </body>
+</html>
