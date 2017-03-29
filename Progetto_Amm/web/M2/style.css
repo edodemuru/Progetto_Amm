@@ -80,6 +80,10 @@ input,textarea{
     
 }
 
+img{
+    max-width: 400px;
+    max-height: 400px;
+}
 
 li{
     list-style-type: decimal;
@@ -87,6 +91,7 @@ li{
     font-size: 20px;
     font-weight: bold;
 }
+
 
 #titledescr{
     font-size:24px;
@@ -120,21 +125,48 @@ header#title{
     
 }
 
-#titleNet{
-    background-color: #111111;    
+body#bodyBach{
+    margin: 0px;
+}
+
+#titleNet{   
     background-color:#2C3E50;
     padding:8px;
     margin: 0px;
     display: inline;
     padding-right: 40px;
-    padding-bottom: 12px;
+    padding-bottom: 20px;
+    padding-top: 17px;
     padding-left:30px;
+    border:2px solid #aaaaaa;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-#linkBach{
+#linkBach,#linkProf{
     display:inline-block;
-    padding-left: 25px;
+    padding: 25px;
+    font-size: 20px;
+    
 }
+#linkBach{
+    background-color: #2C3E50;
+    padding: 25px;
+    margin: 0px;
+    border:2px solid #E74C3C;
+}
+
+#linkProf{
+  padding: 25px;
+  margin: 0px;
+  width: 80.453px;
+  height: 26px;
+  margin-right: -10px;
+  margin-left: -10px;
+  border:hidden;
+  padding-top: 27px;
+}
+
+
 
 header#titleBac{
     font-size:30px;
@@ -144,10 +176,44 @@ header#titleBac{
     margin-bottom: 5px;
     background-color: #ECF0F1;
     color:#3498DB;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin: 0px;
+    
       
 }
 
+div#lateral{
+    float:left;
+    width: 119px;   
+}
+
+article#posts{
+    margin-left: 200px;
+    
+}
+
+nav#link{
+    margin-left: 200px;
+}
+
+#post1,#post2,#post3{
+    margin:0px;
+}
+
+.fotoProfilo{
+    display:inline;
+}
+
+.fotoProfilo img{
+    position:relative;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display:inline;
+}
+
+.nameuser{
+    display: inline-block;
+}
 
 
 

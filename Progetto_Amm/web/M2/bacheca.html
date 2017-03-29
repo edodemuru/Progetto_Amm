@@ -10,32 +10,49 @@
         <link rel="stylesheet" type="text/css" href="style.css" media="screen">
     </head>
     
-    <body>
+    <body id="bodyBach">
         
         <header id="titleBac">
             <h1 id="titleNet">Nerdbook</h1>
-            <h2 id="linkBach">Bacheca</h2>
-            <h2 id="linkProf">Profilo</h2>
+            <h1 id="linkProf">Profilo</h1>
+            <h1 id="linkBach">Bacheca</h1>
         </header>
+        
+        <div id="lateral">
+            <h2>Persone</h2>
+            <p>Pinco Pallino</p>
+            <p>Riccardo Rossi</p>
+            <p>Edoardo Demuru</p>
+            <h2>Gruppi</h2>
+            <p>Informatici</p>
+            <p>Ingegneri</p>
+            
+        </div>
         
         <article id="posts">
             
           <section id="post1">
-            <h3>Gianluca Massi</h3>
+            <div class="fotoProfilo">
             <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png">
+            </div>              
+            <h3 class="nameuser">Gianluca Massi</h3>
             <p>Ehi ciao! Da quanto non ci sentiamo! Vediamoci appena puoi! :)</p>                    
           </section>
         
           <section id="post2">
-            <h3>Giovanni Puddu</h3>
+             <div class="fotoProfilo">
             <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png">
+            </div>
+            <h3 class="nameuser">Giovanni Puddu</h3>            
             <p>Ehi guarda la foto di questo bellissimo gatto!</p>   
             <img src="../img/djanni1.jpg" alt="Foto di gatto" title="Allegato"/>
           </section>
         
           <section id="post3">
-            <h3>Mauro Poddighe</h3>
+            <div class="fotoProfilo">
             <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png">
+            </div>
+            <h3 class="nameuser">Mauro Poddighe</h3>            
             <p>Ehi guarda questo video di youtube!</p>
             <a href="https://www.youtube.com/watch?v=-OnRxfhbHB4">Video di youtube</a>                    
           </section>
@@ -50,5 +67,7 @@
             </ol>
             
         </nav>
+        
+       
     </body>
 </html>
