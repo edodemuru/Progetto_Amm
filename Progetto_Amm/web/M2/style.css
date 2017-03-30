@@ -15,7 +15,8 @@ body{
     font-style: normal;
     font-variant: normal;
     font-weight: 400;
-    line-height: 20px;  
+    line-height: 20px; 
+    margin:0px;
 }
 
 h1{
@@ -101,6 +102,19 @@ input:focus,textarea:focus{
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     border: 3px solid #2980B9;
+}
+
+button{
+    background-color:#ECF0F1;
+    border:none;
+    color:#2980B9;
+    padding:15px 32px;
+    text-align: center;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor:pointer;
+    
+    
 }
 
 img{
@@ -238,7 +252,7 @@ div#lateral{
     width: 140px;
     padding-left: 40px;
     margin-left: 0px;
-    margin-top: 15px;
+    margin-top: 0px;
     border:2px solid #B9BCBD;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -324,6 +338,113 @@ div#lateral2{
 #usernameBox,#passwordBox{
     display:block;
     padding-bottom: 25px;
+}
+
+#buttonacc{
+    margin-left: 0px;
+}
+
+#linkBach2,#linkProf2{
+    display:inline-block;
+    padding: 25px;
+    font-size: 20px;
+    
+}
+#linkBach2{
+    margin: 0px;
+     width: 80.453px;
+  height: 26px;
+  margin-right: 0px;
+  margin-left: 0px;
+  border:hidden;
+  padding-top: 27px;
+  padding: 25px;
+    
+    
+}
+
+#linkProf2{
+  background-color: #ECF0F1;
+  padding: 27px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 0px 0px 35px 35px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin: 0px;
+  width: 80.453px;
+  height: 26px;
+  margin-right: -10px;
+  margin-left: -10px;
+  border:hidden;
+  padding-top: 27px;
+}
+
+div#formProfilo{
+    margin:0px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: white;
+    border:0px;
+    display:inline-block;
+    width: 691px;
+    padding-left: 0px;
+    
+}
+
+img#Profilepic{
+    float: left;
+    width: 115px;
+    height: 76px;
+    padding-left: 80px;
+    padding-top: 45px;
+}
+
+#Profiloform{
+    
+    padding-left: 317px;
+}
+
+.formitem{
+    padding-bottom: 15px;
+}
+
+a:link.buttlink{
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26px; 
+    text-decoration: none;
+    color:#3498DB;
+}
+a:visited.buttlink{
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26px; 
+    text-decoration: none;
+    color:#3498DB;
+}
+a:active.buttlink{
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26px; 
+    text-decoration: none;
+    color:#3498DB;
+}
+
+a:hover.buttlink{
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26px; 
+    text-decoration: none;
+    color:#3498DB;
 }
 
 
