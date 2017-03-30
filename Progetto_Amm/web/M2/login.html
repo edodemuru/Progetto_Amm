@@ -16,18 +16,7 @@
             <h1>Nerdbook - Il Social Network dei Sogni</h1>
         </header>
         
-        <form action="login.html" method="post">
-            <div id="loginContent">
-              <h2>Login</h2>
-              <label for="username">Username</label>
-              <input type="text" name="username" id="username" value="giovanni96">
-              <br/>
-              <label for="passw">Password</label>
-              <input type="password" name="password" id="passw" value="blargh">
-              <button type="submit" name="buttonacc" id="buttonacc">Accedi</button>
-            </div>
-        </form>
-        
+        <div id="lateral2">
         <nav id="link">
             <h2>Dove vuoi andare?</h2>
             <ol>
@@ -36,7 +25,27 @@
                 <li><a href="bacheca.html">Bacheca Personale</a></li>
             </ol>
             
-        </nav>       
+        </nav>
+        </div>
+        
+        <div id="formboxLogin">
+        <form action="login.html" method="post">
+            <div id="loginContent">
+              <h2 id="idtitleLogin">Login</h2>
+              <div id="usernameBox">
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" value="giovanni96">
+              </div>
+              <div id="passwordBox">
+              <label for="passw">Password</label>
+              <input type="password" name="password" id="passw" value="blargh">
+              </div>
+              <button type="submit" name="buttonacc" id="buttonacc">Accedi</button>
+            </div>
+        </form>
+        </div>
+        
+        
         
         
         
