@@ -32,6 +32,7 @@ h2{
     line-height: 20px;
     font-style: normal;
     font-weight: bold;
+    margin-bottom: 7px;
 }
 
 h3{
@@ -39,7 +40,12 @@ h3{
     line-height: 20px;
     font-style: normal;
     font-weight: bold;
+    margin-bottom: 7px;
     
+}
+
+p{
+    margin-top: 7px;
 }
 
 a:link{
@@ -65,10 +71,10 @@ a:visited{
 }
 a:hover{
     text-decoration: underline;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-variant: normal;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 20px; 
     color:#E74C3C;
 }
@@ -131,6 +137,8 @@ li{
 
 ol{
     padding:0px;
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
 
 #titledescr{
@@ -140,14 +148,53 @@ ol{
     font-weight: bold; 
 }
 
+div#lateral3{
+    float:left;
+    width: 140px;
+    padding-left: 40px;
+    margin-left: 0px;
+    margin-top: 0px;
+    border:2px solid #B9BCBD;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.descr{
+    border:2px solid #B9BCBD;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-right: 20px;
+    margin-left: 230px;
+    margin-bottom: 25px;
+}
+
+#linklogin p{
+    margin-top: 0px;
+}
+
+.titlesect{
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+
 div#link{
-    background-color: #2C3E50;
+    /*background-color: #2C3E50;
     border-radius: 25px;
     width: 250px;
     height: 100px; 
     padding-bottom: 15px;
     padding-top: 5px;    
+    */
+    margin-left: -9px;
 }
+
+#lateral3 h2, #lateral3 nav#linklogin{
+    margin-left: -27px;
+}
+
 
 header#title{
     font-size:30px;
@@ -228,6 +275,7 @@ header#titleBac{
 
 #logout{
     float: right;
+    margin-top: 7px;
     
 }
 
@@ -315,12 +363,16 @@ div#lateral2{
     margin-left: 0px;
     margin-right: 15px;
     margin-top: 15px;
-    padding-bottom: 65px;
+    padding-bottom: 40px;
     border:2px solid #B9BCBD;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding-right: 40px;
 }
 
+#lateral2 #link{
+    width: 160px;
+}
 #formboxLogin{
     display:inline-block;
     background-color: white;
@@ -381,14 +433,16 @@ div#lateral2{
 
 div#formProfilo{
     margin:0px;
-    margin-top: 0px;
+    margin-top: 35px;
     margin-bottom: 15px;
     padding: 15px;
     background-color: white;
-    border:0px;
     display:inline-block;
     width: 691px;
-    padding-left: 0px;
+    padding-left: 0px;    
+    border:2px solid #B9BCBD;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-left: 225px;
     
 }
 
@@ -446,6 +500,8 @@ a:hover.buttlink{
     text-decoration: none;
     color:#3498DB;
 }
+
+
 
 
 
