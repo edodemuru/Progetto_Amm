@@ -80,10 +80,10 @@ a:hover{
 }
 a:active{
    text-decoration: underline;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-variant: normal;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 20px; 
     color:#E74C3C; 
 }
@@ -166,7 +166,7 @@ div#lateral3{
     padding: 15px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-right: 20px;
+    margin-right: 25px;
     margin-left: 230px;
     margin-bottom: 25px;
 }
@@ -269,6 +269,9 @@ header#titleBac{
     color:#3498DB;
     margin: 0px;
     /*border:2px solid #B9BCBD;*/
+    position:fixed;
+    top:0px;
+    width: 100%;
     
       
 }
@@ -301,13 +304,22 @@ div#lateral{
     padding-left: 40px;
     margin-left: 0px;
     margin-top: 0px;
-    border:2px solid #B9BCBD;
+    border-left:2px solid #B9BCBD;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: fixed;
+    /*margin-top: 15px;*/
 }
+
+p.people,p.group,p.link{
+    margin-top: 15px;
+}
+
+
 
 article#posts{
     margin-left: 196px;
+    margin-top: 80px;
     
 }
 
@@ -321,20 +333,8 @@ article#posts{
     padding: 15px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-right: 25px;
     
-}
-
-.fotoProfilo{
-    display:inline;
-}
-
-.fotoProfilo img{
-    position:relative;
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    display:inline;
-    float:left;
 }
 
 .nameuser{
@@ -343,7 +343,7 @@ article#posts{
     margin-top: 0px;
 }
 
-#nameprofile{
+.nameprofile{
    font-size:18px;
     line-height: 15px;
     font-style: normal;
@@ -354,6 +354,12 @@ article#posts{
     padding: 15px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-right: 25px;
+    border-top: 0px;
+}
+
+#contentPage{
+    margin-top: 80px;
 }
 
 div#lateral2{
@@ -442,7 +448,7 @@ div#formProfilo{
     padding-left: 0px;    
     border:2px solid #B9BCBD;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-left: 225px;
+    margin-left: 350px;
     
 }
 
@@ -499,6 +505,66 @@ a:hover.buttlink{
     line-height: 26px; 
     text-decoration: none;
     color:#3498DB;
+}
+
+/*Immagini*/
+
+.fotoProfilo{
+    display:inline;
+}
+
+.fotoProfilo img{
+    /*position:relative;*/
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display:inline;
+    float:left;
+}
+
+#logout h2::before, p.people::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/user-icon3.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    
+}
+
+p.group::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/groupimg.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    
+}
+
+p.link::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/iconinfo.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    margin-bottom: 20px
 }
 
 
