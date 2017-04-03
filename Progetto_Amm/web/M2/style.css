@@ -152,7 +152,7 @@ div#lateral3{
     float:left;
     width: 140px;
     padding-left: 40px;
-    margin-left: 0px;
+    margin-left: 14px;
     margin-top: 0px;
     border:2px solid #B9BCBD;
     background-color: white;
@@ -173,6 +173,7 @@ div#lateral3{
 
 #linklogin p{
     margin-top: 0px;
+    margin-left: -13px;
 }
 
 .titlesect{
@@ -181,18 +182,11 @@ div#lateral3{
 }
 
 div#link{
-    /*background-color: #2C3E50;
-    border-radius: 25px;
-    width: 250px;
-    height: 100px; 
-    padding-bottom: 15px;
-    padding-top: 5px;    
-    */
-    margin-left: -9px;
+    margin-left: 8px;
 }
 
-#lateral3 h2, #lateral3 nav#linklogin{
-    margin-left: -27px;
+#lateral3 h2, #lateral3 nav#linklogin h2{
+    margin-left: -16px;
 }
 
 
@@ -298,9 +292,9 @@ div#linkdif{
    
 }
 
-div#lateral{
+div#lateral,div#lateral2{
     float:left;
-    width: 140px;
+    width: 142px;
     padding-left: 40px;
     margin-left: 0px;
     margin-top: 0px;
@@ -311,8 +305,9 @@ div#lateral{
     /*margin-top: 15px;*/
 }
 
-p.people,p.group,p.link{
+p.link{
     margin-top: 15px;
+    margin-left: -22px;
 }
 
 
@@ -507,14 +502,36 @@ a:hover.buttlink{
     color:#3498DB;
 }
 
-/*Immagini*/
+.fotoProfilo2 p{
+    width: 140px;
+    height: 40px;
+    margin-top: 0px;
+    padding-top: 8px;
+    margin-left: 40px;
+    margin-bottom: 0px;
+    margin-top: -3px;
+}
+
+.fotoProfilo2{
+    position: relative;
+    right: 31px;
+    
+}
+
+.lateraltitle{
+    position:relative;
+    right: 20px;
+}
 
 .fotoProfilo{
     display:inline;
 }
 
+/*Immagini*/
+
+
+
 .fotoProfilo img{
-    /*position:relative;*/
     width: 40px;
     height: 40px;
     overflow: hidden;
@@ -522,7 +539,18 @@ a:hover.buttlink{
     float:left;
 }
 
-#logout h2::before, p.people::before{
+.fotoProfilo2 img{
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    display:inline;
+    float:left;
+    
+}
+
+
+
+#logout h2::before{
     position: relative;
     overflow: hidden;
     float: left;
@@ -537,21 +565,20 @@ a:hover.buttlink{
     
 }
 
-p.group::before{
+#groups::after{
     position: relative;
     overflow: hidden;
-    float: left;
-    background-image:url(../img/groupimg.png);
+    float: right;
+    background-image:url(../img/newgroup.png);
     background-size: 30px 30px;
     width: 30px;
     height: 30px;
     display: inline;
     content: "";
-    bottom:7px;
-    right: 10px;
+    bottom:10px;
+    right: 25px;
     
 }
-
 p.link::before{
     position: relative;
     overflow: hidden;
@@ -566,6 +593,270 @@ p.link::before{
     right: 10px;
     margin-bottom: 20px
 }
+
+@media only screen and  (max-width: 480px){
+    
+ header#titleBac{
+    font-size:30px;
+    line-height: 50px;
+    font-style: normal;
+    font-weight: bold;
+    margin-bottom: 5px;
+    background-color: #2C3E50;
+    color:#3498DB;
+    margin: 0px;
+    top:0px;
+    width: 455px;
+    height: 146px;
+    position: static;
+    
+      
+}
+    
+#linkBach{
+    background-color: #ECF0F1;
+    padding: 27px;
+    margin: 0px;
+    /*border:2px solid #B9BCBD;*/
+    border-radius: 0px 0px 35px 35px;
+     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+     padding-left: 40px;
+     padding-right: 40px;   
+}
+
+
+
+#linkProf{
+  padding: 25px;
+  margin: 0px;
+  width: 80.453px;
+  height: 26px;
+  margin-right: -10px;
+  margin-left: -10px;
+  border:hidden;
+  padding-top: 27px;
+}
+
+#linkBach,#linkProf{
+    display:inline-block;
+    padding: 25px;
+    font-size: 20px;
+    
+}
+
+#logout{
+    float: none;
+    margin-top: 0px;
+    position: relative;
+    background-color: #2C3E50;
+    padding: 0px;
+    width: 265px;
+    left:75px;    
+    text-align: center;
+    
+    
+}
+
+#logout h2{
+    margin: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    position: relative;
+    top: 15px;
+}
+
+#logout a:link{
+    margin-left: 0px;
+}
+
+#logout h2::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/user-icon3.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: -17px;
+    
+}
+   div#lateral{
+    float:none;
+    width: 142px;
+    height: 242px;
+    padding-left: 40px;
+    padding-right: 258px;
+    margin-left: 10px;
+    margin-top: 0px;
+    border:2px solid #B9BCBD;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+    top: 16px;
+    
+}
+
+#groupsection{
+    position: relative;
+    left: 215px;
+    bottom: 165px;    
+}
+
+#peoplesection{
+    position: relative;
+    top:12px;
+}
+
+#linksbacheca{
+    position: relative;
+    left: 215px;
+    bottom: 183px;
+    
+}
+
+p.link{
+    margin-top: 15px;
+    margin-left: -22px;
+    width: 150px;
+}
+
+.nameprofile{
+   font-size:18px;
+    line-height: 15px;
+    font-style: normal;
+    font-weight: bold; 
+    margin: 0px;
+    border:2px solid #B9BCBD;
+    margin-top: -45px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-right: 25px;
+    border-top: 0px;
+    width: 410px;
+    position: relative;
+    right: 186px;
+    margin-bottom: 15px;
+}
+
+#post1,#post2,#post3{
+    margin:0px;
+    border:2px solid #B9BCBD;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-right: 25px;
+    width: 410px;
+    position: relative;
+    right:186px;
+    
+}
+
+
+#linkBach2,#linkProf2{
+    display:inline-block;
+    padding: 25px;
+    font-size: 20px;
+    
+}
+
+#linkBach2{
+    
+  margin: 0px;
+  width: 80.453px;
+  height: 26px;
+  margin-right: -10px;
+  margin-left: -10px;
+  border:hidden;
+  padding-top: 27px;
+  padding: 25px;
+    
+}
+
+#linkProf2{
+  background-color: #ECF0F1;
+  border-radius: 0px 0px 35px 35px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  margin: 0px;
+  
+}
+
+div #lateral2{
+    float:none;
+    width: 142px;
+    height: 242px;
+    padding-left: 40px;
+    padding-right: 258px;
+    margin-left: 10px;
+    margin-top: 0px;
+    border:2px solid #B9BCBD;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+    top: -64px;
+}
+
+div #formprofilo{
+    margin-left: 10px;
+}
+
+#Profiloform{
+    position: relative;
+    right: 295px;
+    top: 124px;
+    width: 345px;
+}
+
+div#formProfilo{
+    margin-left: 10px;
+    width: 425px;
+    height: 888px;
+    margin-top: 0px;
+    position: relative;
+    right: 60px;
+    bottom: 57px;
+}
+
+img#Profilepic{
+    padding-left: 138px;
+    padding-top: 32px;
+}
+
+header#title{
+    font-size: 20px;
+    width: 421px;
+    height: 50px;
+}
+
+div#lateral2{
+    float: none;
+    position:relative;
+    top: 360px;
+    margin-left: 107px;
+}
+
+#formboxLogin{
+    position: relative;
+    bottom: 208px;
+    margin-left: 48px;
+    width: 264px;
+    height: 289px;
+}
+
+
+
+      
+    }
+    
+
+
+
 
 
 
