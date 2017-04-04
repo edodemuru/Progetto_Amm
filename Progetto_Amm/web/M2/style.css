@@ -119,6 +119,7 @@ button{
     font-size: 14px;
     margin: 4px 2px;
     cursor:pointer;
+    width: 100%;
     
     
 }
@@ -171,6 +172,7 @@ div#lateral3{
     margin-bottom: 25px;
 }
 
+
 #linklogin p{
     margin-top: 0px;
     margin-left: -13px;
@@ -189,7 +191,6 @@ div#link{
     margin-left: -16px;
 }
 
-
 header#title{
     font-size:30px;
     line-height: 50px;
@@ -205,6 +206,10 @@ header#title{
     border-radius: 30px;   
     
 }
+
+
+    
+
 
 body#bodyBach{
     margin: 0px;
@@ -231,7 +236,6 @@ body#bodyBach{
     background-color: #ECF0F1;
     padding: 27px;
     margin: 0px;
-    /*border:2px solid #B9BCBD;*/
     border-radius: 0px 0px 35px 35px;
      box-shadow: 0 0 10px rgba(0,0,0,0.2);
      padding-left: 40px;
@@ -239,6 +243,7 @@ body#bodyBach{
     
     
 }
+
 
 #linkProf{
   padding: 25px;
@@ -258,23 +263,13 @@ header#titleBac{
     line-height: 50px;
     font-style: normal;
     font-weight: bold;
-    margin-bottom: 5px;
     background-color: #2C3E50;
     color:#3498DB;
-    margin: 0px;
-    /*border:2px solid #B9BCBD;*/
     position:fixed;
-    top:0px;
-    width: 100%;
     
       
 }
 
-#logout{
-    float: right;
-    margin-top: 7px;
-    
-}
 
 #logout h2{
     margin: 0px;
@@ -292,18 +287,18 @@ div#linkdif{
    
 }
 
-div#lateral,div#lateral2{
+div#lateral,div#lateral2,div#lateral5{
     float:left;
     width: 142px;
     padding-left: 40px;
-    margin-left: 0px;
-    margin-top: 0px;
     border-left:2px solid #B9BCBD;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     position: fixed;
     /*margin-top: 15px;*/
 }
+
+
 
 p.link{
     margin-top: 15px;
@@ -357,7 +352,21 @@ article#posts{
     margin-top: 80px;
 }
 
-div#lateral2{
+/*div#lateral2{
+    float:left;
+    width: 140px;
+    padding-left: 27px;
+    margin-left: 0px;
+    margin-right: 15px;
+    margin-top: 15px;
+    padding-bottom: 40px;
+    border:2px solid #B9BCBD;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding-right: 40px;
+}*/
+
+div#lateral4{
     float:left;
     width: 140px;
     padding-left: 27px;
@@ -382,6 +391,8 @@ div#lateral2{
     padding:25px;
     border:2px solid #B9BCBD;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    /*position: relative;
+    bottom: 197px;*/
 
 }
 #idtitleLogin{
@@ -432,28 +443,6 @@ div#lateral2{
   padding-top: 27px;
 }
 
-div#formProfilo{
-    margin:0px;
-    margin-top: 35px;
-    margin-bottom: 15px;
-    padding: 15px;
-    background-color: white;
-    display:inline-block;
-    width: 691px;
-    padding-left: 0px;    
-    border:2px solid #B9BCBD;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-left: 350px;
-    
-}
-
-img#Profilepic{
-    float: left;
-    width: 115px;
-    height: 76px;
-    padding-left: 80px;
-    padding-top: 45px;
-}
 
 #Profiloform{
     
@@ -527,71 +516,152 @@ a:hover.buttlink{
     display:inline;
 }
 
-/*Immagini*/
-
-
-
-.fotoProfilo img{
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    display:inline;
-    float:left;
+div#formProfilo{
+     background-color: white;
+     display:inline-block;
+     border:2px solid #B9BCBD;
+     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-.fotoProfilo2 img{
-    width: 30px;
-    height: 30px;
-    overflow: hidden;
-    display:inline;
-    float:left;
+@media only screen and (min-width:1024px){
+    
+    header#titleBac{
+    font-size:30px;
+    line-height: 50px;
+    font-style: normal;
+    font-weight: bold;
+    margin-bottom: 5px;
+    background-color: #2C3E50;
+    color:#3498DB;
+    margin: 0px;
+    /*border:2px solid #B9BCBD;*/
+    position:fixed;
+    top:0px;
+    width: 100%;
+    height: 80px;
+    
+      
+}
+    
+    div#formProfilo{
+    margin:0px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    padding: 15px;
+    width: 691px;
+    padding-left: 0px;    
+    margin-left: 350px;
     
 }
 
-
-
-#logout h2::before{
-    position: relative;
-    overflow: hidden;
-    float: left;
-    background-image:url(../img/user-icon3.png);
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
-    display: inline;
-    content: "";
-    bottom:7px;
-    right: 10px;
-    
+h2.descr{
+    margin-top: 75px;
 }
 
-#groups::after{
-    position: relative;
-    overflow: hidden;
+div#lateral5{
+    margin-top: 6px;
+}
+
+#logout{
     float: right;
-    background-image:url(../img/newgroup.png);
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
-    display: inline;
-    content: "";
-    bottom:10px;
-    right: 25px;
+    margin-top: 7px;
     
 }
-p.link::before{
+
+    
+}
+@media only screen and (min-width:480px) and (max-width:1024px){
+    #formboxLogin{
+        margin-left: 0px;
+        width: 183px;
+        height: 268px;
+    }
+    
+    header#titleBac{
+        top: 0px;
+        width: 1024px;
+        z-index: 1;
+    }
+    
+    h2.descr{
+        position: relative;
+        top: 139px;
+    }
+    
+    #cosa{
+        margin-top: 153px;
+    }
+    
+    header#title{
+        font-size: 20px;
+    }
+    
+    div #lateral5{
+        margin-top: 131px;
+        position: static;
+    }
+    
+    nav#logout{
+    float: none;
+    margin-top: 0px;
     position: relative;
-    overflow: hidden;
-    float: left;
-    background-image:url(../img/iconinfo.png);
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
-    display: inline;
-    content: "";
-    bottom:7px;
-    right: 10px;
-    margin-bottom: 20px
+    background-color: #2C3E50;
+    padding: 0px;
+    width: 265px;
+    left:221px;    
+    text-align: left;   
+    
+}
+
+div#lateral2{
+    margin-top: 67px;
+}
+
+#Profiloform{
+    padding-left: 0px;
+        
+}
+
+#formProfilo{
+    width: 369px;
+    position: relative;
+    left: 240px;
+    padding: 38px;
+    top: 80px;
+    margin-bottom: 10px;
+}
+
+#formContent h3{
+    position: relative;
+    bottom: 25px;
+}
+
+.formitem#firstformitem{
+    margin-top: 18px;
+}
+
+img#Profilepic{
+    position: relative;
+    bottom: 25px;
+    right: 22px;
+    padding-left: 0px;
+    padding-top: 0px;
+}
+
+div#lateral{
+    margin-top: 0px;
+}
+
+.nameprofile{
+    width: 1000px;
+    margin-top: 148px;
+}
+
+#post1,#post2,#post3{
+    width: 1000px;
+}
+
+
 }
 
 @media only screen and  (max-width: 480px){
@@ -606,7 +676,7 @@ p.link::before{
     color:#3498DB;
     margin: 0px;
     top:0px;
-    width: 455px;
+    width: 480px;
     height: 146px;
     position: static;
     
@@ -703,18 +773,21 @@ p.link::before{
 #groupsection{
     position: relative;
     left: 215px;
-    bottom: 165px;    
+    bottom: 165px;  
+    width: 182px;
 }
 
 #peoplesection{
     position: relative;
     top:12px;
+    width: 182px;
 }
 
 #linksbacheca{
     position: relative;
     left: 215px;
     bottom: 183px;
+    width: 182px;
     
 }
 
@@ -787,19 +860,32 @@ p.link{
   
 }
 
-div #lateral2{
-    float:none;
-    width: 142px;
-    height: 242px;
-    padding-left: 40px;
-    padding-right: 258px;
+div#lateral2, div#lateral5{
+    float: none;
+    position:relative;
+    top: -60px;
     margin-left: 10px;
+   width: 394px;
+    height: 253px;
+    padding-right: 0px;
+    padding-left: 40px;
+    margin-top: 0px;
     margin-top: 0px;
     border:2px solid #B9BCBD;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    position: relative;
-    top: -64px;
+}
+
+div#lateral5{
+    margin-top: 83px;
+}
+
+
+div#lateral4{
+    float: none;
+    position:relative;
+    top: 360px;
+    margin-left: 107px;
 }
 
 div #formprofilo{
@@ -814,13 +900,19 @@ div #formprofilo{
 }
 
 div#formProfilo{
+    padding: 15px;
+    background-color: white;        
+    border:2px solid #B9BCBD;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);  
     margin-left: 10px;
-    width: 425px;
+    width: 405px;
     height: 888px;
     margin-top: 0px;
     position: relative;
-    right: 60px;
-    bottom: 57px;
+    right: 0px;
+    bottom: 37px;
+    display:block;
+    
 }
 
 img#Profilepic{
@@ -830,15 +922,12 @@ img#Profilepic{
 
 header#title{
     font-size: 20px;
-    width: 421px;
+    width: 463px;
     height: 50px;
 }
 
-div#lateral2{
-    float: none;
-    position:relative;
-    top: 360px;
-    margin-left: 107px;
+.lateraltitle{
+    width: 146px;
 }
 
 #formboxLogin{
@@ -849,10 +938,156 @@ div#lateral2{
     height: 289px;
 }
 
+div #lateral3{    
+    float:none;
+    width: 142px;
+    height: 146px;
+    padding-left: 40px;
+    padding-right: 258px;
+    margin-left: 10px;
+    margin-top: 80px;
+    border:2px solid #B9BCBD;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    position: relative;
+    top: -64px;
+    
+}
+
+#linklogin{
+    position: relative;
+    left: 215px;
+    bottom: 122px;
+}
+
+#linklogin p{
+    margin-top: 10px;
+    margin-left: -14px;
+}
+
+.descr{
+    margin-right: 10px;
+    margin-left: 10px;
+    position: relative;
+    bottom: 55px;
+}
+
+.descr h3, h2.descr{
+    text-align: center;
+    width: 325px;
+    height: 28px;
+    margin-left: 20px
+}
+
+h2.descr{
+    width: 405px;
+    margin-left: 10px;
+}
+
+h1.descr{
+    width: 325px;
+    height: 55px;
+    padding-right: 78px;
+}
+
+#cosa,#funzionalita,#come{
+    width: 390px;
+    margin-left: 19px;
+}
+
+a:hover{
+    font-size: 14px;
+}
 
 
       
     }
+    
+    
+    
+    
+/*Immagini*/
+
+/* Queste immagini non possono essere decorative in quanto rappresentano la foto profilo
+   sia dell'utente in quel momento connesso al network, sia degli amici dell'utente, che pubblicano messaggi
+   sulla sua bacheca*/
+.fotoProfilo img{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display:inline;
+    float:left;
+}
+
+/* Queste lo stesso non sono immagini decorative in quanto rappresentano foto profilo di utenti, oppure
+   immagini utilizzate dai gruppi*/
+.fotoProfilo2 img{
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    display:inline;
+    float:left;
+    
+}
+
+
+/* Ho deciso di inserire questa immagine come immagine decorativa, dato che può servire ad 
+   identificare immediatamente l'utente al momento connesso al profilo*/
+#logout h2::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/user-icon3.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    
+}
+
+/* Questa è un'immagine decorativa in quanto rappresenta l'icona di un gruppo*/
+#groups::after{
+    position: relative;
+    overflow: hidden;
+    float: right;
+    background-image:url(../img/newgroup.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:10px;
+    right: 25px;
+    
+}
+
+/* Questa immagine è decorativa in quanto è un'icona che rappresenta la pagina di
+   informazioni del social network*/
+p.link::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/iconinfo.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    margin-bottom: 20px
+}
+
+img#Profilepic{
+    float: left;
+    width: 115px;
+    height: 76px;
+    padding-left: 80px;
+    padding-top: 45px;
+}
     
 
 
