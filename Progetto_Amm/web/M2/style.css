@@ -100,7 +100,6 @@ input,textarea{
     border-radius: 10px;
     padding: 9px 19px;
     box-sizing: border-box;
-    /*font-weight: bold;*/
     
 }
 
@@ -123,6 +122,7 @@ button{
     
     
 }
+
 
 img{
     max-width: 276px;
@@ -163,13 +163,29 @@ div#lateral3{
 .descr{
     border:2px solid #B9BCBD;
     margin-top: 15px;
-    margin-bottom: 15px;
     padding: 15px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     margin-right: 25px;
     margin-left: 230px;
     margin-bottom: 25px;
+}
+
+#internaltitle{
+    border:2px solid #B9BCBD;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-right: 25px;
+    margin-left: 230px;
+    margin-bottom: 25px;
+    width: 230px;
+    padding-top: 4px;
+}
+
+#internallinks{
+    margin-left: 50px;
 }
 
 
@@ -554,12 +570,12 @@ div#formProfilo{
     
 }
 
-h2.descr{
-    margin-top: 75px;
+#headerArticle.descr{
+    margin-top: 87px;
 }
 
 div#lateral5{
-    margin-top: 6px;
+    margin-top: -6px;
 }
 
 #logout{
@@ -583,13 +599,18 @@ div#lateral5{
         z-index: 1;
     }
     
-    h2.descr{
+    #headerArticle.descr{
         position: relative;
         top: 139px;
+        width: 638px;
     }
     
     #cosa{
-        margin-top: 153px;
+        margin-top: 28px;
+    }
+    
+    .descr{
+        width: 638px;
     }
     
     header#title{
@@ -615,6 +636,7 @@ div#lateral5{
 
 div#lateral2{
     margin-top: 67px;
+    z-index: 2;
 }
 
 #Profiloform{
@@ -629,6 +651,7 @@ div#lateral2{
     padding: 38px;
     top: 80px;
     margin-bottom: 10px;
+    z-index: 1;
 }
 
 #formContent h3{
@@ -637,13 +660,13 @@ div#lateral2{
 }
 
 .formitem#firstformitem{
-    margin-top: 18px;
+    margin-top: 63px;
 }
 
 img#Profilepic{
     position: relative;
-    bottom: 25px;
-    right: 22px;
+    bottom: 56px;
+    right: 66px;
     padding-left: 0px;
     padding-top: 0px;
 }
@@ -661,19 +684,17 @@ div#lateral{
     width: 1000px;
 }
 
+#internaltitle{
+    margin-top: 157px;
+}
+
 
 }
 
 @media only screen and  (max-width: 480px){
     
  header#titleBac{
-    font-size:30px;
-    line-height: 50px;
-    font-style: normal;
-    font-weight: bold;
     margin-bottom: 5px;
-    background-color: #2C3E50;
-    color:#3498DB;
     margin: 0px;
     top:0px;
     width: 480px;
@@ -687,7 +708,6 @@ div#lateral{
     background-color: #ECF0F1;
     padding: 27px;
     margin: 0px;
-    /*border:2px solid #B9BCBD;*/
     border-radius: 0px 0px 35px 35px;
      box-shadow: 0 0 10px rgba(0,0,0,0.2);
      padding-left: 40px;
@@ -710,7 +730,6 @@ div#lateral{
 #linkBach,#linkProf{
     display:inline-block;
     padding: 25px;
-    font-size: 20px;
     
 }
 
@@ -718,7 +737,6 @@ div#lateral{
     float: none;
     margin-top: 0px;
     position: relative;
-    background-color: #2C3E50;
     padding: 0px;
     width: 265px;
     left:75px;    
@@ -741,16 +759,6 @@ div#lateral{
 }
 
 #logout h2::before{
-    position: relative;
-    overflow: hidden;
-    float: left;
-    background-image:url(../img/user-icon3.png);
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
-    display: inline;
-    content: "";
-    bottom:7px;
     right: -17px;
     
 }
@@ -763,8 +771,6 @@ div#lateral{
     margin-left: 10px;
     margin-top: 0px;
     border:2px solid #B9BCBD;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
     position: relative;
     top: 16px;
     
@@ -798,33 +804,13 @@ p.link{
 }
 
 .nameprofile{
-   font-size:18px;
-    line-height: 15px;
-    font-style: normal;
-    font-weight: bold; 
-    margin: 0px;
-    border:2px solid #B9BCBD;
     margin-top: -45px;
-    padding: 15px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-right: 25px;
-    border-top: 0px;
     width: 410px;
     position: relative;
     right: 186px;
-    margin-bottom: 15px;
 }
 
 #post1,#post2,#post3{
-    margin:0px;
-    border:2px solid #B9BCBD;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    padding: 15px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    margin-right: 25px;
     width: 410px;
     position: relative;
     right:186px;
@@ -833,29 +819,18 @@ p.link{
 
 
 #linkBach2,#linkProf2{
-    display:inline-block;
     padding: 25px;
-    font-size: 20px;
+    
     
 }
 
 #linkBach2{
     
-  margin: 0px;
-  width: 80.453px;
-  height: 26px;
-  margin-right: -10px;
   margin-left: -10px;
-  border:hidden;
-  padding-top: 27px;
-  padding: 25px;
     
 }
 
 #linkProf2{
-  background-color: #ECF0F1;
-  border-radius: 0px 0px 35px 35px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
   margin: 0px;
   
 }
@@ -863,17 +838,11 @@ p.link{
 div#lateral2, div#lateral5{
     float: none;
     position:relative;
-    top: -60px;
+    bottom: 60px;
     margin-left: 10px;
    width: 394px;
     height: 253px;
-    padding-right: 0px;
-    padding-left: 40px;
-    margin-top: 0px;
-    margin-top: 0px;
     border:2px solid #B9BCBD;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 div#lateral5{
@@ -900,10 +869,7 @@ div #formprofilo{
 }
 
 div#formProfilo{
-    padding: 15px;
-    background-color: white;        
-    border:2px solid #B9BCBD;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);  
+    padding: 15px; 
     margin-left: 10px;
     width: 405px;
     height: 888px;
@@ -966,37 +932,36 @@ div #lateral3{
 }
 
 .descr{
-    margin-right: 10px;
-    margin-left: 10px;
     position: relative;
     bottom: 55px;
+    right: 220px;
+    width: 403px;
+   
+}
+.descr h2{
+    margin: 0px;
+    position: relative;
+    right: 11px;
 }
 
-.descr h3, h2.descr{
+
+.descr h3{
     text-align: center;
     width: 325px;
     height: 28px;
     margin-left: 20px
 }
 
-h2.descr{
-    width: 405px;
-    margin-left: 10px;
-}
-
-h1.descr{
-    width: 325px;
-    height: 55px;
-    padding-right: 78px;
-}
-
-#cosa,#funzionalita,#come{
-    width: 390px;
-    margin-left: 19px;
-}
 
 a:hover{
     font-size: 14px;
+}
+
+#internaltitle{
+    margin-left: 10px;
+    position: relative;
+    bottom: 65px;
+    margin-bottom: 0px;
 }
 
 
@@ -1071,6 +1036,21 @@ p.link::before{
     overflow: hidden;
     float: left;
     background-image:url(../img/iconinfo.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    margin-bottom: 20px
+}
+
+#loginid::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(../img/icon-login.png);
     background-size: 30px 30px;
     width: 30px;
     height: 30px;
