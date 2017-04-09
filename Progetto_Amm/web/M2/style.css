@@ -295,7 +295,7 @@ header#titleBac{
 }
 
 #logout a:link{
-    margin-left: 50px;
+    margin-left: 24px;
 }
 
 div#linkdif{
@@ -567,7 +567,11 @@ div#lateral5{
     margin-top: 7px;
     
 }
-
+.fotoProfiloLogout{
+position: relative;
+     right: 51px;
+    bottom: 15px;
+}
     
 }
 @media only screen and (min-width:480px) and (max-width:1024px){
@@ -614,7 +618,7 @@ div#lateral5{
     padding: 0px;
     width: 265px;
     left:221px;    
-    text-align: left;   
+    margin-left: 64px;
     
 }
 
@@ -672,6 +676,12 @@ div#lateral{
     margin-top: 157px;
 }
 
+.fotoProfiloLogout{
+position: relative;
+     right: 51px;
+    bottom: 15px;
+}
+    
 
 }
 
@@ -740,6 +750,7 @@ div#lateral{
 
 #logout a:link{
     margin-left: 0px;
+    margin-right: 28px;
 }
 
 #logout h2::before{
@@ -949,6 +960,11 @@ a:hover{
     margin-bottom: 0px;
 }
 
+.fotoProfiloLogout{
+position: relative;
+    bottom: 15px;
+}
+    
 
       
     }
@@ -981,24 +997,16 @@ a:hover{
 }
 
 
-/* Ho deciso di inserire questa immagine come immagine decorativa, per metter in evidenza per permettere
-   di identificare l'utente in quel momento connesso al profilo*/
-#logout h2::before{
-    position: relative;
+/*Questa non è un'immagine decorativa in quanto rappresenta la foto del profilo del proprietario dell'account */
+.fotoProfiloLogout img{
+width: 40px;
+    height: 40px;
     overflow: hidden;
-    float: left;
-    background-image:url(../img/user-icon3.png);
-    background-size: 30px 30px;
-    width: 30px;
-    height: 30px;
-    display: inline;
-    content: "";
-    bottom:7px;
-    right: 10px;
-    
+    display:inline;
+    float:left;
 }
 
-/* Questa è un'immagine decorativa in quanto rappresenta l'icona di un gruppo*/
+/* Questa è un'immagine decorativa in quanto rappresenta l'icona generica di un gruppo*/
 #groups::after{
     position: relative;
     overflow: hidden;
@@ -1031,6 +1039,7 @@ p.link::before{
     margin-bottom: 20px
 }
 
+/*Questa immagine è lo stesso decorativa in quanto rappresenta l'icona di login all'account*/
 #loginid::before{
     position: relative;
     overflow: hidden;
@@ -1046,6 +1055,8 @@ p.link::before{
     margin-bottom: 20px
 }
 
+/* Questa non è un'immagine decorativa, in quanto rappresenta la foto profilo dell'utente, visualizzata
+   nella pagina del profilo*/
 img#Profilepic{
     float: left;
     width: 115px;
