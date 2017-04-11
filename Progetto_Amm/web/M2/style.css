@@ -163,7 +163,7 @@ div#lateral3{
 .descr{
     border:2px solid #B9BCBD;
     margin-top: 15px;
-    padding: 15px;
+    padding: 18px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     margin-right: 25px;
@@ -311,7 +311,6 @@ div#lateral,div#lateral2,div#lateral5{
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     position: fixed;
-    /*margin-top: 15px;*/
 }
 
 
@@ -534,7 +533,6 @@ div#formProfilo{
     background-color: #2C3E50;
     color:#3498DB;
     margin: 0px;
-    /*border:2px solid #B9BCBD;*/
     position:fixed;
     top:0px;
     width: 100%;
@@ -571,6 +569,11 @@ div#lateral5{
 position: relative;
      right: 51px;
     bottom: 15px;
+}
+
+#headerArticle h2{
+    margin: 0px;
+    
 }
     
 }
@@ -681,6 +684,13 @@ position: relative;
      right: 51px;
     bottom: 15px;
 }
+
+#headerArticle h2{
+    margin: 0px;
+    
+}
+
+
     
 
 }
@@ -931,6 +941,7 @@ div #lateral3{
     bottom: 55px;
     right: 220px;
     width: 403px;
+    padding: 15px;
    
 }
 .descr h2{
