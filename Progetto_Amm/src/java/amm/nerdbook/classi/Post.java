@@ -16,14 +16,18 @@ public class Post {
     };
     
     private int id;
-    private Utente utente;
+    private Utente utenteDest;
+    private Gruppo gruppoDest;
+    private Utente utenteMitt;
     private String text;
     private String content;
     private Type TypePost;
     
     public Post(){
      this.id=0;
-     this.utente=null;
+     this.utenteDest=null;
+     this.gruppoDest=null;
+     this.utenteMitt=null;
      this.text="";
      this.content="";
      this.TypePost=Type.TEXT;
@@ -47,20 +51,6 @@ public class Post {
     }
 
     /**
-     * @return the utente
-     */
-    public Utente getUtente() {
-        return utente;
-    }
-
-    /**
-     * @param utente the utente to set
-     */
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
-
-    /**
      * @return the text
      */
     public String getText() {
@@ -72,6 +62,48 @@ public class Post {
      */
     public void setText(String text) {
         this.text = text;
+    }
+
+    /**
+     * @return the gruppoDest
+     */
+    public Gruppo getGruppoDest() {
+        return gruppoDest;
+    }
+
+    /**
+     * @param gruppoDest the gruppoDest to set
+     */
+    public void setGruppoDest(Gruppo gruppoDest) {
+        this.gruppoDest = gruppoDest;
+    }
+
+    /**
+     * @return the utenteDest
+     */
+    public Utente getUtenteDest() {
+        return utenteDest;
+    }
+
+    /**
+     * @param utenteDest the utenteDest to set
+     */
+    public void setUtenteDest(Utente utenteDest) {
+        this.utenteDest = utenteDest;
+    }
+
+    /**
+     * @return the utenteMitt
+     */
+    public Utente getUtenteMitt() {
+        return utenteMitt;
+    }
+
+    /**
+     * @param utenteMitt the utenteMitt to set
+     */
+    public void setUtenteMitt(Utente utenteMitt) {
+        this.utenteMitt = utenteMitt;
     }
 
     /**

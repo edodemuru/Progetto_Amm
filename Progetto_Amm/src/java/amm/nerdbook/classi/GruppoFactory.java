@@ -22,10 +22,41 @@ public class GruppoFactory {
         return singleton;
     }
     
-    private ArrayList<Gruppo> gruppo=new ArrayList<>();
+    private ArrayList<Gruppo> gruppi=new ArrayList<>();
     
     public GruppoFactory(){
+        
+        //Gruppo 1
+        Gruppo gruppo1=new Gruppo();
+        gruppo1.setIdamministratore(0);
+        gruppo1.setId(0);
+        gruppo1.setInteresse("Studio");
+        gruppo1.setName("Ingegneria");
+        
+        //Gruppo 2
+        Gruppo gruppo2=new Gruppo();
+        gruppo1.setIdamministratore(1);
+        gruppo1.setId(1);
+        gruppo1.setInteresse("Studio");
+        gruppo1.setName("Informatica");
+        
+        gruppi.add(gruppo1);
+        gruppi.add(gruppo2);
     
     }
+    
+     public Gruppo getGruppobyId(int id){
+     for(Gruppo gruppo: this.gruppi){
+       if(gruppo.getId()==id)
+           return gruppo;
+     
+     }
+     return null;
+    
+    }
+     
+     
+     
+    
     
 }

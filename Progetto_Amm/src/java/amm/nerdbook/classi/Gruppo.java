@@ -14,13 +14,13 @@ public class Gruppo {
     private int id;
     private String name;
     private String interesse;
-    private String amministratore;
+    private int Idamministratore;
     
     public Gruppo(){
     this.id=0;
     this.name="";
     this.interesse="";
-    this.amministratore="";
+    this.Idamministratore=0;
     
     }
 
@@ -53,6 +53,20 @@ public class Gruppo {
     }
 
     /**
+     * @return the Idamministratore
+     */
+    public int getIdamministratore() {
+        return Idamministratore;
+    }
+
+    /**
+     * @param Idamministratore the Idamministratore to set
+     */
+    public void setIdamministratore(int Idamministratore) {
+        this.Idamministratore = Idamministratore;
+    }
+
+    /**
      * @return the interesse
      */
     public String getInteresse() {
@@ -66,18 +80,7 @@ public class Gruppo {
         this.interesse = interesse;
     }
 
-    /**
-     * @return the amministratore
-     */
-    public String getAmministratore() {
-        return amministratore;
-    }
-
-    /**
-     * @param amministratore the amministratore to set
-     */
-    public void setAmministratore(String amministratore) {
-        this.amministratore = amministratore;
-    }
+    
+ 
     
 }
