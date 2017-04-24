@@ -339,7 +339,7 @@ textarea#fraseBach,input#urlAllegato{
     position: relative;
     overflow: hidden;
     float: left;
-    background-image:url(../img/user-icon2.png);
+    background-image:url(img/user-icon2.png);
     background-size: 40px 40px;
     width: 40px;
     height: 40px;
@@ -354,7 +354,7 @@ textarea#fraseBach,input#urlAllegato{
     position: relative;
     overflow: hidden;
     float: left;
-    background-image:url(../img/allegato-icon.png);
+    background-image:url(img/allegato-icon.png);
     background-size: 40px 40px;
     width: 40px;
     height: 40px;
@@ -1141,7 +1141,7 @@ width: 40px;
     position: relative;
     overflow: hidden;
     float: right;
-    background-image:url(../img/newgroup.png);
+    background-image:url(img/newgroup.png);
     background-size: 30px 30px;
     width: 30px;
     height: 30px;
@@ -1158,7 +1158,7 @@ p.link::before{
     position: relative;
     overflow: hidden;
     float: left;
-    background-image:url(../img/iconinfo.png);
+    background-image:url(img/iconinfo.png);
     background-size: 30px 30px;
     width: 30px;
     height: 30px;
@@ -1167,14 +1167,14 @@ p.link::before{
     bottom:7px;
     right: 10px;
     margin-bottom: 20px
-}
+} 
 
 /*Questa immagine è lo stesso decorativa in quanto rappresenta l'icona di login all'account*/
 #loginid::before{
     position: relative;
     overflow: hidden;
     float: left;
-    background-image:url(../img/icon-login.png);
+    background-image:url(img/icon-login.png);
     background-size: 30px 30px;
     width: 30px;
     height: 30px;

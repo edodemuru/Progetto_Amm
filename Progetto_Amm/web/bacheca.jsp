@@ -26,9 +26,9 @@
         <div id="posts">
             <div class="nameprofile">
                 <div class="fotoProfilo">
-                 <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
+                 <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
                 </div>
-            <h2 class="nameuser">Edoardo Demuru: ciò che non ti uccide ti rende più forte</h2>
+            <h2 class="nameuser">${utente.nome} ${utente.cognome}: ${utente.frasePres}</h2>
             </div>
             
              <div id="creaPost">            

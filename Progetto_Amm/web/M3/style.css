@@ -1,4 +1,4 @@
-/*
+/* firstformitem
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -464,6 +464,11 @@ div#lateral4{
 #lateral2 #link{
     width: 160px;
 }
+
+#search{
+    width: 142px;
+    height: 45px;
+}
 #formboxLogin{
     display:inline-block;
     background-color: white;
@@ -602,6 +607,16 @@ div#formProfilo{
      box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
+/* Questa non è un'immagine decorativa, in quanto rappresenta la foto profilo dell'utente, visualizzata
+   nella pagina del profilo*/
+img#Profilepic{
+    float: left;
+    width: 115px;
+    height: 76px;
+    padding-left: 80px;
+    padding-top: 45px;
+}
+
 @media only screen and (min-width:1024px){
     
     header#titleBac{
@@ -735,7 +750,7 @@ div#lateral2{
     bottom: 25px;
 }
 
-.formitem#firstformitem{
+#formContent2{
     margin-top: 63px;
 }
 
@@ -743,8 +758,6 @@ img#Profilepic{
     position: relative;
     bottom: 56px;
     right: 66px;
-    padding-left: 0px;
-    padding-top: 0px;
 }
 
 div#lateral{
@@ -989,8 +1002,8 @@ div#formProfilo{
 }
 
 img#Profilepic{
-    padding-left: 138px;
-    padding-top: 32px;
+    padding-left: 80px;
+    padding-top: 0px;
 }
 
 header#title{
@@ -1172,15 +1185,7 @@ p.link::before{
     margin-bottom: 20px
 }
 
-/* Questa non è un'immagine decorativa, in quanto rappresenta la foto profilo dell'utente, visualizzata
-   nella pagina del profilo*/
-img#Profilepic{
-    float: left;
-    width: 115px;
-    height: 76px;
-    padding-left: 80px;
-    padding-top: 45px;
-}
+
     
 
 

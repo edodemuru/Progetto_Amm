@@ -40,7 +40,7 @@ public class PostFactory {
         //Post 2
         Post post2 = new Post();
         post2.setText("Ehi guarda la foto di questo bellissimo gatto!");
-        post2.setContent("../img/djanni1.jpg");
+        post2.setContent("img/djanni1.jpg");
         post2.setId(1);
         post2.setUtenteDest(utenteFactory.getUtentebyId(0));
         post2.setGruppoDest(null);

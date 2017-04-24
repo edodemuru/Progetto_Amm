@@ -5,22 +5,40 @@
  */
 package amm.nerdbook.classi;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Edoardo
  */
 public class Gruppo {
+
+    /**
+     * @return the IdMembri
+     */
+    public ArrayList<Integer> getIdMembri() {
+        return IdMembri;
+    }
+
+    /**
+     * @param IdMembri the IdMembri to set
+     */
+    public void setIdMembri(ArrayList<Integer> IdMembri) {
+        this.IdMembri = IdMembri;
+    }
     
     private int id;
     private String name;
     private String interesse;
     private int Idamministratore;
+    private ArrayList<Integer> IdMembri;
     
     public Gruppo(){
     this.id=0;
     this.name="";
     this.interesse="";
     this.Idamministratore=0;
+    this.IdMembri=null;
     
     }
 

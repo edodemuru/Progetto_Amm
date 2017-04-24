@@ -16,9 +16,9 @@
                 <h1 id="linkBach"><a href="bacheca.jsp" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
-            <h2>Edoardo Demuru</h2>
+            <h2>${utente.nome}</h2>
              <div class="fotoProfiloLogout">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
+            <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
              </div>
             <a href="login.jsp">Logout</a>   
             </nav>
@@ -33,9 +33,9 @@
             <h1 id="linkBach2"><a href="bacheca.jsp" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
-            <h2>Edoardo Demuru</h2>
+            <h2>${utente.nome}</h2>
              <div class="fotoProfiloLogout">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
+            <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
              </div>
             <a href="login.jsp">Logout</a>   
         </nav>
@@ -51,9 +51,9 @@
             <h1 id="linkBach2"><a href="bacheca.jsp" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
-            <h2>Edoardo Demuru</h2>
+            <h2>${utente.nome}</h2>
             <div class="fotoProfiloLogout">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
+            <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
             </div>
             <a href="login.jsp">Logout</a>   
             </nav>

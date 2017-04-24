@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>NerdBook - Login</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="Edoardo Demuru">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Nerdbook Social Network sogni login nome password">
+        <meta name="description" content="Login Social Network">
+        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+    </head>
+    
+    <body>
+        <header id="title">
+            Nerdbook - Il Social Network dei Sogni
+        </header>
+        
+        <div id="lateral4">
+        <nav id="link">
+            <h2>Dove vuoi andare?</h2>
+            <ol>
+                <li><a href="descrizione.html">Informazioni sul Social Network</a></li>
+                <li><a href="profilo.html">Profilo</a></li>
+                <li><a href="bacheca.html">Bacheca Personale</a></li>
+            </ol>
+            
+        </nav>
+        </div>
+        
+        <div id="formboxLogin">
+        <form action="login.html" method="post">
+            <div id="loginContent">
+              <h2 id="idtitleLogin">Login</h2>
+              <div id="usernameBox">
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" value="giovanni96">
+              </div>
+              <div id="passwordBox">
+              <label for="passw">Password</label>
+              <input type="password" name="password" id="passw" value="blargh">
+              </div>
+              <button type="submit" name="buttonacc" id="buttonacc">Accedi</button>
+            </div>
+        </form>
+        </div>
+        
+        
+        
+        
+        
+    </body>
+    
+    
+    
+    
+</html>

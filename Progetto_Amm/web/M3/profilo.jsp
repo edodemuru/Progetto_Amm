@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -16,71 +19,65 @@ and open the template in the editor.
     </head>
     
     <body>
-        <header id="titleBac">
-            <h1 id="titleNet">Nerdbook</h1>
-            <div id="linkdif">
-            <h1 id="linkProf2"><a href="profilo.html" class="buttlink">Profilo</a></h1>
-            <h1 id="linkBach2"><a href="bacheca.html" class="buttlink">Bacheca</a></h1>
-            </div>
-            <nav id="logout">
-            <h2>Edoardo Demuru</h2>
-             <div class="fotoProfiloLogout">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-             </div>
-            <a href="login.html">Logout</a>   
-        </nav>
-        </header>
+        <c:set var="page" value="1" scope="request"/>
+        <jsp:include page="header.jsp"/>
         
         <div id="contentPage">     
-        <div id="lateral2">
-            <form id="searchsection" action="bacheca.html">
-                <input type="search" id="search" name="search" value="cerca">     
+        <jsp:include page="nav.jsp"/>  
+        
+        <div id="formProfilo">
+           <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" id="Profilepic">
+           <form action="profilo.html" method="post" id="Profiloform">
+                <div id="formContent">                  
+                  <h3>Inserisci o modifica i tuoi dati</h3>
+                  
+                  <div class="formitem">
+                  <label for="nome">Nome</label>
+                  <input type="text" name="nome" value="${utente.nome}" id="nome">
+                  </div>
+                  
+                  <div class="formitem">
+                  <label for="cognome">Cognome</label>
+                  <input type="text" name="cognome" value="${utente.cognome}" id="cognome">
+                  </div>
+                  
+                  <div class="formitem">
+                  <label for="url">Url foto profilo</label>
+                  <input type="url" name="url" value="${utente.urlFotoProfilo}" id="url">
+                  </div>
+                  
+                  <div class="formitem">
+                  <label for="frase">Frase di presentazione</label>
+                  <textarea rows="4" cols="20" name="frase" id="frase">${utente.frasePres}</textarea>
+                  </div>
+                  
+                  <div class="formitem">
+                  <label for="data">Data di nascita</label>
+                  <input type="date" id="data" name="data" value="1995-06-18">
+                  
+                  </div>
+                  
+                  <div class="formitem">
+                  <label for="passw">Password</label>
+                  <input type="password" name="password" value="${post.password}" id="passw">
+                  </div>
+                  
+                  <div class="formitem">
+                  <label for="confpassw">Conferma Password</label>
+                  <input type="password" name="password" value="${post.password}" id="confpassw">
+                  </div>
+                  <button type="submit" name="modifica" id="modifica">Modifica i dati</button>
+                </div>
             </form>
-            
-            <div id="peoplesection">
-            <h2 class="lateraltitle">Persone</h2>
-            <div class="fotoProfilo2">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-            <p>Pinco Pallino</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-            <p>Riccardo Rossi</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-            <p>Edoardo Demuru</p>
-            </div>            
-            </div>
-            
-            <div id="groupsection">
-            <h2 class="lateraltitle" id="groups">Gruppi</h2>
-            
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="../img/groupimg.png" >
-            <p class="group">Informatici</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="../img/groupimg.png" >
-            <p class="group">Ingegneri</p>
-            </div>
-            </div>
-            
-          <nav id="linksbacheca">
-              <h2 class="lateraltitle">Link</h2>
-            <p class="link"><a href="descrizione.html">Informazioni sul Social Network</a></p>     
-          </nav>
             
         </div>
         
-        
-        <div id="formProfilo">  
+        <!--<div id="formProfilo">  
             <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon2.png" id="Profilepic">
             <form action="profilo.html" method="post" id="Profiloform">
                 <div id="formContent">                  
                   <h3>Inserisci o modifica i tuoi dati</h3>
                   
-                  <div id="formContent2">
                   <div class="formitem" id="firstformitem">
                   <label for="nome">Nome</label>
                   <input type="text" name="nome" value="Luigi" id="nome">
@@ -117,11 +114,10 @@ and open the template in the editor.
                   </div>
                   <button type="submit" name="modifica" id="modifica">Modifica i dati</button>
                 </div>
-                </div>
             </form>
             
             
-        </div>
+        </div>-->
             
         </div>
         

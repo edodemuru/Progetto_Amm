@@ -5,6 +5,8 @@
  */
 package amm.nerdbook.classi;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Edoardo
@@ -15,9 +17,13 @@ public class Utente {
     private String cognome;
     private String urlFotoProfilo;
     private String frasePres;
-    private String dataNascita;
+    private int day;
+    private int month;
+    private int year;
     private String password;
     private int id;
+    private ArrayList<Integer> amici;
+    private ArrayList<Integer> gruppi;
     
     public Utente(){
         this.id=0;
@@ -25,8 +31,12 @@ public class Utente {
         this.cognome="";
         this.urlFotoProfilo="";
         this.frasePres="";
-        this.dataNascita="";
+        this.day=0;
+        this.month=0;
+        this.year=0;
         this.password="";
+        this.amici=null;
+        this.gruppi=null;
     
     
     }
@@ -60,6 +70,48 @@ public class Utente {
     }
 
     /**
+     * @return the day
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * @param day the day to set
+     */
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    /**
+     * @return the month
+     */
+    public int getMonth() {
+        return month;
+    }
+
+    /**
+     * @param month the month to set
+     */
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    /**
+     * @return the year
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * @param year the year to set
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    /**
      * @return the urlFotoProfilo
      */
     public String getUrlFotoProfilo() {
@@ -88,20 +140,6 @@ public class Utente {
     }
 
     /**
-     * @return the dataNascita
-     */
-    public String getDataNascita() {
-        return dataNascita;
-    }
-
-    /**
-     * @param dataNascita the dataNascita to set
-     */
-    public void setDataNascita(String dataNascita) {
-        this.dataNascita = dataNascita;
-    }
-
-    /**
      * @return the password
      */
     public String getPassword() {
@@ -127,6 +165,34 @@ public class Utente {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the amici
+     */
+    public ArrayList<Integer> getAmici() {
+        return amici;
+    }
+
+    /**
+     * @param amici the amici to set
+     */
+    public void setAmici(ArrayList<Integer> amici) {
+        this.amici = amici;
+    }
+
+    /**
+     * @return the gruppi
+     */
+    public ArrayList<Integer> getGruppi() {
+        return gruppi;
+    }
+
+    /**
+     * @param gruppi the gruppi to set
+     */
+    public void setGruppi(ArrayList<Integer> gruppi) {
+        this.gruppi = gruppi;
     }
     
     @Override
