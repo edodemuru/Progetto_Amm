@@ -9,6 +9,7 @@ import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +50,9 @@ public class Profilo extends HttpServlet {
         
         if(utente!= null){
           request.setAttribute("utente", utente);
+          
+          ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
+          request.setAttribute("amici", ListAmici);
           
           request.getRequestDispatcher("profilo.jsp").forward(request, response);
         

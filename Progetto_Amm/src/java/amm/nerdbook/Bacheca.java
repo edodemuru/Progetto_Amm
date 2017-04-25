@@ -5,6 +5,8 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.classi.Post;
+import amm.nerdbook.classi.PostFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
@@ -49,6 +51,16 @@ public class Bacheca extends HttpServlet {
          
          if(utente!= null){
              request.setAttribute("utente",utente );
+             
+             ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
+             request.setAttribute("amici", ListAmici);
+             
+             ArrayList<Post> ListPost=PostFactory.getInstance().getPostListBacheca(utente);
+             request.setAttribute("posts", ListPost);
+             
+             
+             
+             
              
              request.getRequestDispatcher("bacheca.jsp").forward(request, response);
    

@@ -58,13 +58,18 @@ and open the template in the editor.
                   </div>
                   
                   <div class="formitem">
+                  <label for="username">Username</label>
+                  <input type="text" name="username" value="${utente.username}" id="username">
+                  </div>
+                  
+                  <div class="formitem">
                   <label for="passw">Password</label>
-                  <input type="password" name="password" value="${post.password}" id="passw">
+                  <input type="password" name="password" value="${utente.password}" id="passw">
                   </div>
                   
                   <div class="formitem">
                   <label for="confpassw">Conferma Password</label>
-                  <input type="password" name="password" value="${post.password}" id="confpassw">
+                  <input type="password" name="password" value="${utente.password}" id="confpassw">
                   </div>
                   <button type="submit" name="modifica" id="modifica">Modifica i dati</button>
                 </div>

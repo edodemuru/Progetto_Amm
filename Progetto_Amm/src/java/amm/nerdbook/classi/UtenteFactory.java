@@ -37,6 +37,7 @@ public class UtenteFactory {
     utente1.setMonth(6);
     utente1.setYear(1995);
     utente1.setFrasePres("Ciò che non ti uccide ti rende più forte");
+    utente1.setUsername("edo95");
     utente1.setPassword("abcd");
     utente1.setUrlFotoProfilo("img/utente1.jpg");
     ArrayList<Integer> Amici1= new ArrayList<>();
@@ -52,6 +53,7 @@ public class UtenteFactory {
     utente2.setMonth(9);
     utente2.setYear(1998);
     utente2.setFrasePres("Che la forza sia con te");
+    utente2.setUsername("marco23");
     utente2.setPassword("21413");
     utente2.setUrlFotoProfilo("img/utente2.jpg");
     ArrayList<Integer> Amici2= new ArrayList<>();
@@ -61,16 +63,20 @@ public class UtenteFactory {
     //Utente3
     Utente utente3= new Utente();
     utente3.setNome("Giovanni");
-    utente3.setCognome("Puddu");
+    utente3.setCognome("");
     utente3.setId(2);
     utente3.setDay(27);
     utente3.setMonth(2);
     utente3.setYear(1994);
-    utente3.setFrasePres("Basta un poco di zucchero");
+    utente3.setFrasePres("");
+    utente3.setUsername("ciao94");
     utente3.setPassword("4325");
     utente3.setUrlFotoProfilo("img/utente3.jpg");
     ArrayList<Integer> Amici3= new ArrayList<>();
     ArrayList<Integer>Gruppi3= new ArrayList<>();
+    
+    //Utente4 
+    
     
     
     
@@ -100,7 +106,7 @@ public class UtenteFactory {
     }
     
     public Utente getUtentebyId(int id){
-     for(Utente utente: this.Utenti){
+     for(Utente utente: this.getUtenti()){
        if(utente.getId()==id)
            return utente;
      
@@ -121,6 +127,24 @@ public class UtenteFactory {
   
   
   }
+
+    /**
+     * @return the Utenti
+     */
+    public ArrayList<Utente> getUtenti() {
+        return Utenti;
+    }
+    
+    public Utente getUtenteByUsername(String username){
+        for(Utente utente:this.Utenti){
+            if(username.equals(utente.getUsername()))
+                return utente;
+        
+        
+        }
+        return null;
+
+}
     
     
     

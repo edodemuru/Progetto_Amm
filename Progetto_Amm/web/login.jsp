@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     
@@ -16,6 +17,8 @@
             Nerdbook - Il Social Network dei Sogni
         </header>
         
+        
+        
         <div id="lateral4">
         <nav id="link">
             <h2>Dove vuoi andare?</h2>
@@ -28,22 +31,34 @@
         </nav>
         </div>
         
+      
+        
+        
         <div id="formboxLogin">
-        <form action="login.html" method="post">
+        <form action="Login" method="post">
             <div id="loginContent">
               <h2 id="idtitleLogin">Login</h2>
               <div id="usernameBox">
               <label for="username">Username</label>
-              <input type="text" name="username" id="username" value="giovanni96">
+              <input type="text" name="username" id="username">
               </div>
               <div id="passwordBox">
               <label for="passw">Password</label>
-              <input type="password" name="password" id="passw" value="blargh">
+              <input type="password" name="password" id="passw">
               </div>
-              <button type="submit" name="buttonacc" id="buttonacc">Accedi</button>
+              <button type="submit" name="Submit" value="Login" id="buttonacc">Accedi</button>
             </div>
         </form>
         </div>
+        
+        <c:if test="${!empty errore}">
+             <div id="loginError">
+                 <p>Errore nell'inserimento dell'username o della password!</p>
+             </div>           
+        </c:if>
+        
+        
+         
         
         
         

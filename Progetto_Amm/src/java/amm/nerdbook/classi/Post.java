@@ -21,7 +21,7 @@ public class Post {
     private Utente utenteMitt;
     private String text;
     private String content;
-    private Type TypePost;
+    private Type postType;
     
     public Post(){
      this.id=0;
@@ -30,7 +30,7 @@ public class Post {
      this.utenteMitt=null;
      this.text="";
      this.content="";
-     this.TypePost=Type.TEXT;
+     this.postType=Type.TEXT;
      
     
     
@@ -121,17 +121,17 @@ public class Post {
     }
 
     /**
-     * @return the TypePost
+     * @return the PostType
      */
-    public Type getTypePost() {
-        return TypePost;
+    public Type getPostType() {
+        return postType;
     }
 
     /**
-     * @param TypePost the TypePost to set
+     * @param PostType the TypePost to set
      */
-    public void setTypePost(Type TypePost) {
-        this.TypePost = TypePost;
+    public void setPostType(Type PostType) {
+        this.postType = PostType;
     }
     
     

@@ -35,7 +35,7 @@ public class PostFactory {
         post1.setUtenteDest(utenteFactory.getUtentebyId(0));
         post1.setGruppoDest(null);
         post1.setUtenteMitt(utenteFactory.getUtentebyId(1));
-        post1.setTypePost(Post.Type.TEXT);
+        post1.setPostType(Post.Type.TEXT);
 
         //Post 2
         Post post2 = new Post();
@@ -45,7 +45,7 @@ public class PostFactory {
         post2.setUtenteDest(utenteFactory.getUtentebyId(0));
         post2.setGruppoDest(null);
         post2.setUtenteMitt(utenteFactory.getUtentebyId(1));
-        post2.setTypePost(Post.Type.IMAGE);
+        post2.setPostType(Post.Type.IMAGE);
 
         //Post 3
         Post post3 = new Post();
@@ -55,7 +55,7 @@ public class PostFactory {
         post3.setUtenteDest(utenteFactory.getUtentebyId(0));
         post3.setGruppoDest(null);
         post3.setUtenteMitt(utenteFactory.getUtentebyId(2));
-        post3.setTypePost(Post.Type.LINK);
+        post3.setPostType(Post.Type.LINK);
         
         post.add(post1);
         post.add(post2);
@@ -74,10 +74,10 @@ public class PostFactory {
     
     }
     
-    ArrayList<Post> getPostList(Utente utente){
+    public ArrayList<Post> getPostListBacheca(Utente utente){
         ArrayList postList=new ArrayList();
         for(Post singlepost: this.post){
-          if(singlepost.getUtenteDest().getId()== utente.getId()){
+          if(singlepost.getUtenteDest().getId()== utente.getId() ){
              postList.add(singlepost);
           }
               
@@ -87,7 +87,7 @@ public class PostFactory {
     
     }
     
-    ArrayList<Post> getPostList(Gruppo gruppo){
+    public ArrayList<Post> getPostListGruppo(Gruppo gruppo){
       ArrayList postList=new ArrayList();
       for(Post singlePost:this.post){
         if(singlePost.getUtenteDest().getId()== gruppo.getId())

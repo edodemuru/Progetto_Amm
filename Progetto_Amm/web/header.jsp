@@ -12,15 +12,15 @@
 <header id="titleBac">
             <h1 id="titleNet">Nerdbook</h1>
             <div id="linkdif">
-                <h1 id="linkProf"><a href="profilo.jsp" class="buttlink">Profilo</a></h1>
-                <h1 id="linkBach"><a href="bacheca.jsp" class="buttlink">Bacheca</a></h1>
+                <h1 id="linkProf"><a href="profilo.html" class="buttlink">Profilo</a></h1>
+            <h1 id="linkBach"><a href="bacheca.html" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
-            <h2>${utente.nome}</h2>
+            <h2>${utente.nome} ${utente.cognome}</h2>
              <div class="fotoProfiloLogout">
             <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
              </div>
-            <a href="login.jsp">Logout</a>   
+            <a href="login.html">Logout</a>   
             </nav>
         </header>
     </c:when>
@@ -33,7 +33,7 @@
             <h1 id="linkBach2"><a href="bacheca.jsp" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
-            <h2>${utente.nome}</h2>
+            <h2>${utente.nome} ${utente.cognome}</h2>
              <div class="fotoProfiloLogout">
             <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
              </div>
@@ -51,7 +51,7 @@
             <h1 id="linkBach2"><a href="bacheca.jsp" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
-            <h2>${utente.nome}</h2>
+            <h2>${utente.nome} ${utente.cognome}</h2>
             <div class="fotoProfiloLogout">
             <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" >
             </div>

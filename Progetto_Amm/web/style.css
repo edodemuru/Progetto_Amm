@@ -1,4 +1,4 @@
-/* firstformitem
+/* firstformitem 
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -798,6 +798,11 @@ textarea#fraseBach,input#urlAllegato,button#pubblica{
     right: 20px;
 }
 
+#loginError{
+    color: red;
+    
+}
+
 
 
     
@@ -893,7 +898,7 @@ textarea#fraseBach,input#urlAllegato,button#pubblica{
 #groupsection{
     position: relative;
     left: 215px;
-    bottom: 223px;  
+    bottom: 133px;  
     width: 182px;
 }
 
@@ -912,7 +917,7 @@ textarea#fraseBach,input#urlAllegato,button#pubblica{
 #linksbacheca{
     position: relative;
     left: 215px;
-    bottom: 235px;
+    bottom: 150px;
     width: 182px;
     
 }
@@ -992,7 +997,7 @@ div#formProfilo{
     padding: 15px; 
     margin-left: 10px;
     width: 405px;
-    height: 888px;
+    height: 930px;
     margin-top: 0px;
     position: relative;
     right: 0px;

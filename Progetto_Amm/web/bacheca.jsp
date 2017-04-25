@@ -17,11 +17,8 @@
         <c:set var="page" value="0" scope="request"/>
         <jsp:include page="header.jsp"/>
         
-        <jsp:include page="nav.jsp"/>
         
-        
-        
-        
+       <jsp:include page="nav.jsp"/>
         <!-- Lista di post-->
         <div id="posts">
             <div class="nameprofile">
@@ -58,59 +55,52 @@
           </div>
             
             <c:forEach var="post" items="${posts}">
-                <div id="post1">
-                    <div class="fotoProfilo">
-                      <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">  
-                    </div>
-                    <h3 class="nameuser">${post.utenteMitt.nome} ${post.utenteMitt.cognome} </h3>
-                    <c:choose>
-                        <c:when test="${post.TypePost== 'TEXT'}">
-                            <p>${post.text}</p>
-                        </c:when>
-                            
-                        <c:when test="${post.TypePost== 'IMAGE'}">
-                            <p>${post.text}</p> 
-                            <img src="${post.content}" alt="Foto" title="Allegato"/>   
-                        </c:when>
-                        
-                        <c:when test="${post.TypePost== 'LINK'}">
-                            <p>${post.text}</p>
-                            <a href="${post.content}">${post.content}</a>                              
-                        </c:when>   
-                    </c:choose>
-                    
-                </div> 
+
+                <c:choose>
+                   <c:when test="${post.postType == 'TEXT'}">
+                       <div id="post1">
+                   <div class="fotoProfilo">
+                   <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
+                   </div>              
+                   <h3 class="nameuser">${post.utenteMitt.nome} ${post.utenteMitt.cognome}</h3>            
+                   <p>${post.text}</p>
+                       </div>
+                   </c:when>
+                   
+                   <c:when test="${post.postType =='IMAGE'}">
+                       <div id="post2">
+                       <div class="fotoProfilo">
+                       <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
+                       </div>
+                       <h3 class="nameuser">${post.utenteMitt.nome} ${post.utenteMitt.cognome}</h3>            
+                       <p>${post.text}</p>   
+                       <img src="${post.content}" alt="Foto di gatto" title="Allegato"/>
+                       </div>
+                       
+                   </c:when>
+                       
+                       <c:when test="${post.postType =='LINK'}">
+                         <div id="post3">
+                        <div class="fotoProfilo">
+                        <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
+                        </div>
+                        <h3 class="nameuser">${post.utenteMitt.nome} ${post.utenteMitt.cognome}</h3>            
+                        <p>${post.text}</p>
+                        <a href="${post.content}">${post.content}</a> 
+                         </div>
+                           
+                       </c:when>
+                   
+                   
+            
+            </c:choose>   
+                
                 
             </c:forEach>
             
-          <!--<div id="post1">            
-            <div class="fotoProfilo">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png">
-            </div>              
-            <h3 class="nameuser">Gianluca Massi</h3>
+          
             
-            <p>Ehi ciao! Da quanto non ci sentiamo! Vediamoci appena puoi! :)</p>                    
-          </div>
-        
-          <div id="post2">
-             <div class="fotoProfilo">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png">
-            </div>
-            <h3 class="nameuser">Giovanni Puddu</h3>            
-            <p>Ehi guarda la foto di questo bellissimo gatto!</p>   
-            <img src="../img/djanni1.jpg" alt="Foto di gatto" title="Allegato"/>
-          </div>
-        
-          <div id="post3">
-            <div class="fotoProfilo">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png">
-            </div>
-            <h3 class="nameuser">Mauro Poddighe</h3>            
-            <p>Ehi guarda questo video di youtube!</p>
-            <a href="https://www.youtube.com/watch?v=-OnRxfhbHB4">Video di youtube</a>                    
-          </div>-->
-            
-        </div> 
+        </div>
         
        
     </body>

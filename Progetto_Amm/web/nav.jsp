@@ -10,52 +10,42 @@
 <c:choose>
     <c:when test="${page==0}">
         
-        <div id="lateral">
-            <form id="searchsection" action="bacheca.jsp">
+         <div id="lateral">
+            <form id="searchsection" action="bacheca.html">
                 <input type="search" id="search" name="search" value="cerca">
                 
             </form>
+             
             <div id="peoplesection">
-                <h2 class="lateraltitle">Persone</h2>
-                <c:forEach var="amico" items="${amici}">
+            <h2 class="lateraltitle">Persone</h2>
+            
+            <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
                    <p>${amico.nome} ${amico.cognome}</p>
-            </div>                    
-                    
-                </c:forEach>
-           <!-- <div class="fotoProfilo2">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-            <p>Pinco Pallino</p>
+                </div>                                       
+            </c:forEach>
             </div>
-            <div class="fotoProfilo2">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-            <p>Riccardo Rossi</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoProfilo" alt="Foto del Profilo" src="../img/user-icon.png" >
-            <p>Edoardo Demuru</p>
-            </div>
-            </div>-->
             
             <div id="groupsection">
             <h2 class="lateraltitle" id="groups">Gruppi</h2>            
             <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="img/groupimg.png" >
+            <img title="fotoGruppo" alt="Foto di un Gruppo" src="../img/groupimg.png" >
             <p class="group">Informatici</p>
             </div>
             <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="img/groupimg.png" >
+            <img title="fotoGruppo" alt="Foto di un Gruppo" src="../img/groupimg.png" >
             <p class="group">Ingegneri</p>
             </div>
             </div>
             
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Link</h2>
-            <p class="link"><a href="descrizione.jsp">Informazioni sul Social Network</a></p>     
+            <p class="link"><a href="descrizione.html">Informazioni sul Social Network</a></p>     
           </nav>
             
-        </div>       
+        </div>
+              
 
     </c:when>
     
