@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,33 +34,42 @@ public class Profilo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String user= request.getParameter("user");
-        
-        int idUtente;
-        
-        if(user!= null){
-            idUtente=Integer.parseInt(user);
-         
+
+        String user = request.getParameter("user");
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute("LoggedIn").equals(true)) {
+
+            int idUtente;
+
+            if (user != null) {
+                idUtente = Integer.parseInt(user);
+            } else {
+                idUtente=(int) session.getAttribute("idUtente");
+                
+            }
+
+            Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
+
+            if (utente != null) {
+                request.setAttribute("utente", utente);
+
+                ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
+                request.setAttribute("amici", ListAmici);
+
+                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
+
         }
         else{
-         idUtente=0;
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        
+        
         }
-        
-        Utente utente= UtenteFactory.getInstance().getUtentebyId(idUtente);
-        
-        if(utente!= null){
-          request.setAttribute("utente", utente);
-          
-          ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
-          request.setAttribute("amici", ListAmici);
-          
-          request.getRequestDispatcher("profilo.jsp").forward(request, response);
-        
-        
-        }else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

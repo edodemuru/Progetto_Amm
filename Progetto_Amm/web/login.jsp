@@ -53,7 +53,7 @@
         
         <c:if test="${!empty errore}">
              <div id="loginError">
-                 <p>Errore nell'inserimento dell'username o della password!</p>
+                 <p>Username o password errato!</p>
              </div>           
         </c:if>
         

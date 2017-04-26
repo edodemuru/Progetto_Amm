@@ -36,6 +36,7 @@ public class GruppoFactory {
         membri1.add(0);
         membri1.add(1);
         gruppo1.setIdMembri(membri1);
+        gruppo1.setUrlFotoGruppo("img/gruppo2.jpg");
         
         //Gruppo 2
         Gruppo gruppo2=new Gruppo();
@@ -45,7 +46,9 @@ public class GruppoFactory {
         gruppo2.setName("Informatica");
         ArrayList<Integer> membri2=new ArrayList<>();
         membri2.add(2);
+        membri2.add(0);
         gruppo2.setIdMembri(membri2);
+        gruppo2.setUrlFotoGruppo("img/gruppo1.jpg");
         
         gruppi.add(gruppo1);
         gruppi.add(gruppo2);
@@ -61,6 +64,21 @@ public class GruppoFactory {
      return null;
     
     }
+     
+     public ArrayList<Gruppo> getGruppoListUtente(int id){
+         ArrayList<Gruppo> GruppoList=new ArrayList<>();
+         for(Gruppo gruppo: this.gruppi){
+             if(gruppo.getIdMembri().contains(id)){
+                 GruppoList.add(gruppo);
+             
+             }
+         
+         }
+         
+         return GruppoList;
+     
+     
+     }
      
      
      

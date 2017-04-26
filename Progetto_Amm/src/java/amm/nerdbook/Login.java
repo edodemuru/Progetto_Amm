@@ -5,6 +5,8 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.classi.Gruppo;
+import amm.nerdbook.classi.GruppoFactory;
 import amm.nerdbook.classi.Post;
 import amm.nerdbook.classi.PostFactory;
 import amm.nerdbook.classi.Utente;
@@ -39,14 +41,14 @@ public class Login extends HttpServlet {
  
         
         HttpSession session = request.getSession();
-        session.setAttribute("LoggedIn", "no");
+        session.setAttribute("LoggedIn", false);
         session.setAttribute("ProfileOk", "no");
         
         
         
         //Utente non loggato in precedenza
          if(request.getParameter("Submit")!=null && 
-               session.getAttribute("LoggedIn").equals("no")){
+               session.getAttribute("LoggedIn").equals(false)){
             //Verifica username e password     
             String username=request.getParameter("username");
             String password=request.getParameter("password");
@@ -60,6 +62,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("idUtente", idUtente);
                 
                 if(checkProfile(utente)){
+                    //Utente con profilo completo
                
                 request.setAttribute("utente",utente );
              
@@ -69,14 +72,25 @@ public class Login extends HttpServlet {
                 ArrayList<Post> ListPost=PostFactory.getInstance().getPostListBacheca(utente);
                 request.setAttribute("posts", ListPost);
                 session.setAttribute("ProfileOk", true);
-             
-             
+                
+                ArrayList<Gruppo> ListGruppo=GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                request.setAttribute("gruppi", ListGruppo);
              
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                 }
                 else{
+                    //Utente con profilo incompleto
                     session.setAttribute("ProfileOk", false);
-                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                    
+                    request.setAttribute("utente", utente);
+          
+                    ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
+                    request.setAttribute("amici", ListAmici);
+                    
+                    
+          
+                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                    
                 
                 }
    
@@ -114,12 +128,15 @@ public class Login extends HttpServlet {
              
                     ArrayList<Post> ListPost=PostFactory.getInstance().getPostListBacheca(utente);
                     request.setAttribute("posts", ListPost);
+                    
+                    ArrayList<Gruppo> ListGruppo=GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                    request.setAttribute("gruppi", ListGruppo);
          
                     request.getRequestDispatcher("bacheca.jsp").forward(request, response);
    
-         } else
+         } else{
                     //Utente inesistente
-                {
+                
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
          }
                 
@@ -213,8 +230,8 @@ public class Login extends HttpServlet {
     
     public boolean checkProfile(Utente utente){
         if(utente!=null){
-        return !(utente.getNome()==null || utente.getCognome()==null || utente.getFrasePres()==null || 
-                utente.getUrlFotoProfilo()==null);
+        return !(utente.getNome().equals("") || utente.getCognome().equals("") || utente.getFrasePres().equals("") || 
+                utente.getUrlFotoProfilo().equals(""));
         }
         else{
             return true;        

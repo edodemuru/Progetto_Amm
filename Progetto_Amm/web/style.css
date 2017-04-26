@@ -1,4 +1,4 @@
-/* firstformitem 
+/*  
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -617,6 +617,19 @@ img#Profilepic{
     padding-top: 45px;
 }
 
+#loginError{
+    position: relative;
+    bottom: 290px;
+    left: 870px;
+    color: #E74C3C;
+    font-size: 22px;
+    font-weight: bold;
+    width: 194px;
+    height: 63px;
+    margin: 0px;
+    
+}
+
 @media only screen and (min-width:1024px){
     
     header#titleBac{
@@ -799,9 +812,9 @@ textarea#fraseBach,input#urlAllegato,button#pubblica{
 }
 
 #loginError{
-    color: red;
-    
+        left: 482px;
 }
+
 
 
 
@@ -1098,6 +1111,17 @@ position: relative;
 
 textarea#fraseBach,input#urlAllegato,button#pubblica{
     width: 325px;
+}
+
+#loginError{
+    position: relative;
+    bottom: 533px;
+    left: 100px;
+    color: #E74C3C;
+    font-size: 16px;
+    font-weight: bold;
+    width: 238px;
+    
 }
     
 

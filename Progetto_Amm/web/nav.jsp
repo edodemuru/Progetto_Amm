@@ -28,15 +28,14 @@
             </div>
             
             <div id="groupsection">
-            <h2 class="lateraltitle" id="groups">Gruppi</h2>            
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="../img/groupimg.png" >
-            <p class="group">Informatici</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="../img/groupimg.png" >
-            <p class="group">Ingegneri</p>
-            </div>
+                <h2 class="lateraltitle" id="groups">Gruppi</h2>
+                <c:forEach var="gruppo" items="${gruppi}">
+                    <div class="fotoProfilo2">
+                        <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
+                        <p class="group">${gruppo.name}</p>
+                    </div>
+                    
+                </c:forEach>
             </div>
             
           <nav id="linksbacheca">
@@ -69,15 +68,13 @@
             
             <div id="groupsection">
             <h2 class="lateraltitle" id="groups">Gruppi</h2>
-            
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="img/groupimg.png" >
-            <p class="group">Informatici</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="img/groupimg.png" >
-            <p class="group">Ingegneri</p>
-            </div>
+            <c:forEach var="gruppo" items="${gruppi}">
+                    <div class="fotoProfilo2">
+                        <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
+                        <p class="group">${gruppo.name}</p>
+                    </div>
+                    
+                </c:forEach>            
             </div>
             
           <nav id="linksbacheca">
@@ -111,14 +108,13 @@
             
             <div id="groupsection">
             <h2 class="lateraltitle" id="groups">Gruppi</h2>            
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="img/groupimg.png" >
-            <p>Informatici</p>
-            </div>
-            <div class="fotoProfilo2">
-            <img title="fotoGruppo" alt="Foto di un Gruppo" src="img/groupimg.png" >
-            <p>Ingegneri</p>
-            </div>
+            <c:forEach var="gruppo" items="${gruppi}">
+                    <div class="fotoProfilo2">
+                        <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
+                        <p class="group">${gruppo.name}</p>
+                    </div>
+                    
+                </c:forEach>
             </div>
             
           <nav id="linksbacheca">

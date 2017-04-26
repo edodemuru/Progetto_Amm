@@ -13,32 +13,22 @@ import java.util.ArrayList;
  */
 public class Gruppo {
 
-    /**
-     * @return the IdMembri
-     */
-    public ArrayList<Integer> getIdMembri() {
-        return IdMembri;
-    }
-
-    /**
-     * @param IdMembri the IdMembri to set
-     */
-    public void setIdMembri(ArrayList<Integer> IdMembri) {
-        this.IdMembri = IdMembri;
-    }
+    
     
     private int id;
     private String name;
     private String interesse;
-    private int Idamministratore;
-    private ArrayList<Integer> IdMembri;
+    private int idamministratore;
+    private ArrayList<Integer> idMembri;
+    private String urlFotoGruppo;
     
     public Gruppo(){
     this.id=0;
     this.name="";
     this.interesse="";
-    this.Idamministratore=0;
-    this.IdMembri=null;
+    this.idamministratore=0;
+    this.idMembri=null;
+    this.urlFotoGruppo="";
     
     }
 
@@ -74,14 +64,14 @@ public class Gruppo {
      * @return the Idamministratore
      */
     public int getIdamministratore() {
-        return Idamministratore;
+        return idamministratore;
     }
 
     /**
-     * @param Idamministratore the Idamministratore to set
+     * @param idamministratore the Idamministratore to set
      */
-    public void setIdamministratore(int Idamministratore) {
-        this.Idamministratore = Idamministratore;
+    public void setIdamministratore(int idamministratore) {
+        this.idamministratore = idamministratore;
     }
 
     /**
@@ -96,6 +86,34 @@ public class Gruppo {
      */
     public void setInteresse(String interesse) {
         this.interesse = interesse;
+    }
+
+    /**
+     * @return the urlFotoGruppo
+     */
+    public String getUrlFotoGruppo() {
+        return urlFotoGruppo;
+    }
+
+    /**
+     * @param urlFotoGruppo the UrlFotoGruppo to set
+     */
+    public void setUrlFotoGruppo(String urlFotoGruppo) {
+        this.urlFotoGruppo = urlFotoGruppo;
+    }
+
+    /**
+     * @return the idMembri
+     */
+    public ArrayList<Integer> getIdMembri() {
+        return idMembri;
+    }
+
+    /**
+     * @param idMembri the idMembri to set
+     */
+    public void setIdMembri(ArrayList<Integer> idMembri) {
+        this.idMembri = idMembri;
     }
 
     
