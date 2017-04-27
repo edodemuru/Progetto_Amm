@@ -38,138 +38,102 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
- 
-        
+
         HttpSession session = request.getSession();
-        session.setAttribute("LoggedIn", false);
-        session.setAttribute("ProfileOk", "no");
-        
-        
-        
-        //Utente non loggato in precedenza
-         if(request.getParameter("Submit")!=null && 
-               session.getAttribute("LoggedIn").equals(false)){
-            //Verifica username e password     
-            String username=request.getParameter("username");
-            String password=request.getParameter("password");
-            
-            //Tentativo di login da parte dell'utente
-            if(username != null && password != null && this.login(username, password)){
-                session.setAttribute("LoggedIn", true);
-                Utente utente=UtenteFactory.getInstance().getUtenteByUsername(username);
-                int idUtente=utente.getId();
-                
-                session.setAttribute("idUtente", idUtente);
-                
-                if(checkProfile(utente)){
-                    //Utente con profilo completo
-               
-                request.setAttribute("utente",utente );
-             
-                ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
-                request.setAttribute("amici", ListAmici);
-             
-                ArrayList<Post> ListPost=PostFactory.getInstance().getPostListBacheca(utente);
-                request.setAttribute("posts", ListPost);
-                session.setAttribute("ProfileOk", true);
-                
-                ArrayList<Gruppo> ListGruppo=GruppoFactory.getInstance().getGruppoListUtente(idUtente);
-                request.setAttribute("gruppi", ListGruppo);
-             
-                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+
+        if (request.getParameter("logout") != null) {
+
+            session.invalidate();
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+
+        }
+
+        //Utente loggato in precedenza
+        if (session.getAttribute("loggedIn") != null
+                && session.getAttribute("loggedIn").equals(true)
+                && request.getParameter("Submit") == null) {
+
+            // Ricerco l'utente
+            Integer idUtente = (Integer) request.getAttribute("idUtente");
+
+            Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
+
+            // Verifica profilo utente
+            if (session.getAttribute("ProfileOk") != null
+                    && session.getAttribute("ProfileOk").equals(true)) {
+
+                if (utente != null) {
+                    //Carico la bacheca
+
+                    request.setAttribute("loggedUserID", idUtente);
+
+                    request.getRequestDispatcher("bacheca.html").forward(request, response);
+
+                } else {
+                    //Utente inesistente
+
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
-                else{
+
+            } else {
+                if (utente != null) {
+                    //Utente con profilo incompleto
+
+                    session.setAttribute("ProfileOk", false);
+                    request.setAttribute("idUtente", idUtente);
+
+                    request.getRequestDispatcher("profilo.html").forward(request, response);
+
+                } else {
+                    //Utente inesistente
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+
+            }
+
+        } else if (request.getParameter("Submit") != null) {
+            //Utente non loggato in precedenza
+            //Verifica username e password     
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            //Tentativo di login da parte dell'utente
+            if (username != null && password != null && this.login(username, password)) {
+
+                session.setAttribute("loggedIn", true);
+
+                Utente utente = UtenteFactory.getInstance().getUtenteByUsername(username);
+                Integer idUtente = utente.getId();
+
+                request.setAttribute("idUtente", idUtente);
+
+                if (checkProfile(utente)) {
+                    //Utente con profilo completo
+
+                    request.getRequestDispatcher("bacheca.html").forward(request, response);
+                    return;
+                } else {
                     //Utente con profilo incompleto
                     session.setAttribute("ProfileOk", false);
-                    
-                    request.setAttribute("utente", utente);
-          
-                    ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
-                    request.setAttribute("amici", ListAmici);
-                    
-                    
-          
-                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                    
-                
+
+                    request.getRequestDispatcher("profilo.html").forward(request, response);
+                    return;
+
                 }
-   
-                
-            }
-            //Password errata 
-            else if(this.login(username, password)==false){
+
+            } else {
+                //Username o password errati
                 request.setAttribute("errore", "Errore nell'inserimento dell'username o della password");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-            
-            }
-            
-            }
-         
-         
-        
-         
-         else if(session.getAttribute("LoggedIn").equals(true)){
-            //Utente loggato in precedenza
-            
-            // Ricerco l'utente
-            int idUtente= (int) session.getAttribute("idUtente");
-                      
-            Utente utente= UtenteFactory.getInstance().getUtentebyId(idUtente);
-        
-            // Verifica profilo utente
-            if(session.getAttribute("ProfileOk").equals(true)){
-                if(utente!= null){
-                    //Carico la bacheca
-                    
-                    request.setAttribute("utente",utente );
-             
-                    ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
-                    request.setAttribute("amici", ListAmici);
-             
-                    ArrayList<Post> ListPost=PostFactory.getInstance().getPostListBacheca(utente);
-                    request.setAttribute("posts", ListPost);
-                    
-                    ArrayList<Gruppo> ListGruppo=GruppoFactory.getInstance().getGruppoListUtente(idUtente);
-                    request.setAttribute("gruppi", ListGruppo);
-         
-                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-   
-         } else{
-                    //Utente inesistente
-                
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-         }
-                
-            
-            
-            }
-            else{
-                if(utente!=null){
-                    //Utente con profilo incompleto
-                    request.setAttribute("utente", utente);
-                    session.setAttribute("ProfileOk", false);
-                                      
-                    request.getRequestDispatcher("profilo.jsp").forward(request, response);
-                
-                }
-                else{
-                    //Utente inesistente
-                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);                
-                }
-                
-            
-            
-            }
-           
-        
-        }
-         request.getRequestDispatcher("login.jsp").forward(request, response);
-        
-        
-        }
-    
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+            }
+
+        }
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+
+    }
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -214,33 +178,27 @@ public class Login extends HttpServlet {
      * @param password
      * @return
      */
-    public boolean login(String username, String password){
-        ArrayList<Utente> utenti=UtenteFactory.getInstance().getUtenti();
-        for(Utente utente: utenti){
-            if(utente.getUsername().equals(username) && utente.getPassword().equals(password)){
-              return true; 
-            
-            
+    public boolean login(String username, String password) {
+        ArrayList<Utente> utenti = UtenteFactory.getInstance().getUtenti();
+        for (Utente utente : utenti) {
+            if (utente.getUsername().equals(username) && utente.getPassword().equals(password)) {
+                return true;
+
             }
-        
+
         }
-  
-    return false;
-  } 
-    
-    public boolean checkProfile(Utente utente){
-        if(utente!=null){
-        return !(utente.getNome().equals("") || utente.getCognome().equals("") || utente.getFrasePres().equals("") || 
-                utente.getUrlFotoProfilo().equals(""));
-        }
-        else{
-            return true;        
-        }
-    
-    
+
+        return false;
     }
 
+    public boolean checkProfile(Utente utente) {
+        if (utente != null) {
+            return !(utente.getNome().equals("") || utente.getCognome().equals("") || utente.getFrasePres().equals("")
+                    || utente.getUrlFotoProfilo().equals(""));
+        } else {
+            return true;
+        }
 
-
+    }
 
 }

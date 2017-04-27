@@ -630,6 +630,16 @@ img#Profilepic{
     
 }
 
+#modificaDati{
+    position: relative;
+    top: 135px;
+    right: 131px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #3c763d;
+    width: 370px;
+}
+
 @media only screen and (min-width:1024px){
     
     header#titleBac{
@@ -697,6 +707,10 @@ position: relative;
         width: 183px;
         height: 268px;
     }
+    #firstItem{
+           margin-top: 63px; 
+        
+    }
     
     header#titleBac{
         top: 0px;
@@ -760,7 +774,7 @@ div#lateral2{
 
 #formContent h3{
     position: relative;
-    bottom: 25px;
+    bottom: 10px;
 }
 
 #formContent2{
@@ -815,7 +829,18 @@ textarea#fraseBach,input#urlAllegato,button#pubblica{
         left: 482px;
 }
 
-
+#modificaDati{
+    position: absolute;
+    top: 75px;
+    right: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #3c763d;
+    margin: 0px;
+    width: 370px;
+    margin-top: 36px;
+    
+}
 
 
     
@@ -1122,6 +1147,12 @@ textarea#fraseBach,input#urlAllegato,button#pubblica{
     font-weight: bold;
     width: 238px;
     
+}
+
+#modificaDati{
+   position: absolute;
+    left: 105px;
+    top: 104px;
 }
     
 

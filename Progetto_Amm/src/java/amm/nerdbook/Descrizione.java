@@ -5,6 +5,8 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.classi.Gruppo;
+import amm.nerdbook.classi.GruppoFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,34 +36,45 @@ public class Descrizione extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession(false);
+
+        if (session!=null && 
+           session.getAttribute("loggedIn")!=null &&
+           session.getAttribute("loggedIn").equals(true) &&
+                request.getParameter("idUtente")!=null) {
+
+            String user = request.getParameter("idUtente");
+
+            int idUtente;
+
+            idUtente = Integer.parseInt(user);
+
+            
+
+            Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
+
+            if (utente != null) {
+                request.setAttribute("utente", utente);
+
+                ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
+                request.setAttribute("amici", ListAmici);
+                
+                ArrayList<Gruppo> ListGruppo=GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                request.setAttribute("gruppi", ListGruppo);
+
+                request.getRequestDispatcher("descrizione.jsp").forward(request, response);
+
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
+        } else{
+            
+            request.getRequestDispatcher("descrizione.jsp").forward(request, response);
         
-         String user= request.getParameter("user");
         
-        int idUtente;
-        
-        if(user!= null){
-            idUtente=Integer.parseInt(user);
-         
         }
-        else{
-         idUtente=0;
-        }
         
-         Utente utente= UtenteFactory.getInstance().getUtentebyId(idUtente);
-         
-         if(utente!= null){
-             request.setAttribute("utente",utente );
-             
-             ArrayList<Utente> ListAmici= UtenteFactory.getInstance().getListAmicibyId(idUtente);
-             request.setAttribute("amici", ListAmici);
-             
-             request.getRequestDispatcher("descrizione.jsp").forward(request, response);
-   
-         
-         
-         } else{
-           response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

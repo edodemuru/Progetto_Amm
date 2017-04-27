@@ -40,7 +40,7 @@
             
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Link</h2>
-            <p class="link"><a href="descrizione.html">Informazioni sul Social Network</a></p>     
+            <p class="link"><a href="descrizione.html?idUtente=${utente.id}">Informazioni sul Social Network</a></p>     
           </nav>
             
         </div>
@@ -79,7 +79,7 @@
             
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Link</h2>
-            <p class="link"><a href="descrizione.jsp">Informazioni sul Social Network</a></p>     
+            <p class="link"><a href="descrizione.html?idUtente=${utente.id}">Informazioni sul Social Network</a></p>     
           </nav>
             
         </div>
@@ -119,7 +119,7 @@
             
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Entra in Nerdbook</h2>
-            <p class="link" id="loginid"><a href="login.jsp">Login</a></p>     
+            <p class="link" id="loginid"><a href="login.html">Login</a></p>     
           </nav>
              
            

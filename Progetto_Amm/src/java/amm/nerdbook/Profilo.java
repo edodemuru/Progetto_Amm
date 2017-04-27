@@ -5,6 +5,8 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.classi.Gruppo;
+import amm.nerdbook.classi.GruppoFactory;
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
@@ -35,19 +37,20 @@ public class Profilo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String user = request.getParameter("user");
+        
 
-        HttpSession session = request.getSession();
-        if (session.getAttribute("LoggedIn").equals(true)) {
+        HttpSession session = request.getSession(false);
+        if (session != null
+                && session.getAttribute("loggedIn") != null
+                && session.getAttribute("loggedIn").equals(true)&&
+                request.getParameter("idUtente")!=null) {
+
+            String user = request.getParameter("idUtente");
+            request.setAttribute("NonAutorizzato", false);
 
             int idUtente;
 
-            if (user != null) {
-                idUtente = Integer.parseInt(user);
-            } else {
-                idUtente=(int) session.getAttribute("idUtente");
-                
-            }
+            idUtente = Integer.parseInt(user);
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -56,6 +59,24 @@ public class Profilo extends HttpServlet {
 
                 ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
                 request.setAttribute("amici", ListAmici);
+                
+                ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                request.setAttribute("gruppi", ListGruppo);
+
+                if (request.getParameter("modifica") != null) {
+                    
+                   request.setAttribute("nome", request.getParameter("nome"));
+                   utente.setNome(request.getParameter("nome"));
+                   utente.setCognome(request.getParameter("cognome"));
+                   utente.setUrlFotoProfilo(request.getParameter("url"));
+                   utente.setFrasePres(request.getParameter("frase"));
+                   utente.setDataNascita(request.getParameter("data"));
+                   utente.setUsername(request.getParameter("username"));
+                   utente.setPassword(request.getParameter("password"));
+                   
+                   request.setAttribute("modificaDati", true);
+
+                }
 
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
 
@@ -63,11 +84,11 @@ public class Profilo extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
 
-        }
-        else{
+        } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        
-        
+            request.setAttribute("NonAutorizzato", true);
+            request.getRequestDispatcher("profilo.jsp").forward(request, response);
+
         }
 
     }

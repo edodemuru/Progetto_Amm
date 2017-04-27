@@ -33,9 +33,7 @@ public class UtenteFactory {
     utente1.setNome("Edoardo");
     utente1.setCognome("Demuru");
     utente1.setId(0);
-    utente1.setDay(18);
-    utente1.setMonth(6);
-    utente1.setYear(1995);
+    utente1.setDataNascita("1995-06-18");
     utente1.setFrasePres("Ciò che non ti uccide ti rende più forte");
     utente1.setUsername("edo95");
     utente1.setPassword("abcd");
@@ -49,12 +47,10 @@ public class UtenteFactory {
     utente2.setNome("Marco");
     utente2.setCognome("Broccolo");
     utente2.setId(1);
-     utente2.setDay(20);
-    utente2.setMonth(9);
-    utente2.setYear(1998);
+    utente2.setDataNascita("1998-09-20");
     utente2.setFrasePres("Che la forza sia con te");
     utente2.setUsername("marco23");
-    utente2.setPassword("21413");
+    utente2.setPassword("456");
     utente2.setUrlFotoProfilo("img/utente2.jpg");
     ArrayList<Integer> Amici2= new ArrayList<>();
     ArrayList<Integer>Gruppi2= new ArrayList<>();
@@ -65,21 +61,14 @@ public class UtenteFactory {
     utente3.setNome("Giovanni");
     utente3.setCognome("");
     utente3.setId(2);
-    utente3.setDay(27);
-    utente3.setMonth(2);
-    utente3.setYear(1994);
+    utente3.setDataNascita("1994-02-27");
     utente3.setFrasePres("");
     utente3.setUsername("ciao94");
     utente3.setPassword("4325");
     utente3.setUrlFotoProfilo("img/utente3.jpg");
     ArrayList<Integer> Amici3= new ArrayList<>();
     ArrayList<Integer>Gruppi3= new ArrayList<>();
-    
-    //Utente4 
-    
-    
-    
-    
+  
     
     //Amici
     Amici1.add(2);

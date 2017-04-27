@@ -35,7 +35,7 @@
         
         
         <div id="formboxLogin">
-        <form action="Login" method="post">
+        <form action="login.html" method="post">
             <div id="loginContent">
               <h2 id="idtitleLogin">Login</h2>
               <div id="usernameBox">
