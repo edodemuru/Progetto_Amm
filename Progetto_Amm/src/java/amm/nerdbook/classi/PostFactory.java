@@ -57,9 +57,19 @@ public class PostFactory {
         post3.setUtenteMitt(utenteFactory.getUtentebyId(2));
         post3.setPostType(Post.Type.LINK);
         
+        //Post 4
+        Post post4 = new Post();
+        post4.setText("Ciao come stai?");        
+        post4.setId(9);
+        post4.setUtenteDest(utenteFactory.getUtentebyId(0));
+        post4.setGruppoDest(null);
+        post4.setUtenteMitt(utenteFactory.getUtentebyId(2));
+        post4.setPostType(Post.Type.TEXT);
+        
         post.add(post1);
         post.add(post2);
         post.add(post3);
+        post.add(post4);
     
     
     }

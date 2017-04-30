@@ -50,11 +50,17 @@ public class Login extends HttpServlet {
 
         //Utente loggato in precedenza
         if (session.getAttribute("loggedIn") != null
-                && session.getAttribute("loggedIn").equals(true)
-                && request.getParameter("Submit") == null) {
+                && session.getAttribute("loggedIn").equals(true) &&
+                request.getParameter("idUtente")!= null
+                 && request.getParameter("Submit") == null) {
 
             // Ricerco l'utente
-            Integer idUtente = (Integer) request.getAttribute("idUtente");
+            String user = request.getParameter("idUtente");
+
+            int idUtente;
+
+            idUtente = Integer.parseInt(user);
+            
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -106,11 +112,13 @@ public class Login extends HttpServlet {
                 Integer idUtente = utente.getId();
 
                 request.setAttribute("idUtente", idUtente);
-
+                
+                
                 if (checkProfile(utente)) {
                     //Utente con profilo completo
 
                     request.getRequestDispatcher("bacheca.html").forward(request, response);
+                    
                     return;
                 } else {
                     //Utente con profilo incompleto

@@ -37,20 +37,25 @@ public class Profilo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        
-
         HttpSession session = request.getSession(false);
+
         if (session != null
                 && session.getAttribute("loggedIn") != null
-                && session.getAttribute("loggedIn").equals(true)&&
-                request.getParameter("idUtente")!=null) {
+                && session.getAttribute("loggedIn").equals(true)
+                && (request.getAttribute("idUtente") != null
+                || request.getParameter("idUtente") != null)) {
 
             String user = request.getParameter("idUtente");
+
             request.setAttribute("NonAutorizzato", false);
 
             int idUtente;
 
-            idUtente = Integer.parseInt(user);
+            if (request.getAttribute("idUtente") != null) {
+                idUtente = (int) request.getAttribute("idUtente");
+            } else {
+                idUtente = Integer.parseInt(request.getParameter("idUtente"));
+            }
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -59,22 +64,16 @@ public class Profilo extends HttpServlet {
 
                 ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
                 request.setAttribute("amici", ListAmici);
-                
+
                 ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
                 request.setAttribute("gruppi", ListGruppo);
 
+                //Modifica del profilo
                 if (request.getParameter("modifica") != null) {
-                    
-                   request.setAttribute("nome", request.getParameter("nome"));
-                   utente.setNome(request.getParameter("nome"));
-                   utente.setCognome(request.getParameter("cognome"));
-                   utente.setUrlFotoProfilo(request.getParameter("url"));
-                   utente.setFrasePres(request.getParameter("frase"));
-                   utente.setDataNascita(request.getParameter("data"));
-                   utente.setUsername(request.getParameter("username"));
-                   utente.setPassword(request.getParameter("password"));
-                   
-                   request.setAttribute("modificaDati", true);
+
+                    utente.setNome(request.getParameter("nome"));
+
+                    request.setAttribute("modificaDati", true);
 
                 }
 
@@ -84,7 +83,9 @@ public class Profilo extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
 
-        } else {
+        } else if (session.getAttribute("loggedIn") == null
+                || session.getAttribute("loggedIn").equals(false)
+                || request.getParameter("idUtente").equals("")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             request.setAttribute("NonAutorizzato", true);
             request.getRequestDispatcher("profilo.jsp").forward(request, response);

@@ -43,15 +43,31 @@ public class Bacheca extends HttpServlet {
 
         if (session != null
                 && session.getAttribute("loggedIn") != null
-                && session.getAttribute("loggedIn").equals(true) &&
-                request.getParameter("idUtente")!=null) {
-            String user = request.getParameter("idUtente");
+                && session.getAttribute("loggedIn").equals(true)
+                && (request.getAttribute("idUtente") != null
+                || request.getParameter("idUtente") != null)) {
+
             int idUtente;
-            idUtente = Integer.parseInt(user);
+            int idAmico;
+            request.setAttribute("NonAutorizzato", false);
+
+            if (request.getAttribute("idUtente") != null) {
+                idUtente = (int) request.getAttribute("idUtente");
+            } else {
+                idUtente = Integer.parseInt(request.getParameter("idUtente"));
+            }
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
-            if (utente != null) {
+            if (request.getParameter("idAmico") != null && !request.getParameter("idAmico").equals("")) {
+                idAmico = Integer.parseInt(request.getParameter("idAmico"));
+
+            } else {
+                idAmico = -1;
+            }
+
+            if (utente != null && idAmico == -1) {
+                //Bacheca propria
                 request.setAttribute("utente", utente);
 
                 ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
@@ -62,14 +78,171 @@ public class Bacheca extends HttpServlet {
 
                 ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
                 request.setAttribute("gruppi", ListGruppo);
-                
+
                 request.setAttribute("idUtente", idUtente);
+
+                request.setAttribute("propriaBacheca", true);
+
+                if (request.getParameter("conferma") != null
+                        && request.getParameter("idDestPost") != null) {
+                    
+                    //Controllo per il messaggio di conferma
+                    request.setAttribute("inserimentoPost", 2);
+                    int idDest;
+                    idDest = Integer.parseInt(request.getParameter("idDestPost"));
+                    Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDest);
+                    request.setAttribute("utenteDest", utenteDest);
+
+                } else {
+                    request.setAttribute("inserimentoPost", 0);
+                }
+
+                //Inserimento nuovo post
+                if (request.getParameter("nuovoPost") != null) {
+                    Post nuovoPost = new Post();
+
+                    //Tipo di post
+                    if (request.getParameter("allegato") != null
+                            && request.getParameter("allegato").equals("Immagine")) {
+                        nuovoPost.setPostType(Post.Type.IMAGE);
+                        nuovoPost.setContent(request.getParameter("urlAllegato"));
+                        nuovoPost.setText(request.getParameter("frase"));
+                        nuovoPost.setUtenteMitt(utente);
+                        nuovoPost.setUtenteDest(utente);
+                        nuovoPost.setId((int) Math.random());
+
+                        ListPost.add(nuovoPost);
+
+                        request.setAttribute("nuovoAllegato", true);
+                        request.setAttribute("nuovoPost", nuovoPost);
+                        request.setAttribute("inserimentoPost", 1);
+
+                    } else if (request.getParameter("allegato") != null && request.getParameter("allegato").equals("URL")) {
+                        nuovoPost.setPostType(Post.Type.LINK);
+                        nuovoPost.setContent(request.getParameter("urlAllegato"));
+                        nuovoPost.setText(request.getParameter("frase"));
+                        nuovoPost.setUtenteMitt(utente);
+                        nuovoPost.setUtenteDest(utente);
+                        nuovoPost.setId((int) Math.random());
+
+                        ListPost.add(nuovoPost);
+
+                        request.setAttribute("nuovoAllegato", true);
+                        request.setAttribute("nuovoPost", nuovoPost);
+                        request.setAttribute("inserimentoPost", 1);
+                    } else {
+                        nuovoPost.setPostType(Post.Type.TEXT);
+                        nuovoPost.setText(request.getParameter("frase"));
+                        nuovoPost.setUtenteMitt(utente);
+                        nuovoPost.setUtenteDest(utente);
+                        nuovoPost.setId((int) Math.random());
+
+                        ListPost.add(nuovoPost);
+                        request.setAttribute("nuovoAllegato", false);
+                        request.setAttribute("nuovoPost", nuovoPost);
+                        request.setAttribute("inserimentoPost", 1);
+
+                    }
+
+                }
+
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+
+            }
+            if (utente != null && idAmico != -1) {
+
+                //Bacheca amico
+                Utente amico = UtenteFactory.getInstance().getUtentebyId(idAmico);
+
+                request.setAttribute("utente", utente);
+                request.setAttribute("amico", amico);
+
+                ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
+                request.setAttribute("amici", ListAmici);
+
+                ArrayList<Post> ListPost = PostFactory.getInstance().getPostListBacheca(amico);
+                request.setAttribute("posts", ListPost);
+
+                ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                request.setAttribute("gruppi", ListGruppo);
+
+                request.setAttribute("idUtente", idUtente);
+
+                request.setAttribute("propriaBacheca", false);
+
+                if (request.getParameter("conferma") != null
+                        && request.getParameter("idDestPost") != null) {
+                    //Controllo per il messaggio di conferma
+                    
+                    request.setAttribute("inserimentoPost", 2);
+                    int idDest;
+                    idDest = Integer.parseInt(request.getParameter("idDestPost"));
+                    Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDest);
+                    request.setAttribute("utenteDest", utenteDest);
+
+                } else {
+                    request.setAttribute("inserimentoPost", 0);
+                }
+
+                //Inserimento nuovo post
+                if (request.getParameter("nuovoPost") != null) {
+                    Post nuovoPost = new Post();
+
+                    //Tipo di post
+                    if (request.getParameter("allegato") != null
+                            && request.getParameter("allegato").equals("Immagine")) {
+                        nuovoPost.setPostType(Post.Type.IMAGE);
+                        nuovoPost.setContent(request.getParameter("urlAllegato"));
+                        nuovoPost.setText(request.getParameter("frase"));
+                        nuovoPost.setUtenteMitt(utente);
+                        nuovoPost.setUtenteDest(amico);
+                        nuovoPost.setId((int) Math.random());
+
+                        ListPost.add(nuovoPost);
+
+                        request.setAttribute("nuovoAllegato", true);
+                        request.setAttribute("nuovoPost", nuovoPost);
+                        request.setAttribute("inserimentoPost", 1);
+
+                    } else if (request.getParameter("allegato") != null && request.getParameter("allegato").equals("URL")) {
+                        nuovoPost.setPostType(Post.Type.LINK);
+                        nuovoPost.setContent(request.getParameter("urlAllegato"));
+                        nuovoPost.setText(request.getParameter("frase"));
+                        nuovoPost.setUtenteMitt(utente);
+                        nuovoPost.setUtenteDest(amico);
+                        nuovoPost.setId((int) Math.random());
+
+                        ListPost.add(nuovoPost);
+
+                        request.setAttribute("nuovoAllegato", true);
+                        request.setAttribute("nuovoPost", nuovoPost);
+                        request.setAttribute("inserimentoPost", 1);
+                    } else {
+                        nuovoPost.setPostType(Post.Type.TEXT);
+                        nuovoPost.setText(request.getParameter("frase"));
+                        nuovoPost.setUtenteMitt(utente);
+                        nuovoPost.setUtenteDest(amico);
+                        nuovoPost.setId((int) Math.random());
+
+                        ListPost.add(nuovoPost);
+                        request.setAttribute("nuovoAllegato", false);
+                        request.setAttribute("nuovoPost", nuovoPost);
+                        request.setAttribute("inserimentoPost", 1);
+
+                    }
+
+                }
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
 
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
+
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            request.setAttribute("NonAutorizzato", true);
+            request.getRequestDispatcher("profilo.jsp").forward(request, response);
 
         }
 

@@ -37,20 +37,21 @@ public class Descrizione extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("loggedIn") == null) {
+            session.setAttribute("loggedIn", false);
+        }
 
-        if (session!=null && 
-           session.getAttribute("loggedIn")!=null &&
-           session.getAttribute("loggedIn").equals(true) &&
-                request.getParameter("idUtente")!=null) {
+        if (session != null
+                && session.getAttribute("loggedIn") != null
+                && session.getAttribute("loggedIn").equals(true)
+                && request.getParameter("idUtente") != null) {
 
             String user = request.getParameter("idUtente");
 
             int idUtente;
 
             idUtente = Integer.parseInt(user);
-
-            
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -59,8 +60,8 @@ public class Descrizione extends HttpServlet {
 
                 ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
                 request.setAttribute("amici", ListAmici);
-                
-                ArrayList<Gruppo> ListGruppo=GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+
+                ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
                 request.setAttribute("gruppi", ListGruppo);
 
                 request.getRequestDispatcher("descrizione.jsp").forward(request, response);
@@ -68,13 +69,12 @@ public class Descrizione extends HttpServlet {
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
-        } else{
-            
+        } else {
+
             request.getRequestDispatcher("descrizione.jsp").forward(request, response);
-        
-        
+
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

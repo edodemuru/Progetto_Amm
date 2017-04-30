@@ -22,7 +22,7 @@
             <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                   <p>${amico.nome} ${amico.cognome}</p>
+                   <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                 </div>                                       
             </c:forEach>
             </div>
@@ -60,7 +60,7 @@
             <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                   <p>${amico.nome} ${amico.cognome}</p>
+                   <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                 </div>                                       
             </c:forEach>
                         
@@ -111,7 +111,7 @@
             <c:forEach var="gruppo" items="${gruppi}">
                     <div class="fotoProfilo2">
                         <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
-                        <p class="group">${gruppo.name}</p>
+                        <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                     </div>
                     
                 </c:forEach>
