@@ -409,7 +409,7 @@ button#pubblica, button#pubblica2{
 
 
 
-#post1,#post2,#post3,#creaPost{
+.posts,#creaPost{
     margin:0px;
     border:2px solid #B9BCBD;
     margin-top: 15px;
@@ -808,7 +808,7 @@ div#lateral{
     margin-top: 148px;
 }
 
-#post1,#post2,#post3,#creaPost{
+.posts,#creaPost{
     width: 638px;
 }
 
@@ -985,7 +985,7 @@ p.link{
     right: 186px;
 }
 
-#post1,#post2,#post3,#creaPost{
+.posts,#creaPost{
     width: 410px;
     position: relative;
     right:186px;

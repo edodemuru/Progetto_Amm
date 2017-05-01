@@ -78,7 +78,7 @@
 
                         <c:choose>
                             <c:when test="${nuovoPost.postType == 'TEXT'}">
-                                <div id="post1">
+                                <div class="posts">
                                     <div class="fotoProfilo">
                                         <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
                                     </div>              
@@ -94,7 +94,7 @@
                             </c:when>
 
                             <c:when test="${nuovoPost.postType =='IMAGE'}">
-                                <div id="post2">
+                                <div class="posts">
                                     <div class="fotoProfilo">
                                         <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
                                     </div>
@@ -112,7 +112,7 @@
                             </c:when>
 
                             <c:when test="${nuovoPost.postType =='LINK'}">
-                                <div id="post3">
+                                <div class="posts">
                                     <div class="fotoProfilo">
                                         <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
                                     </div>
@@ -139,7 +139,7 @@
 
                 
                 <c:when test="${inserimentoPost== 2}">
-                    <div id="post1">
+                    <div class="posts">
                         <p>Hai scritto sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}</p>
                     </div>
 
@@ -151,7 +151,7 @@
 
                     <c:choose>
                         <c:when test="${post.postType == 'TEXT'}">
-                            <div id="post1">
+                            <div class="posts">
                                 <div class="fotoProfilo">
                                     <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
                                 </div>              
@@ -161,7 +161,7 @@
                         </c:when>
 
                         <c:when test="${post.postType =='IMAGE'}">
-                            <div id="post2">
+                            <div class="posts">
                                 <div class="fotoProfilo">
                                     <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
                                 </div>
@@ -173,7 +173,7 @@
                         </c:when>
 
                         <c:when test="${post.postType =='LINK'}">
-                            <div id="post3">
+                            <div class="posts">
                                 <div class="fotoProfilo">
                                     <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
                                 </div>
