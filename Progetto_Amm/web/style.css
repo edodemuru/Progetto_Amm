@@ -1,4 +1,4 @@
-/*   
+/*  
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -390,7 +390,7 @@ border-radius: 0px;
 
 }
 
-button#pubblica{
+button#pubblica, button#pubblica2{
     
     width: 610px;
     height: 45px;
@@ -425,6 +425,7 @@ button#pubblica{
     padding-left: 50px;
     padding-top: 15px;
     margin-top: 0px;
+    margin-bottom: 18px;
 }
 
 .nameprofile{
@@ -640,6 +641,17 @@ img#Profilepic{
     width: 370px;
 }
 
+#textNewPost{
+    margin-top: 16px;
+    
+}
+#warning{
+    text-align: center;
+    margin-top: 252px;
+    font-size: 43px;
+    line-height: 60px;
+}
+
 @media only screen and (min-width:1024px){
     
     header#titleBac{
@@ -815,7 +827,7 @@ position: relative;
     
 }
 
-textarea#fraseBach,input#urlAllegato,button#pubblica{
+textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2{
     width: 500px;
 }
 
@@ -1134,7 +1146,7 @@ position: relative;
     bottom: 15px;
 }
 
-textarea#fraseBach,input#urlAllegato,button#pubblica{
+textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2{
     width: 325px;
 }
 

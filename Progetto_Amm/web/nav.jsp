@@ -43,6 +43,7 @@
             <p class="link"><a href="descrizione.html?idUtente=${utente.id}">Informazioni sul Social Network</a></p>     
           </nav>
             
+            
         </div>
               
 
@@ -76,11 +77,12 @@
                     
                 </c:forEach>            
             </div>
-            
+           <c:if test="${loggedIn==false}"> 
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Link</h2>
             <p class="link"><a href="descrizione.html?idUtente=${utente.id}">Informazioni sul Social Network</a></p>     
           </nav>
+           </c:if>
             
         </div>
         
@@ -91,6 +93,7 @@
     <c:when test="${page==2}">
         
         <div id="lateral5">
+            <c:if test="${loggedIn==true}">
              <form id="searchsection" action="bacheca.jsp">
                 <input type="search" id="search" name="search" value="cerca">
                 
@@ -101,7 +104,7 @@
             <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                   <p>${amico.nome} ${amico.cognome}</p>
+                   <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                 </div>                                       
             </c:forEach>
             </div>
@@ -111,16 +114,19 @@
             <c:forEach var="gruppo" items="${gruppi}">
                     <div class="fotoProfilo2">
                         <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
-                        <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
+                        <p>${gruppo.name}</p>
                     </div>
                     
                 </c:forEach>
             </div>
+            </c:if>
             
+            <c:if test="${loggedIn==false}">
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Entra in Nerdbook</h2>
             <p class="link" id="loginid"><a href="login.html">Login</a></p>     
           </nav>
+            </c:if>
              
            
           

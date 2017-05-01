@@ -87,7 +87,7 @@ and open the template in the editor.
             </div>
         </c:if>
         <c:if test="${NonAutorizzato==true}">
-            <h1><strong>Non Autorizzato a visitare questa pagina</strong></h1>
+            <h1 id='warning'><strong>Non Autorizzato a visitare questa pagina</strong></h1>
 
         </c:if>
 

@@ -50,6 +50,8 @@
                 <h1 id="linkProf"><a href="profilo.html?idUtente=${utente.id}" class="buttlink">Profilo</a></h1>
             <h1 id="linkBach2"><a href="bacheca.html?idUtente=${utente.id}" class="buttlink">Bacheca</a></h1>
             </div>
+            
+            <c:if test="${loggedIn == true}">
             <nav id="logout">
             <h2>${utente.nome} ${utente.cognome}</h2>
             <div class="fotoProfiloLogout">
@@ -57,6 +59,7 @@
             </div>
             <a href="login.html?logout=2">Logout</a>   
             </nav>
+            </c:if>
         </header>  
         
     </c:when>

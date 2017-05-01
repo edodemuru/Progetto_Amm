@@ -68,7 +68,7 @@
 
                             </div>
 
-                            <button type="submit" name="nuovoPost" id="pubblica">Pubblica post</button>
+                            <button type="submit" name="nuovoPost" id="pubblica2">Pubblica post</button>
 
                         </form>
                     </c:when>
@@ -83,7 +83,7 @@
                                         <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
                                     </div>              
                                     <h3 class="nameuser">${nuovoPost.utenteMitt.nome} ${nuovoPost.utenteMitt.cognome}</h3>            
-                                    <p>${nuovoPost.text}</p>
+                                    <p id='textNewPost'>${nuovoPost.text}</p>
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
                                         <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.utenteDest.id}" method="post">
@@ -99,7 +99,7 @@
                                         <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
                                     </div>
                                     <h3 class="nameuser">${nuovoPost.utenteMitt.nome} ${nuovoPost.utenteMitt.cognome}</h3>            
-                                    <p>${nuovoPost.text}</p>   
+                                    <p id='textNewPost'>${nuovoPost.text}</p>   
                                     <img src="${nuovoPost.content}" alt="Foto" title="Allegato"/>
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
@@ -117,7 +117,7 @@
                                         <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
                                     </div>
                                     <h3 class="nameuser">${nuovoPost.utenteMitt.nome} ${nuovoPost.utenteMitt.cognome}</h3>            
-                                    <p>${nuovoPost.text}</p>
+                                    <p id='textNewPost'>${nuovoPost.text}</p>
                                     <a href="${nuovoPost.content}">${nuovoPost.content}</a> 
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
@@ -197,7 +197,7 @@
 
         </c:if>
         <c:if test="${NonAutorizzato==true}">
-            <h1><strong>Non Autorizzato a visitare questa pagina</strong></h1>
+            <h1 id='warning'><strong>Non Autorizzato a visitare questa pagina</strong></h1>
 
         </c:if>
     </body>

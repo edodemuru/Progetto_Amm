@@ -70,8 +70,18 @@ public class Profilo extends HttpServlet {
 
                 //Modifica del profilo
                 if (request.getParameter("modifica") != null) {
+                    
+                    String nome=request.getParameter("nome");
+                    String cognome=request.getParameter("cognome");
+                    String url=request.getParameter("url");
+                    String frasePres=request.getParameter("frase");
+                    String data=request.getParameter("data");
+                    String username=request.getParameter("username");
+                    String password=request.getParameter("password");
+                    String confpassword=request.getParameter("confpassword");
+                    
 
-                    utente.setNome(request.getParameter("nome"));
+                    
 
                     request.setAttribute("modificaDati", true);
 
