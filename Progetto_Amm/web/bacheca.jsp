@@ -10,6 +10,7 @@
         <meta name="keywords" content="Nerdbook Social Network sogni bacheca personale">
         <meta name="description" content="Bacheca personale utente">
         <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+        
     </head>
 
     <body id="bodyBach">
@@ -45,7 +46,7 @@
 
                 <c:choose>
                     <c:when test="${inserimentoPost==0}">
-                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}" method="post" id="creaPost">            
+                        <form action="bacheca.html?idAmico=${amico.id}" method="post" id="creaPost">            
                             <div class="formitem" id="PostText">
                                 <textarea rows="2" cols="20" name="frase" id="fraseBach">Testo nuovo Post</textarea>
                             </div>
@@ -86,7 +87,7 @@
                                     <p id='textNewPost'>${nuovoPost.text}</p>
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
+                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
@@ -103,7 +104,7 @@
                                     <img src="${nuovoPost.content}" alt="Foto" title="Allegato"/>
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
+                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
@@ -121,7 +122,7 @@
                                     <a href="${nuovoPost.content}">${nuovoPost.content}</a> 
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
+                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>

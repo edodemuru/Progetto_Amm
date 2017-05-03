@@ -5,14 +5,10 @@
  */
 package amm.nerdbook;
 
-import amm.nerdbook.classi.Gruppo;
-import amm.nerdbook.classi.GruppoFactory;
-import amm.nerdbook.classi.Post;
-import amm.nerdbook.classi.PostFactory;
+
 import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

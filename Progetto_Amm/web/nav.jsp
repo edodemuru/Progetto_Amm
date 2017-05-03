@@ -22,7 +22,7 @@
             <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                   <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
+                   <p><a href="bacheca.html?idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                 </div>                                       
             </c:forEach>
             </div>
@@ -40,7 +40,7 @@
             
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Link</h2>
-            <p class="link"><a href="descrizione.html?idUtente=${utente.id}">Informazioni sul Social Network</a></p>     
+            <p class="link"><a href="descrizione.html">Informazioni sul Social Network</a></p>     
           </nav>
             
             
@@ -61,7 +61,7 @@
             <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                   <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
+                   <p><a href="bacheca.html?idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                 </div>                                       
             </c:forEach>
                         
@@ -80,7 +80,7 @@
            <c:if test="${loggedIn==false}"> 
           <nav id="linksbacheca">
               <h2 class="lateraltitle">Link</h2>
-            <p class="link"><a href="descrizione.html?idUtente=${utente.id}">Informazioni sul Social Network</a></p>     
+            <p class="link"><a href="descrizione.html">Informazioni sul Social Network</a></p>     
           </nav>
            </c:if>
             
@@ -104,7 +104,7 @@
             <c:forEach var="amico" items="${amici}">
                 <div class="fotoProfilo2">
                    <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                   <p><a href="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
+                   <p><a href="bacheca.html?idAmico=${amico.id}">${amico.nome} ${amico.cognome}</a></p>
                 </div>                                       
             </c:forEach>
             </div>

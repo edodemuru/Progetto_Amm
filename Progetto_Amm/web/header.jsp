@@ -12,8 +12,8 @@
 <header id="titleBac">
             <h1 id="titleNet">Nerdbook</h1>
             <div id="linkdif">
-                <h1 id="linkProf"><a href="profilo.html?idUtente=${utente.id}" class="buttlink">Profilo</a></h1>
-            <h1 id="linkBach"><a href="bacheca.html?idUtente=${utente.id}" class="buttlink">Bacheca</a></h1>
+                <h1 id="linkProf"><a href="profilo.html" class="buttlink">Profilo</a></h1>
+            <h1 id="linkBach"><a href="bacheca.html" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
             <h2>${utente.nome} ${utente.cognome}</h2>
@@ -29,8 +29,8 @@
         <header id="titleBac">
             <h1 id="titleNet">Nerdbook</h1>
             <div id="linkdif">
-            <h1 id="linkProf2"><a href="profilo.html?idUtente=${utente.id}" class="buttlink">Profilo</a></h1>
-            <h1 id="linkBach2"><a href="bacheca.html?idUtente=${utente.id}" class="buttlink">Bacheca</a></h1>
+            <h1 id="linkProf2"><a href="profilo.html" class="buttlink">Profilo</a></h1>
+            <h1 id="linkBach2"><a href="bacheca.html" class="buttlink">Bacheca</a></h1>
             </div>
             <nav id="logout">
             <h2>${utente.nome} ${utente.cognome}</h2>
@@ -47,8 +47,8 @@
         <header id="titleBac">
             <h1 id="titleNet">Nerdbook</h1>
             <div id="linkdif">
-                <h1 id="linkProf"><a href="profilo.html?idUtente=${utente.id}" class="buttlink">Profilo</a></h1>
-            <h1 id="linkBach2"><a href="bacheca.html?idUtente=${utente.id}" class="buttlink">Bacheca</a></h1>
+                <h1 id="linkProf"><a href="profilo.html" class="buttlink">Profilo</a></h1>
+            <h1 id="linkBach2"><a href="bacheca.html" class="buttlink">Bacheca</a></h1>
             </div>
             
             <c:if test="${loggedIn == true}">

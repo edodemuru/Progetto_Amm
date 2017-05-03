@@ -35,7 +35,7 @@ and open the template in the editor.
                         </div>           
                     </c:if>
                     
-                    <form action="profilo.html?idUtente=${utente.id}" method="post" id="Profiloform">
+                    <form action="profilo.html" method="post" id="Profiloform">
                         <div id="formContent">                  
                             <h3>Inserisci o modifica i tuoi dati</h3>
 
