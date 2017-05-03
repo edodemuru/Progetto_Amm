@@ -44,18 +44,13 @@ public class Bacheca extends HttpServlet {
         if (session != null
                 && session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true)
-                && (request.getAttribute("idUtente") != null
-                || request.getParameter("idUtente") != null)) {
+                && session.getAttribute("idUtente") != null) {
 
             int idUtente;
             int idAmico;
             request.setAttribute("NonAutorizzato", false);
 
-            if (request.getAttribute("idUtente") != null) {
-                idUtente = (int) request.getAttribute("idUtente");
-            } else {
-                idUtente = Integer.parseInt(request.getParameter("idUtente"));
-            }
+            idUtente = (int) session.getAttribute("idUtente");
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -79,21 +74,17 @@ public class Bacheca extends HttpServlet {
                 ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
                 request.setAttribute("gruppi", ListGruppo);
 
-                request.setAttribute("idUtente", idUtente);
-
                 request.setAttribute("propriaBacheca", true);
 
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idDestPost") != null) {
-                    
+
                     //Controllo per il messaggio di conferma
                     request.setAttribute("inserimentoPost", 2);
-                    int idDest;
-                    idDest = Integer.parseInt(request.getParameter("idDestPost"));
-                    Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDest);
+                    int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
+
+                    Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDestPost);
                     request.setAttribute("utenteDest", utenteDest);
-                    Post nuovoPost=(Post) session.getAttribute("savePost");
-                    ListPost.add(nuovoPost);
 
                 } else {
                     request.setAttribute("inserimentoPost", 0);
@@ -111,10 +102,7 @@ public class Bacheca extends HttpServlet {
                         nuovoPost.setText(request.getParameter("frase"));
                         nuovoPost.setUtenteMitt(utente);
                         nuovoPost.setUtenteDest(utente);
-                        nuovoPost.setId((int) Math.random());
-
-                        // Salvataggio post in sessione
-                        session.setAttribute("savePost", nuovoPost);
+                        nuovoPost.setId((int) (Math.random()) * 10000);
 
                         request.setAttribute("nuovoAllegato", true);
                         request.setAttribute("nuovoPost", nuovoPost);
@@ -126,10 +114,7 @@ public class Bacheca extends HttpServlet {
                         nuovoPost.setText(request.getParameter("frase"));
                         nuovoPost.setUtenteMitt(utente);
                         nuovoPost.setUtenteDest(utente);
-                        nuovoPost.setId((int) Math.random());
-
-                        // Salvataggio post in sessione
-                        session.setAttribute("savePost", nuovoPost);
+                        nuovoPost.setId((int) (Math.random()) * 10000);
 
                         request.setAttribute("nuovoAllegato", true);
                         request.setAttribute("nuovoPost", nuovoPost);
@@ -139,13 +124,13 @@ public class Bacheca extends HttpServlet {
                         nuovoPost.setText(request.getParameter("frase"));
                         nuovoPost.setUtenteMitt(utente);
                         nuovoPost.setUtenteDest(utente);
-                        nuovoPost.setId((int) Math.random());
+                        nuovoPost.setId(10);
 
-                       // Salvataggio post in sessione
-                        session.setAttribute("savePost", nuovoPost);
-                        
+                        //Ci sono allegati nel post?
                         request.setAttribute("nuovoAllegato", false);
+                        // Creo un attributo in cui inserisco il nuovo post
                         request.setAttribute("nuovoPost", nuovoPost);
+                        // Attributo per modifica pagina html di output
                         request.setAttribute("inserimentoPost", 1);
 
                     }
@@ -172,23 +157,17 @@ public class Bacheca extends HttpServlet {
                 ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
                 request.setAttribute("gruppi", ListGruppo);
 
-                request.setAttribute("idUtente", idUtente);
-
                 request.setAttribute("propriaBacheca", false);
 
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idDestPost") != null) {
+
                     //Controllo per il messaggio di conferma
-                    
                     request.setAttribute("inserimentoPost", 2);
-                    int idDest;
-                    idDest = Integer.parseInt(request.getParameter("idDestPost"));
-                    Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDest);
+                    int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
+
+                    Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDestPost);
                     request.setAttribute("utenteDest", utenteDest);
-                    
-                    //Memorizzazione nuovo Post
-                    Post nuovoPost=(Post) session.getAttribute("savePost");
-                    ListPost.add(nuovoPost);
 
                 } else {
                     request.setAttribute("inserimentoPost", 0);
@@ -206,10 +185,7 @@ public class Bacheca extends HttpServlet {
                         nuovoPost.setText(request.getParameter("frase"));
                         nuovoPost.setUtenteMitt(utente);
                         nuovoPost.setUtenteDest(amico);
-                        nuovoPost.setId((int) Math.random());
-
-                        // Salvataggio post in sessione
-                        session.setAttribute("savePost", nuovoPost);
+                        nuovoPost.setId((int) (Math.random()) * 10000);
 
                         request.setAttribute("nuovoAllegato", true);
                         request.setAttribute("nuovoPost", nuovoPost);
@@ -221,10 +197,7 @@ public class Bacheca extends HttpServlet {
                         nuovoPost.setText(request.getParameter("frase"));
                         nuovoPost.setUtenteMitt(utente);
                         nuovoPost.setUtenteDest(amico);
-                        nuovoPost.setId((int) Math.random());
-
-                        // Salvataggio post in sessione
-                        session.setAttribute("savePost", nuovoPost);
+                        nuovoPost.setId((int) (Math.random()) * 10000);
 
                         request.setAttribute("nuovoAllegato", true);
                         request.setAttribute("nuovoPost", nuovoPost);
@@ -234,11 +207,8 @@ public class Bacheca extends HttpServlet {
                         nuovoPost.setText(request.getParameter("frase"));
                         nuovoPost.setUtenteMitt(utente);
                         nuovoPost.setUtenteDest(amico);
-                        nuovoPost.setId((int) Math.random());
+                        nuovoPost.setId(11);
 
-                       // Salvataggio post in sessione
-                        session.setAttribute("savePost", nuovoPost);
-                        
                         request.setAttribute("nuovoAllegato", false);
                         request.setAttribute("nuovoPost", nuovoPost);
                         request.setAttribute("inserimentoPost", 1);

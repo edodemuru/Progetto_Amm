@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 
         if (request.getParameter("logout") != null) {
 
@@ -51,16 +51,12 @@ public class Login extends HttpServlet {
         //Utente loggato in precedenza
         if (session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true) &&
-                request.getParameter("idUtente")!= null
-                 && request.getParameter("Submit") == null) {
+                session.getAttribute("idUtente")!=null              
+                ) {
 
             // Ricerco l'utente
-            String user = request.getParameter("idUtente");
-
-            int idUtente;
-
-            idUtente = Integer.parseInt(user);
-            
+           
+            int idUtente=(int) session.getAttribute("idUtente");
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -71,9 +67,12 @@ public class Login extends HttpServlet {
                 if (utente != null) {
                     //Carico la bacheca
 
-                    request.setAttribute("loggedUserID", idUtente);
+                    //request.setAttribute("loggedUserID", idUtente);
+                    session.setAttribute("loggedUserID", idUtente);
 
                     request.getRequestDispatcher("bacheca.html").forward(request, response);
+                    
+                    return;
 
                 } else {
                     //Utente inesistente
@@ -86,9 +85,11 @@ public class Login extends HttpServlet {
                     //Utente con profilo incompleto
 
                     session.setAttribute("ProfileOk", false);
-                    request.setAttribute("idUtente", idUtente);
+                    //request.setAttribute("idUtente", idUtente);
+                    session.setAttribute("idUtente", idUtente);
 
                     request.getRequestDispatcher("profilo.html").forward(request, response);
+                    return;
 
                 } else {
                     //Utente inesistente
@@ -111,15 +112,17 @@ public class Login extends HttpServlet {
                 Utente utente = UtenteFactory.getInstance().getUtenteByUsername(username);
                 Integer idUtente = utente.getId();
 
-                request.setAttribute("idUtente", idUtente);
+               // request.setAttribute("idUtente", idUtente);
+                session.setAttribute("idUtente", idUtente);
                 
                 
                 if (checkProfile(utente)) {
                     //Utente con profilo completo
-
+                    session.setAttribute("ProfileOk", true);
                     request.getRequestDispatcher("bacheca.html").forward(request, response);
-                    
                     return;
+                    
+                   
                 } else {
                     //Utente con profilo incompleto
                     session.setAttribute("ProfileOk", false);
@@ -133,6 +136,7 @@ public class Login extends HttpServlet {
                 //Username o password errati
                 request.setAttribute("errore", "Errore nell'inserimento dell'username o della password");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
 
             }
 

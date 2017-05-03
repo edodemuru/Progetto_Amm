@@ -42,20 +42,11 @@ public class Profilo extends HttpServlet {
         if (session != null
                 && session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true)
-                && (request.getAttribute("idUtente") != null
-                || request.getParameter("idUtente") != null)) {
-
-            String user = request.getParameter("idUtente");
+                && session.getAttribute("idUtente") != null) {
 
             request.setAttribute("NonAutorizzato", false);
 
-            int idUtente;
-
-            if (request.getAttribute("idUtente") != null) {
-                idUtente = (int) request.getAttribute("idUtente");
-            } else {
-                idUtente = Integer.parseInt(request.getParameter("idUtente"));
-            }
+            int idUtente = (int) session.getAttribute("idUtente");
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -80,9 +71,14 @@ public class Profilo extends HttpServlet {
                     String password=request.getParameter("password");
                     String confpassword=request.getParameter("confpassword");
                     
-
-                    
-
+                    utente.setNome(nome);
+                    utente.setCognome(cognome);
+                    utente.setFrasePres(frasePres);
+                    utente.setDataNascita(data);
+                    utente.setPassword(password);
+                    utente.setUsername(username);
+                    utente.setUrlFotoProfilo(url);
+                  
                     request.setAttribute("modificaDati", true);
 
                 }
@@ -93,9 +89,7 @@ public class Profilo extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
 
-        } else if (session.getAttribute("loggedIn") == null
-                || session.getAttribute("loggedIn").equals(false)
-                || request.getParameter("idUtente").equals("")) {
+        } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             request.setAttribute("NonAutorizzato", true);
             request.getRequestDispatcher("profilo.jsp").forward(request, response);

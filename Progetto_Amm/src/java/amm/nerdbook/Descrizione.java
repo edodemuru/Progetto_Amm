@@ -38,20 +38,17 @@ public class Descrizione extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        if (session.getAttribute("loggedIn") == null) {
-            session.setAttribute("loggedIn", false);
-        }
+       
 
         if (session != null
                 && session.getAttribute("loggedIn") != null
-                && session.getAttribute("loggedIn").equals(true)
-                && request.getParameter("idUtente") != null) {
+                && session.getAttribute("loggedIn").equals(true) &&
+                session.getAttribute("idUtente")!=null) {
 
-            String user = request.getParameter("idUtente");
+            
 
             int idUtente;
-
-            idUtente = Integer.parseInt(user);
+            idUtente= (int) session.getAttribute("idUtente");
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
 
@@ -70,7 +67,7 @@ public class Descrizione extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
         } else {
-
+            session.setAttribute("loggedIn", false);
             request.getRequestDispatcher("descrizione.jsp").forward(request, response);
 
         }

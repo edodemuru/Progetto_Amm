@@ -86,7 +86,7 @@
                                     <p id='textNewPost'>${nuovoPost.text}</p>
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.utenteDest.id}" method="post">
+                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
@@ -103,7 +103,7 @@
                                     <img src="${nuovoPost.content}" alt="Foto" title="Allegato"/>
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.utenteDest.id}" method="post">
+                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
@@ -121,7 +121,7 @@
                                     <a href="${nuovoPost.content}">${nuovoPost.content}</a> 
                                     <div id="utenteDest">
                                         <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.utenteDest.id}" method="post">
+                                        <form action="bacheca.html?idUtente=${utente.id}&idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
