@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Bacheca extends HttpServlet {
 
-    /**
+    /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -131,7 +131,7 @@ public class Bacheca extends HttpServlet {
                         request.setAttribute("nuovoAllegato", false);
                         // Creo un attributo in cui inserisco il nuovo post
                         request.setAttribute("nuovoPost", nuovoPost);
-                        // Attributo per modifica pagina html di output
+                        // Attributo per modificare la pagina html di output
                         request.setAttribute("inserimentoPost", 1);
 
                     }

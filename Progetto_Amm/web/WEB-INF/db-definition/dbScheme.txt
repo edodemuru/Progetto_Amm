@@ -1,0 +1,68 @@
+Entità Utente: 
+	nome (varchar)
+	cognome (varchar)
+	urlFotoProfilo (varchar) 
+	frasePres (varchar)
+	dataNasc (varchar)
+	username (varchar)
+	password (varchar)
+        idUtente(integer,Chiave Primaria)
+
+Entità Gruppo:
+	urlFotoGruppo (varchar)
+	interesse (varchar)
+	name (varchar)
+        idGruppo(integer,Chiave Primaria)
+	idAmministratore (integer, Chiave Esterna di Utente)
+
+Entità Post:
+	idPostType(integer, Chiave Esterna di PostType)
+	content(varchar)
+	text(varchar)
+	idPost(integer,Chiave primaria)
+	idMittente(integer,Chiave Esterna di Utente)
+	idDestinatarioUtente (integer,Chiave Esterna di Utente)
+        idDestinatarioGruppo (integer,Chiave Esterna di Gruppo)
+
+Entità PostType:
+	id (integer, Chiave Primaria)
+	name (varchar)
+
+Relazione Amministratore Gruppo:
+	relazione di partenza: Gruppo
+	relazione di arrivo: Utente
+	cardinalità: uno a molti
+
+Relazione Tipo di Post:
+	relazione di partenza: Post
+	relazione di arrivo: PostType
+	cardinalità: uno a molti
+
+Relazione Amicizia:
+	relazione di partenza: Utente
+	relazione di arrivo: Utente
+	cardinalità: molti a molti
+
+Relazione Partecipazione Gruppo:
+	relazione di partenza: Utente
+	relazione di arrivo: Gruppo
+	cardinalità: molti a molti
+
+Relazione Destinatario Post Utente:
+	relazione di partenza: Post
+	relazione di arrivo: Utente
+	cardinalità: uno a molti
+
+Relazione Destinatario Post Gruppo:
+	relazione di partenza: Post
+	relazione di arrivo: Gruppo
+	cardinalità: uno a molti
+
+Relazione Mittente Post:
+	relazione di partenza: Post
+	relazione di arrivo: Utente
+	cardinalità: uno a molti
+
+
+	
+
