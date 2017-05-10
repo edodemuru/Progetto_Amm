@@ -11,7 +11,7 @@ Entità Utente:
 Entità Gruppo:
 	urlFotoGruppo (varchar)
 	interesse (varchar)
-	name (varchar)
+	nome (varchar)
         idGruppo(integer,Chiave Primaria)
 	idAmministratore (integer, Chiave Esterna di Utente)
 
@@ -42,6 +42,9 @@ Relazione Amicizia:
 	relazione di partenza: Utente
 	relazione di arrivo: Utente
 	cardinalità: molti a molti
+        Attributi: follower (integer, chiave esterna di utente)
+                   followed(integer,chiave esterna di utente)
+                   chiave primaria(follower+followed)
 
 Relazione Partecipazione Gruppo:
 	relazione di partenza: Utente
