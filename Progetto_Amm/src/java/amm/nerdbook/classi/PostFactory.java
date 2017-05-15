@@ -5,6 +5,11 @@
  */
 package amm.nerdbook.classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -12,21 +17,21 @@ import java.util.ArrayList;
  * @author Edoardo
  */
 public class PostFactory {
-    
+
     private static PostFactory singleton;
     private String connectionString;
-    
+
     public static PostFactory getInstance() {
         if (singleton == null) {
             singleton = new PostFactory();
         }
         return singleton;
     }
-    
-    private ArrayList<Post> post=new ArrayList<>();
-    
-    private PostFactory(){
-     UtenteFactory utenteFactory = UtenteFactory.getInstance();
+
+    private ArrayList<Post> post = new ArrayList<>();
+
+    private PostFactory() {
+        /*UtenteFactory utenteFactory = UtenteFactory.getInstance();
 
         //Post 1
         Post post1 = new Post();
@@ -70,12 +75,11 @@ public class PostFactory {
         post.add(post1);
         post.add(post2);
         post.add(post3);
-        post.add(post4);
-    
-    
+        post.add(post4);*/
+
     }
-    
-    public Post getPostbyId(int id){
+
+    /*public Post getPostbyId(int id){
      for(Post singlepost: this.post){
        if(singlepost.getId()==id)
            return singlepost;
@@ -83,37 +87,95 @@ public class PostFactory {
      }
      return null;
     
-    }
-    
-    public ArrayList<Post> getPostListBacheca(Utente utente){
-        ArrayList postList=new ArrayList();
-        for(Post singlepost: this.post){
-          if(singlepost.getUtenteDest().getId()== utente.getId() ){
-             postList.add(singlepost);
-          }
-              
+    }*/
+    public Post getPostbyId(int id) {
+        try {
+           UtenteFactory utenteFactory = UtenteFactory.getInstance();
+           GruppoFactory gruppoFactory=GruppoFactory.getInstance();
+           
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "select * from post "
+                         + "join postType on postType.idType = post.idPostType "
+                         + "where idPost=?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, id);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+
+                Post post = new Post();
+                post.setText(res.getString("text"));
+                post.setId(res.getInt("idPost"));
+                post.setUtenteDest(utenteFactory.getUtentebyId(res.getInt("idDestinatarioUtente")));
+                post.setGruppoDest(gruppoFactory.getGruppobyId(res.getInt("idDestinatarioGruppo")));
+                post.setUtenteMitt(utenteFactory.getUtentebyId(res.getInt("idDestinatarioUtente")));
+                post.setPostType(postTypeFromString(res.getString("name")));
+
+                stmt.close();
+                conn.close();
+
+                return post;
+
+            }
+
+            //Nel caso la ricerca non dia risultati
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        
+        return null;
+
+    }
+
+    public ArrayList<Post> getPostListBacheca(Utente utente) {
+        ArrayList postList = new ArrayList();
+        for (Post singlepost : this.post) {
+            if (singlepost.getUtenteDest().getId() == utente.getId()) {
+                postList.add(singlepost);
+            }
+
+        }
+
         return postList;
-    
+
+    }
+
+    public ArrayList<Post> getPostListGruppo(Gruppo gruppo) {
+        ArrayList postList = new ArrayList();
+        for (Post singlePost : this.post) {
+            if (singlePost.getUtenteDest().getId() == gruppo.getId()) {
+                postList.add(singlePost);
+            }
+
+        }
+        return postList;
+
+    }
+
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+
+    public String getConnectionString() {
+        return this.connectionString;
     }
     
-    public ArrayList<Post> getPostListGruppo(Gruppo gruppo){
-      ArrayList postList=new ArrayList();
-      for(Post singlePost:this.post){
-        if(singlePost.getUtenteDest().getId()== gruppo.getId())
-            postList.add(singlePost);
-      
-      }
-      return postList;
+    
+    private Post.Type postTypeFromString(String type){
+        if(type.equals("TEXT"))
+            return Post.Type.TEXT;
+        if(type.equals("IMAGE"))
+            return Post.Type.IMAGE;
+        
+        return Post.Type.LINK;
+    
     
     }
-    
-    public void setConnectionString(String s){
-	this.connectionString = s;
-}
-public String getConnectionString(){
-	return this.connectionString;
-}
-    
+
 }

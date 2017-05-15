@@ -5,6 +5,11 @@
  */
 package amm.nerdbook.classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +17,7 @@ import java.util.ArrayList;
  * @author Edoardo
  */
 public class UtenteFactory {
-    
+
     private static UtenteFactory singleton;
     private String connectionString;
 
@@ -22,15 +27,13 @@ public class UtenteFactory {
         }
         return singleton;
     }
-    
-    private ArrayList<Utente> Utenti= new ArrayList<>();
-    
-    
-    
-    private UtenteFactory(){
-        
-    //Utente 1 
-    Utente utente1= new Utente();
+
+    private ArrayList<Utente> Utenti = new ArrayList<>();
+
+    private UtenteFactory() {
+
+        //Utente 1 
+        /*Utente utente1= new Utente();
     utente1.setNome("Edoardo");
     utente1.setCognome("Demuru");
     utente1.setId(0);
@@ -88,14 +91,10 @@ public class UtenteFactory {
     
     Utenti.add(utente1);
     Utenti.add(utente2);
-    Utenti.add(utente3);
-    
-    
-    
-    
+    Utenti.add(utente3);*/
     }
-    
-    public Utente getUtentebyId(int id){
+
+    /*public Utente getUtentebyId(int id){
      for(Utente utente: this.getUtenti()){
        if(utente.getId()==id)
            return utente;
@@ -103,9 +102,50 @@ public class UtenteFactory {
      }
      return null;
     
+    }*/
+    public Utente getUtentebyId(int id) {
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "select * from utente "
+                    + "where idUtente=?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, id);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                Utente utente = new Utente();
+                utente.setNome(res.getString("nome"));
+                utente.setCognome(res.getString("cognome"));
+                utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
+                utente.setFrasePres(res.getString("frasePres"));
+                utente.setDataNascita(res.getString("dataNasc"));
+                utente.setUsername(res.getString("username"));
+                utente.setPassword(res.getString("password"));
+                utente.setId(res.getInt("idUtente"));
+
+                stmt.close();
+                conn.close();
+
+                return utente;
+
+            }
+
+            //Nel caso la ricerca non dia risultati
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
-    
-  public ArrayList<Utente> getListAmicibyId(int id){
+
+    /*public ArrayList<Utente> getListAmicibyId(int id){
       ArrayList<Utente> ListAmici=new ArrayList<>();
       Utente utente=getUtentebyId(id);
       
@@ -116,7 +156,34 @@ public class UtenteFactory {
       return ListAmici;
   
   
-  }
+  }*/
+    public ArrayList<Utente> getListAmicibyId(int id) {
+        ArrayList<Utente> ListAmici = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+            String query = "select * from utente "
+                    + "join amicizia on utente.idutente = amicizia.follower "
+                    + "where utente.idutente= ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, id);
+
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                int idAmico = res.getInt("followed");
+                ListAmici.add(getUtentebyId(idAmico));
+
+            }
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ListAmici;
+
+    }
 
     /**
      * @return the Utenti
@@ -124,27 +191,55 @@ public class UtenteFactory {
     public ArrayList<Utente> getUtenti() {
         return Utenti;
     }
-    
-    public Utente getUtenteByUsername(String username){
-        for(Utente utente:this.Utenti){
-            if(username.equals(utente.getUsername()))
+
+    public Utente getUtenteByUsername(String username) {
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "select * from utente "
+                    + "where username=?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, username);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                Utente utente = new Utente();
+                utente.setNome(res.getString("nome"));
+                utente.setCognome(res.getString("cognome"));
+                utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
+                utente.setFrasePres(res.getString("frasePres"));
+                utente.setDataNascita(res.getString("dataNasc"));
+                utente.setUsername(res.getString("username"));
+                utente.setPassword(res.getString("password"));
+                utente.setId(res.getInt("idUtente"));
+
+                stmt.close();
+                conn.close();
+
                 return utente;
-        
-        
+
+            }
+
+            //Nel caso la ricerca non dia risultati
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
 
-}
-    
-    public void setConnectionString(String s){
-	this.connectionString = s;
-}
-public String getConnectionString(){
-	return this.connectionString;
-}
-    
-    
-    
-    
-    
+    }
+
+    public void setConnectionString(String s) {
+        this.connectionString = s;
+    }
+
+    public String getConnectionString() {
+        return this.connectionString;
+    }
+
 }
