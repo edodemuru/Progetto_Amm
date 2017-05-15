@@ -5,6 +5,11 @@
  */
 package amm.nerdbook.classi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +32,7 @@ public class GruppoFactory {
     
     public GruppoFactory(){
         
-        //Gruppo 1
+       /* //Gruppo 1
         Gruppo gruppo1=new Gruppo();
         gruppo1.setIdamministratore(0);
         gruppo1.setId(3);
@@ -52,11 +57,11 @@ public class GruppoFactory {
         gruppo2.setUrlFotoGruppo("img/gruppo1.jpg");
         
         gruppi.add(gruppo1);
-        gruppi.add(gruppo2);
+        gruppi.add(gruppo2);*/
     
     }
     
-     public Gruppo getGruppobyId(int id){
+     /*public Gruppo getGruppobyId(int id){
      for(Gruppo gruppo: this.gruppi){
        if(gruppo.getId()==id)
            return gruppo;
@@ -64,6 +69,44 @@ public class GruppoFactory {
      }
      return null;
     
+    }*/
+    
+    public Gruppo getgruppobyId(int id){
+    try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "select * from utente "
+                    + "where idUtente=?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, id);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                Gruppo gruppo= new Gruppo();
+                gruppo.setUrlFotoGruppo(res.getString("urlFotoGruppo"));
+                gruppo.setInteresse(res.getString("interesse"));
+                gruppo.setName(res.getString("nome"));
+                gruppo.setId(res.getInt("idGruppo"));
+                gruppo.setIdamministratore(res.getInt("idAmministratore"));
+                
+                stmt.close();
+                conn.close();
+
+                return gruppo;
+
+            }
+
+            //Nel caso la ricerca non dia risultati
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
      
      public ArrayList<Gruppo> getGruppoListUtente(int id){

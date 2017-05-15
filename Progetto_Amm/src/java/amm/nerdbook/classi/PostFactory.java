@@ -111,7 +111,7 @@ public class PostFactory {
                 post.setText(res.getString("text"));
                 post.setId(res.getInt("idPost"));
                 post.setUtenteDest(utenteFactory.getUtentebyId(res.getInt("idDestinatarioUtente")));
-                post.setGruppoDest(gruppoFactory.getGruppobyId(res.getInt("idDestinatarioGruppo")));
+                post.setGruppoDest(gruppoFactory.getgruppobyId(res.getInt("idDestinatarioGruppo")));
                 post.setUtenteMitt(utenteFactory.getUtentebyId(res.getInt("idDestinatarioUtente")));
                 post.setPostType(postTypeFromString(res.getString("name")));
 
@@ -135,25 +135,106 @@ public class PostFactory {
 
     public ArrayList<Post> getPostListBacheca(Utente utente) {
         ArrayList postList = new ArrayList();
-        for (Post singlepost : this.post) {
-            if (singlepost.getUtenteDest().getId() == utente.getId()) {
-                postList.add(singlepost);
+        
+        try {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "username", "password");
+            
+            UtenteFactory utenteFactory = UtenteFactory.getInstance();
+            GruppoFactory gruppoFactory=GruppoFactory.getInstance();
+            
+            String query = 
+                      "select * from post "
+                    + "join posttype on post.idposttype = posttype.idtype "
+                    + "where idDestinatarioUtente = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            // Si associano i valori
+            stmt.setInt(1,utente.getId());
+            
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+
+            // ciclo sulle righe restituite
+            while (res.next()) {
+                
+                // Settaggio parametri del post
+                Post current = new Post();
+                
+                current.setId(res.getInt("idpost"));
+                current.setUtenteMitt(utenteFactory.getUtentebyId(res.getInt("idMittente")));
+                current.setUtenteDest(utenteFactory.getUtentebyId(res.getInt("idDestinatarioUtente")));
+                current.setGruppoDest(null);
+                current.setContent(res.getString("content"));
+                current.setText(res.getString("text"));                
+                current.setPostType(this.postTypeFromString(res.getString("name")));
+
+                postList.add(current);
             }
 
+            stmt.close();
+            conn.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return postList;
 
     }
 
+    //Lista dei post di un gruppo
     public ArrayList<Post> getPostListGruppo(Gruppo gruppo) {
         ArrayList postList = new ArrayList();
-        for (Post singlePost : this.post) {
-            if (singlePost.getUtenteDest().getId() == gruppo.getId()) {
-                postList.add(singlePost);
+        
+        try {
+            // path, username, password
+            Connection conn = DriverManager.getConnection(connectionString, "username", "password");
+            
+            UtenteFactory utenteFactory = UtenteFactory.getInstance();
+            GruppoFactory gruppoFactory=GruppoFactory.getInstance();
+            
+            String query = 
+                      "select * from post "
+                    + "join posttype on post.idposttype = posttype.idtype "
+                    + "where idDestinarioGruppo = ?";
+            
+            // Prepared Statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            // Si associano i valori
+            stmt.setInt(1,gruppo.getId());
+            
+            // Esecuzione query
+            ResultSet res = stmt.executeQuery();
+
+            // ciclo sulle righe restituite
+            while (res.next()) {
+                
+                Post current = new Post();
+                
+                current.setId(res.getInt("idpost"));
+                current.setUtenteMitt(utenteFactory.getUtentebyId(res.getInt("idMittente")));
+                current.setUtenteDest(null);
+                current.setGruppoDest(gruppoFactory.getgruppobyId(res.getInt("idDestinatarioGruppo")));
+                current.setContent(res.getString("content"));
+                current.setText(res.getString("text"));                
+                current.setPostType(this.postTypeFromString(res.getString("name")));
+                
+                //NECESSARIO CONTROLLO AFFINCHE' SIA L'ID DEL GRUPPO CHE L'ID DELL'UTENTE NON SIANO ENTRAMBI NULLI
+
+                postList.add(current);
             }
 
+            stmt.close();
+            conn.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         return postList;
 
     }
