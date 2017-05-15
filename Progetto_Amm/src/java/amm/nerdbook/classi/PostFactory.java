@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class PostFactory {
     
     private static PostFactory singleton;
+    private String connectionString;
     
     public static PostFactory getInstance() {
         if (singleton == null) {
@@ -107,5 +108,12 @@ public class PostFactory {
       return postList;
     
     }
+    
+    public void setConnectionString(String s){
+	this.connectionString = s;
+}
+public String getConnectionString(){
+	return this.connectionString;
+}
     
 }

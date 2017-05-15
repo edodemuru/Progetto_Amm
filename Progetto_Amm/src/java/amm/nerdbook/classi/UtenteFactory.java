@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class UtenteFactory {
     
     private static UtenteFactory singleton;
+    private String connectionString;
 
     public static UtenteFactory getInstance() {
         if (singleton == null) {
@@ -135,6 +136,12 @@ public class UtenteFactory {
 
 }
     
+    public void setConnectionString(String s){
+	this.connectionString = s;
+}
+public String getConnectionString(){
+	return this.connectionString;
+}
     
     
     

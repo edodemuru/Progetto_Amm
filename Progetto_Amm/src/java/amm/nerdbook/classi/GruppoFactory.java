@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class GruppoFactory {
     
     private static GruppoFactory singleton;
+    private String connectionString;
     
     public static GruppoFactory getInstance() {
         if (singleton == null) {
@@ -79,6 +80,13 @@ public class GruppoFactory {
      
      
      }
+     
+     public void setConnectionString(String s){
+	this.connectionString = s;
+}
+public String getConnectionString(){
+	return this.connectionString;
+}
      
      
      
