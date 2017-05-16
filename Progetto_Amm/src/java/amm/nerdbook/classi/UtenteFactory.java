@@ -28,7 +28,7 @@ public class UtenteFactory {
         return singleton;
     }
 
-    private ArrayList<Utente> Utenti = new ArrayList<>();
+    //private ArrayList<Utente> utenti = new ArrayList<>();
 
     private UtenteFactory() {
 
@@ -189,7 +189,37 @@ public class UtenteFactory {
      * @return the Utenti
      */
     public ArrayList<Utente> getUtenti() {
-        return Utenti;
+        ArrayList<Utente> utenti = new ArrayList<>();
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+            String query = "select * from utente";
+                    
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                Utente utente = new Utente();
+                utente.setNome(res.getString("nome"));
+                utente.setCognome(res.getString("cognome"));
+                utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
+                utente.setFrasePres(res.getString("frasePres"));
+                utente.setDataNascita(res.getString("dataNasc"));
+                utente.setUsername(res.getString("username"));
+                utente.setPassword(res.getString("password"));
+                utente.setId(res.getInt("idUtente"));
+                
+                utenti.add(utente);
+                
+            }
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       
+        return utenti;
     }
 
     public Utente getUtenteByUsername(String username) {

@@ -113,6 +113,10 @@ VALUES(2,'https://www.youtube.com/watch?v=-OnRxfhbHB4',
 INSERT INTO amicizia(follower,followed)
 VALUES(1,3),(2,1),(2,3); 
 
+--Partecipazione ad un gruppo
+INSERT INTO partecipazioneGruppo(idUtente,idGruppo)
+VALUES(1,2),(1,3)
+
 
 
 

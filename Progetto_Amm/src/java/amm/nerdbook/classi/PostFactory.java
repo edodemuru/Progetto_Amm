@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+//CHECK DELLE DATE
  */
 package amm.nerdbook.classi;
 
@@ -138,7 +139,7 @@ public class PostFactory {
         
         try {
             // path, username, password
-            Connection conn = DriverManager.getConnection(connectionString, "username", "password");
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
             
             UtenteFactory utenteFactory = UtenteFactory.getInstance();
             GruppoFactory gruppoFactory=GruppoFactory.getInstance();
@@ -171,6 +172,7 @@ public class PostFactory {
                 current.setText(res.getString("text"));                
                 current.setPostType(this.postTypeFromString(res.getString("name")));
 
+                if(current.getUtenteDest()!=null)
                 postList.add(current);
             }
 
@@ -191,7 +193,7 @@ public class PostFactory {
         
         try {
             // path, username, password
-            Connection conn = DriverManager.getConnection(connectionString, "username", "password");
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
             
             UtenteFactory utenteFactory = UtenteFactory.getInstance();
             GruppoFactory gruppoFactory=GruppoFactory.getInstance();
@@ -223,9 +225,9 @@ public class PostFactory {
                 current.setText(res.getString("text"));                
                 current.setPostType(this.postTypeFromString(res.getString("name")));
                 
-                //NECESSARIO CONTROLLO AFFINCHE' SIA L'ID DEL GRUPPO CHE L'ID DELL'UTENTE NON SIANO ENTRAMBI NULLI
-
+                if(current.getUtenteDest()!= null)
                 postList.add(current);
+                
             }
 
             stmt.close();
@@ -257,6 +259,10 @@ public class PostFactory {
         return Post.Type.LINK;
     
     
+    }
+    
+    private boolean checkNull(int idA, int idB){
+        return idA==idB;    
     }
 
 }
