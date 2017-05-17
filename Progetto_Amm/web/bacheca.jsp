@@ -10,7 +10,7 @@
         <meta name="keywords" content="Nerdbook Social Network sogni bacheca personale">
         <meta name="description" content="Bacheca personale utente">
         <link rel="stylesheet" type="text/css" href="style.css" media="screen">
-        
+
     </head>
 
     <body id="bodyBach">
@@ -33,22 +33,23 @@
                     </div>
                 </c:if>
 
-                
-                    <c:if test="${propriaBacheca==false}">
-                        <div class="nameprofile">
-                            <div class="fotoProfilo">
-                                <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
-                            </div>
-                            <h2 class="nameuser">${amico.nome} ${amico.cognome}: ${amico.frasePres}</h2>
+
+                <c:if test="${propriaBacheca==false}">
+                    <div class="nameprofile">
+                        <div class="fotoProfilo">
+                            <img title="fotoProfilo" alt="Foto del Profilo" src="${amico.urlFotoProfilo}" >
                         </div>
-                    </c:if>
+                        <h2 class="nameuser">${amico.nome} ${amico.cognome}: ${amico.frasePres}</h2>
+                    </div>
+                </c:if>
 
 
                 <c:choose>
                     <c:when test="${inserimentoPost==0}">
+                        <!-- Inserimento di un nuovo Post-->
                         <form action="bacheca.html?idAmico=${amico.id}" method="post" id="creaPost">            
                             <div class="formitem" id="PostText">
-                                <textarea rows="2" cols="20" name="frase" id="fraseBach">Testo nuovo Post</textarea>
+                                <textarea rows="2" cols="20" name="frase" id="fraseBach">Testo nuovo post</textarea>
                             </div>
 
 
@@ -58,11 +59,11 @@
 
                             <div id="options">
                                 <div id="optionimage">
-                                    <input type="radio" name="allegato" id="Immagineradio" value="Immagine">
+                                    <input type="radio" name="allegato" id="Immagineradio" value="IMAGE">
                                     <label for="Immagineradio">Immagine</label>
                                 </div>
                                 <div id="optionurl">
-                                    <input type="radio" name="allegato" id="urlradio" value="URL">    
+                                    <input type="radio" name="allegato" id="urlradio" value="LINK">    
                                     <label for="urlradio">URL</label>
                                 </div>
 
@@ -74,37 +75,52 @@
                         </form>
                     </c:when>
 
-                    
+
                     <c:when test="${inserimentoPost==1}">
+                        <!--Riepilogo dati del post-->
 
                         <c:choose>
-                            <c:when test="${nuovoPost.postType == 'TEXT'}">
+                            <c:when test="${typePost == 'TEXT'}">
                                 <div class="posts">
                                     <div class="fotoProfilo">
-                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
+                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${utenteMitt.urlFotoProfilo}">
                                     </div>              
-                                    <h3 class="nameuser">${nuovoPost.utenteMitt.nome} ${nuovoPost.utenteMitt.cognome}</h3>            
-                                    <p id='textNewPost'>${nuovoPost.text}</p>
+                                    <h3 class="nameuser">${utenteMitt.nome} ${utenteMitt.cognome}</h3>            
+                                    <p id='textNewPost'>${testoNuovoPost}</p>
                                     <div id="utenteDest">
-                                        <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
+                                        <p>Pubblicare sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}?</p>
+                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${idUtenteDest}" method="post">
+                                            
+                                            <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
+                                            <input type="text" hidden name="content" value="${urlAllegato}">
+                                            <input type="text" hidden name="typePost" value="${typePost}">
+                                            <input type="text" hidden name="idUtenteDest">
+                                            <input type="text" hidden name="idUtenteMitt">
+
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
                                 </div>
                             </c:when>
 
-                            <c:when test="${nuovoPost.postType =='IMAGE'}">
+                            <c:when test="${typePost =='IMAGE'}">
                                 <div class="posts">
                                     <div class="fotoProfilo">
-                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
+                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${utenteMitt.urlFotoProfilo}">
                                     </div>
-                                    <h3 class="nameuser">${nuovoPost.utenteMitt.nome} ${nuovoPost.utenteMitt.cognome}</h3>            
-                                    <p id='textNewPost'>${nuovoPost.text}</p>   
-                                    <img src="${nuovoPost.content}" alt="Foto" title="Allegato"/>
+                                    <h3 class="nameuser">${utenteMitt.nome} ${utenteMitt.cognome}</h3>            
+                                    <p id='textNewPost'>${testoNuovoPost}</p>   
+                                    <img src="${content}" alt="Foto" title="Allegato"/>
                                     <div id="utenteDest">
-                                        <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
+                                        <p>Pubblicare sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}?</p>
+                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${idUtenteDest}" method="post">
+                                            
+                                            <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
+                                            <input type="text" hidden name="content" value="${urlAllegato}">
+                                            <input type="text" hidden name="typePost" value="${typePost}">
+                                            <input type="text" hidden name="idUtenteDest">
+                                            <input type="text" hidden name="idUtenteMitt">
+                                            
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
@@ -112,17 +128,24 @@
 
                             </c:when>
 
-                            <c:when test="${nuovoPost.postType =='LINK'}">
+                            <c:when test="${typePost =='LINK'}">
                                 <div class="posts">
                                     <div class="fotoProfilo">
-                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${nuovoPost.utenteMitt.urlFotoProfilo}">
+                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${utenteMitt.urlFotoProfilo}">
                                     </div>
-                                    <h3 class="nameuser">${nuovoPost.utenteMitt.nome} ${nuovoPost.utenteMitt.cognome}</h3>            
-                                    <p id='textNewPost'>${nuovoPost.text}</p>
-                                    <a href="${nuovoPost.content}">${nuovoPost.content}</a> 
+                                    <h3 class="nameuser">${utenteMitt.nome} ${utenteMitt.cognome}</h3>            
+                                    <p id='textNewPost'>${testoNuovoPost}</p>
+                                    <a href="${content}">${content}</a> 
                                     <div id="utenteDest">
-                                        <p>Pubblicare sulla bacheca di ${nuovoPost.utenteDest.nome} ${nuovoPost.utenteDest.cognome}?</p>
-                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${nuovoPost.getUtenteDest().getId()}" method="post">
+                                        <p>Pubblicare sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}?</p>
+                                        <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${idUtenteDest}" method="post">
+                                            
+                                            <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
+                                            <input type="text" hidden name="content" value="${urlAllegato}">
+                                            <input type="text" hidden name="typePost" value="${typePost}">
+                                            <input type="text" hidden name="idUtenteDest">
+                                            <input type="text" hidden name="idUtenteMitt">
+                                            
                                             <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                         </form>
                                     </div>
@@ -136,16 +159,17 @@
 
 
                     </c:when>
-                
-
-                
-                <c:when test="${inserimentoPost== 2}">
-                    <div class="posts">
-                        <p>Hai scritto sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}</p>
-                    </div>
 
 
-                </c:when>
+
+                    <c:when test="${inserimentoPost== 2}">
+                        <!--Conferma pubblicazione post-->
+                        <div class="posts">
+                            <p>Hai scritto sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}</p>
+                        </div>
+
+
+                    </c:when>
                 </c:choose>
 
                 <c:forEach var="post" items="${posts}">

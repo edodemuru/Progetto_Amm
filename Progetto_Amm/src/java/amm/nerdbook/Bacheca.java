@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Bacheca extends HttpServlet {
 
-    /** 
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -38,7 +38,6 @@ public class Bacheca extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
 
         HttpSession session = request.getSession(false);
 
@@ -82,10 +81,36 @@ public class Bacheca extends HttpServlet {
 
                     //Controllo per il messaggio di conferma
                     request.setAttribute("inserimentoPost", 2);
+                    //Prendo l'id dell'utente destinatario
                     int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
 
+                    //Ottengo gli altri dati dell'utente
                     Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDestPost);
                     request.setAttribute("utenteDest", utenteDest);
+
+                    String typePost = request.getParameter("typePost");
+
+                    Post nuovoPost = new Post();
+
+                    if (typePost.equals("IMAGE")) {
+                        nuovoPost.setPostType(Post.Type.IMAGE);
+                    }
+                    if (typePost.equals("LINK")) {
+                        nuovoPost.setPostType(Post.Type.LINK);
+                    } else {
+                        nuovoPost.setPostType(Post.Type.TEXT);
+                    }
+
+                    nuovoPost.setContent(request.getParameter("content"));
+                    nuovoPost.setText(request.getParameter("testoNuovoPost"));
+                    nuovoPost.setUtenteMitt(utenteDest);
+                    nuovoPost.setUtenteDest(utenteDest);
+
+                    PostFactory.getInstance().addNewPost(nuovoPost);
+
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                    return;
+                    
 
                 } else {
                     request.setAttribute("inserimentoPost", 0);
@@ -93,52 +118,42 @@ public class Bacheca extends HttpServlet {
 
                 //Inserimento nuovo post
                 if (request.getParameter("nuovoPost") != null) {
-                    Post nuovoPost = new Post();
 
-                    //Tipo di post
-                    if (request.getParameter("allegato") != null
-                            && request.getParameter("allegato").equals("Immagine")) {
-                        nuovoPost.setPostType(Post.Type.IMAGE);
-                        nuovoPost.setContent(request.getParameter("urlAllegato"));
-                        nuovoPost.setText(request.getParameter("frase"));
-                        nuovoPost.setUtenteMitt(utente);
-                        nuovoPost.setUtenteDest(utente);
-                        nuovoPost.setId((int) (Math.random()) * 10000);
+                    //Dati che servono alla jsp
+                    String testoNuovoPost = request.getParameter("frase");
+                    String content = request.getParameter("urlAllegato");
+                    String typePost = request.getParameter("allegato");
+                    Utente utenteDest = utente;
+                    Utente utenteMitt = utente;
 
-                        request.setAttribute("nuovoAllegato", true);
-                        request.setAttribute("nuovoPost", nuovoPost);
-                        request.setAttribute("inserimentoPost", 1);
-
-                    } else if (request.getParameter("allegato") != null && request.getParameter("allegato").equals("URL")) {
-                        nuovoPost.setPostType(Post.Type.LINK);
-                        nuovoPost.setContent(request.getParameter("urlAllegato"));
-                        nuovoPost.setText(request.getParameter("frase"));
-                        nuovoPost.setUtenteMitt(utente);
-                        nuovoPost.setUtenteDest(utente);
-                        nuovoPost.setId((int) (Math.random()) * 10000);
-
-                        request.setAttribute("nuovoAllegato", true);
-                        request.setAttribute("nuovoPost", nuovoPost);
-                        request.setAttribute("inserimentoPost", 1);
-                    } else {
-                        nuovoPost.setPostType(Post.Type.TEXT);
-                        nuovoPost.setText(request.getParameter("frase"));
-                        nuovoPost.setUtenteMitt(utente);
-                        nuovoPost.setUtenteDest(utente);
-                        nuovoPost.setId(10);
-
-                        //Ci sono allegati nel post?
-                        request.setAttribute("nuovoAllegato", false);
-                        // Creo un attributo in cui inserisco il nuovo post
-                        request.setAttribute("nuovoPost", nuovoPost);
-                        // Attributo per modificare la pagina html di output
-                        request.setAttribute("inserimentoPost", 1);
-
+                    if (typePost == null) {
+                        typePost = "TEXT";
                     }
+
+                    int idUtenteDest = utente.getId();
+                    int idUtenteMitt = utente.getId();
+
+                    request.setAttribute("typePost", typePost);
+                    request.setAttribute("content", content);
+                    request.setAttribute("testoNuovoPost", testoNuovoPost);
+                    request.setAttribute("idUtenteDest", idUtenteDest);
+                    request.setAttribute("idUtenteMitt", idUtenteMitt);
+                    request.setAttribute("utenteMitt", utenteMitt);
+                    request.setAttribute("utenteDest", utenteDest);
+
+                    request.setAttribute("nuovoAllegato", true);
+                    request.setAttribute("inserimentoPost", 1);
 
                 }
 
-                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                /*if ((int) request.getAttribute("inserimentoPost") == 2) {
+                    //Reindirizzamento
+                    String url = request.getContextPath() + request.getServletPath();
+                    response.sendRedirect(url);
+                    return;
+                } else {*/
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                
 
             }
             if (utente != null && idAmico != -1) {
@@ -165,10 +180,36 @@ public class Bacheca extends HttpServlet {
 
                     //Controllo per il messaggio di conferma
                     request.setAttribute("inserimentoPost", 2);
+
+                    //Prendo l'id dell'utente destinatario
                     int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
 
+                    //Ottengo gli altri dati dell'utente
                     Utente utenteDest = UtenteFactory.getInstance().getUtentebyId(idDestPost);
                     request.setAttribute("utenteDest", utenteDest);
+
+                    Post nuovoPost = new Post();
+
+                    String typePost = request.getParameter("typePost");
+
+                    if (typePost.equals("IMAGE")) {
+                        nuovoPost.setPostType(Post.Type.IMAGE);
+                    }
+                    if (typePost.equals("LINK")) {
+                        nuovoPost.setPostType(Post.Type.LINK);
+                    } else {
+                        nuovoPost.setPostType(Post.Type.TEXT);
+                    }
+
+                    nuovoPost.setContent(request.getParameter("content"));
+                    nuovoPost.setText(request.getParameter("testoNuovoPost"));
+                    nuovoPost.setUtenteMitt(utente);
+                    nuovoPost.setUtenteDest(utenteDest);
+
+                    PostFactory.getInstance().addNewPost(nuovoPost);
+                    
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                    return;
 
                 } else {
                     request.setAttribute("inserimentoPost", 0);
@@ -176,45 +217,31 @@ public class Bacheca extends HttpServlet {
 
                 //Inserimento nuovo post
                 if (request.getParameter("nuovoPost") != null) {
-                    Post nuovoPost = new Post();
+                    //Dati che servono alla jsp
+                    String testoNuovoPost = request.getParameter("frase");
+                    String content = request.getParameter("urlAllegato");
+                    String typePost = request.getParameter("allegato");
 
-                    //Tipo di post
-                    if (request.getParameter("allegato") != null
-                            && request.getParameter("allegato").equals("Immagine")) {
-                        nuovoPost.setPostType(Post.Type.IMAGE);
-                        nuovoPost.setContent(request.getParameter("urlAllegato"));
-                        nuovoPost.setText(request.getParameter("frase"));
-                        nuovoPost.setUtenteMitt(utente);
-                        nuovoPost.setUtenteDest(amico);
-                        nuovoPost.setId((int) (Math.random()) * 10000);
+                    Utente utenteDest = amico;
+                    Utente utenteMitt = utente;
 
-                        request.setAttribute("nuovoAllegato", true);
-                        request.setAttribute("nuovoPost", nuovoPost);
-                        request.setAttribute("inserimentoPost", 1);
-
-                    } else if (request.getParameter("allegato") != null && request.getParameter("allegato").equals("URL")) {
-                        nuovoPost.setPostType(Post.Type.LINK);
-                        nuovoPost.setContent(request.getParameter("urlAllegato"));
-                        nuovoPost.setText(request.getParameter("frase"));
-                        nuovoPost.setUtenteMitt(utente);
-                        nuovoPost.setUtenteDest(amico);
-                        nuovoPost.setId((int) (Math.random()) * 10000);
-
-                        request.setAttribute("nuovoAllegato", true);
-                        request.setAttribute("nuovoPost", nuovoPost);
-                        request.setAttribute("inserimentoPost", 1);
-                    } else {
-                        nuovoPost.setPostType(Post.Type.TEXT);
-                        nuovoPost.setText(request.getParameter("frase"));
-                        nuovoPost.setUtenteMitt(utente);
-                        nuovoPost.setUtenteDest(amico);
-                        nuovoPost.setId(11);
-
-                        request.setAttribute("nuovoAllegato", false);
-                        request.setAttribute("nuovoPost", nuovoPost);
-                        request.setAttribute("inserimentoPost", 1);
-
+                    if (typePost == null) {
+                        typePost = "TEXT";
                     }
+
+                    int idUtenteDest = amico.getId();
+                    int idUtenteMitt = utente.getId();
+
+                    request.setAttribute("typePost", typePost);
+                    request.setAttribute("content", content);
+                    request.setAttribute("testoNuovoPost", testoNuovoPost);
+                    request.setAttribute("idUtenteDest", idUtenteDest);
+                    request.setAttribute("idUtenteMitt", idUtenteMitt);
+                    request.setAttribute("utenteMitt", utenteMitt);
+                    request.setAttribute("utenteDest", utenteDest);
+
+                    request.setAttribute("nuovoAllegato", true);
+                    request.setAttribute("inserimentoPost", 1);
 
                 }
 

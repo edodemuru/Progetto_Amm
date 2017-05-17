@@ -94,15 +94,7 @@ public class UtenteFactory {
     Utenti.add(utente3);*/
     }
 
-    /*public Utente getUtentebyId(int id){
-     for(Utente utente: this.getUtenti()){
-       if(utente.getId()==id)
-           return utente;
-     
-     }
-     return null;
-    
-    }*/
+   
     public Utente getUtentebyId(int id) {
         try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
@@ -145,18 +137,7 @@ public class UtenteFactory {
 
     }
 
-    /*public ArrayList<Utente> getListAmicibyId(int id){
-      ArrayList<Utente> ListAmici=new ArrayList<>();
-      Utente utente=getUtentebyId(id);
-      
-      for(int idAmico: utente.getAmici()){
-        ListAmici.add(getUtentebyId(idAmico));
-      }
-      
-      return ListAmici;
   
-  
-  }*/
     public ArrayList<Utente> getListAmicibyId(int id) {
         ArrayList<Utente> ListAmici = new ArrayList<>();
         try {

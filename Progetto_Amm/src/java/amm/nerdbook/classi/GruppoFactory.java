@@ -61,15 +61,7 @@ public class GruppoFactory {
     
     }
     
-     /*public Gruppo getGruppobyId(int id){
-     for(Gruppo gruppo: this.gruppi){
-       if(gruppo.getId()==id)
-           return gruppo;
      
-     }
-     return null;
-    
-    }*/
     
     public Gruppo getgruppobyId(int id){
     try {
@@ -109,20 +101,7 @@ public class GruppoFactory {
         return null;
     }
      
-     /*public ArrayList<Gruppo> getGruppoListUtente(int id){
-         ArrayList<Gruppo> GruppoList=new ArrayList<>();
-         for(Gruppo gruppo: this.gruppi){
-             if(gruppo.getIdMembri().contains(id)){
-                 GruppoList.add(gruppo);
-             
-             }
-         
-         }
-         
-         return GruppoList;
-     
-     
-     }*/
+  
     
     public ArrayList<Gruppo> getGruppoListUtente(int id){
         ArrayList<Gruppo> gruppoList=new ArrayList<>();
