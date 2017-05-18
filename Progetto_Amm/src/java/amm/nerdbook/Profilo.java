@@ -11,6 +11,7 @@ import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -82,12 +83,30 @@ public class Profilo extends HttpServlet {
                     request.setAttribute("modificaDati", true);
 
                 }
+                if(request.getParameter("cancella")!=null){
+                try{
+                    UtenteFactory.getInstance().deleteUtente(utente);
+                    session.setAttribute("loggedIn", false);
+                    session.setAttribute("idUtente", null);
+                    
+                    request.getRequestDispatcher("login.html").forward(request, response);
+                    return;
+                    
+                
+                }catch(SQLException e){
+                
+                }                
+                
+            
+            }
 
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
 
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
+            
+            
 
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

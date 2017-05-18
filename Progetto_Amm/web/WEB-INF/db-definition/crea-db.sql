@@ -117,6 +117,11 @@ VALUES(1,3),(2,1),(2,3);
 INSERT INTO partecipazioneGruppo(idUtente,idGruppo)
 VALUES(1,2),(1,3)
 
+-- Inserimento utenti per test cancellazione profilo
+INSERT INTO utente(nome,cognome,urlFotoProfilo,frasePres,dataNasc,username,password,idUtente)
+VALUES('Marco','Salvemini','img/utente4.png','Siamo tutti destinati a morire','1980-07-09',
+       'marco','123',default);
+
 
 
 

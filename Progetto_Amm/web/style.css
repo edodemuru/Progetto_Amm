@@ -1,7 +1,7 @@
 /*  
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
-and open the template in the editor.
+and open the template in the editor. 
 */
 /* 
     Created on : 27-mar-2017, 11.46.30
@@ -652,6 +652,8 @@ img#Profilepic{
     line-height: 60px;
 }
 
+
+
 @media only screen and (min-width:1024px){
     
     header#titleBac{
@@ -711,6 +713,18 @@ position: relative;
     position: relative;
     right: 20px;
 }
+
+button#cancellaProfilo{
+    width: 26%;
+    position: relative;
+    top: 150px;
+    right: 135px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 3px solid #ccc;
+
+    
+}
     
 }
 @media only screen and (min-width:480px) and (max-width:1024px){
@@ -720,7 +734,7 @@ position: relative;
         height: 268px;
     }
     #firstItem{
-           margin-top: 63px; 
+           margin-top: 12px; 
         
     }
     
@@ -786,17 +800,33 @@ div#lateral2{
 
 #formContent h3{
     position: relative;
-    bottom: 10px;
+    bottom: 114px;
 }
+
+
 
 #formContent2{
     margin-top: 63px;
 }
 
+button#cancellaProfilo{
+    width: 50%;
+    position: relative;    
+    right: 7px;
+    left: 84px;
+    bottom: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 3px solid #ccc;    
+    
+    
+}
+
 img#Profilepic{
     position: relative;
-    bottom: 56px;
-    right: 66px;
+    bottom: 66px;
+    right: 0px;
+    left: 45px;
 }
 
 div#lateral{
@@ -843,7 +873,7 @@ textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2{
 
 #modificaDati{
     position: absolute;
-    top: 75px;
+    top: 188px;
     right: 40px;
     font-size: 16px;
     font-weight: bold;
@@ -948,8 +978,23 @@ textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2{
 #groupsection{
     position: relative;
     left: 215px;
-    bottom: 133px;  
+    bottom: 82px;  
     width: 182px;
+}
+
+button#cancellaProfilo{
+    width: 50%;
+    position: relative;
+    top: 127px;
+    
+    left: -100px;
+    
+    font-weight: bold;
+    font-size: 14px;
+    border: 3px solid #ccc;
+   
+    position: hidden;
+    
 }
 
 #peoplesection{
@@ -1047,7 +1092,7 @@ div#formProfilo{
     padding: 15px; 
     margin-left: 10px;
     width: 405px;
-    height: 930px;
+    height: 1002px;
     margin-top: 0px;
     position: relative;
     right: 0px;
@@ -1059,6 +1104,8 @@ div#formProfilo{
 img#Profilepic{
     padding-left: 80px;
     padding-top: 0px;
+    position:relative;
+    left:64px;
 }
 
 header#title{
@@ -1163,7 +1210,7 @@ textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2{
 
 #modificaDati{
    position: absolute;
-    left: 105px;
+    left: 142px;
     top: 104px;
 }
     

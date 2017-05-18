@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author Edoardo
  */
 
-@WebServlet(name="Login",urlPatterns={"/login.html"},loadOnStartup = 0)
+@WebServlet(loadOnStartup = 0)
 public class Login extends HttpServlet {
     
     private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -110,7 +110,7 @@ private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
                     //Utente con profilo incompleto
 
                     session.setAttribute("ProfileOk", false);
-                    //request.setAttribute("idUtente", idUtente);
+                    
                     session.setAttribute("idUtente", idUtente);
 
                     request.getRequestDispatcher("profilo.html").forward(request, response);

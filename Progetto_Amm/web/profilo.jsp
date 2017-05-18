@@ -34,6 +34,10 @@ and open the template in the editor.
                             <p>Modifiche effettuate</p>
                         </div>           
                     </c:if>
+                    <form action="profilo.html" method="post">
+                    <button type="submit" name="cancella" id="cancellaProfilo">Cancella profilo</button>
+                    </form>
+                    
                     
                     <form action="profilo.html" method="post" id="Profiloform">
                         <div id="formContent">                  

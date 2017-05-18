@@ -32,33 +32,7 @@ public class GruppoFactory {
     
     public GruppoFactory(){
         
-       /* //Gruppo 1
-        Gruppo gruppo1=new Gruppo();
-        gruppo1.setIdamministratore(0);
-        gruppo1.setId(3);
-        gruppo1.setInteresse("Studio");
-        gruppo1.setName("Ingegneria");
-        ArrayList <Integer> membri1=new ArrayList<>();
-        membri1.add(0);
-        membri1.add(1);
-        gruppo1.setIdMembri(membri1);
-        gruppo1.setUrlFotoGruppo("img/gruppo2.jpg");
-        
-        //Gruppo 2
-        Gruppo gruppo2=new Gruppo();
-        gruppo2.setIdamministratore(1);
-        gruppo2.setId(4);
-        gruppo2.setInteresse("Studio");
-        gruppo2.setName("Informatica");
-        ArrayList<Integer> membri2=new ArrayList<>();
-        membri2.add(2);
-        membri2.add(0);
-        gruppo2.setIdMembri(membri2);
-        gruppo2.setUrlFotoGruppo("img/gruppo1.jpg");
-        
-        gruppi.add(gruppo1);
-        gruppi.add(gruppo2);*/
-    
+      
     }
     
      
