@@ -10,7 +10,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -163,7 +166,15 @@ public class UtenteFactory {
                 utente.setCognome(res.getString("cognome"));
                 utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
                 utente.setFrasePres(res.getString("frasePres"));
+                
+                if(this.checkFormatDate(res.getString("dataNasc"))){
+                    
                 utente.setDataNascita(res.getString("dataNasc"));
+                
+                }
+                else{
+                utente.setDataNascita("00/00/0000");
+                }
                 utente.setUsername(res.getString("username"));
                 utente.setPassword(res.getString("password"));
                 utente.setId(res.getInt("idUtente"));
@@ -245,6 +256,93 @@ public class UtenteFactory {
                             
     
     }
+    
+    public void updateProfilo(Utente utente){
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = " update utente set "
+                         + "nome=? ,cognome=? ,urlFotoProfilo=? ,frasePres=? ,dataNasc=? ,username=? ,password=? "
+                         +"where idUtente=?";
+                          
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, utente.getNome());
+            stmt.setString(2, utente.getCognome());
+            stmt.setString(3, utente.getUrlFotoProfilo());
+            stmt.setString(4, utente.getFrasePres());
+            stmt.setString(5, utente.getDataNascita());
+            stmt.setString(6, utente.getUsername());
+            stmt.setString(7, utente.getPassword());
+            stmt.setInt(8, utente.getId());
+            
+
+            stmt.executeUpdate();
+
+            
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+
+    }
+    
+    public void addAmico(int idUtente, int idAmico){
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query="insert into amicizia(follower,followed) "
+                         +"values (?,?),(?,?)";
+                          
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, idUtente);
+            stmt.setInt(2, idAmico);
+            stmt.setInt(3, idAmico);
+            stmt.setInt(4, idUtente);
+            
+
+            stmt.executeUpdate();
+
+            
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      
+}
+    
+    private boolean checkFormatDate(String dateString){
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd"); 
+        dt.setLenient(false);
+        
+        if(dateString==null)
+            return false;
+        
+        try{
+            Date date=dt.parse(dateString);
+        
+        
+        }catch(ParseException e){
+            e.printStackTrace();
+            return false;
+        
+        }
+        
+        return true;       
+    
+    
+    }
+    
 
     public void setConnectionString(String s) {
         this.connectionString = s;

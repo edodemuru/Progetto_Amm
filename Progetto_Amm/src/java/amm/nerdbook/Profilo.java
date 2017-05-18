@@ -62,51 +62,55 @@ public class Profilo extends HttpServlet {
 
                 //Modifica del profilo
                 if (request.getParameter("modifica") != null) {
-                    
-                    String nome=request.getParameter("nome");
-                    String cognome=request.getParameter("cognome");
-                    String url=request.getParameter("url");
-                    String frasePres=request.getParameter("frase");
-                    String data=request.getParameter("data");
-                    String username=request.getParameter("username");
-                    String password=request.getParameter("password");
-                    String confpassword=request.getParameter("confpassword");
-                    
-                    utente.setNome(nome);
-                    utente.setCognome(cognome);
-                    utente.setFrasePres(frasePres);
-                    utente.setDataNascita(data);
-                    utente.setPassword(password);
-                    utente.setUsername(username);
-                    utente.setUrlFotoProfilo(url);
-                  
+
+                    String nome = request.getParameter("nome");
+                    String cognome = request.getParameter("cognome");
+                    String url = request.getParameter("url");
+                    String frasePres = request.getParameter("frase");
+                    String data = request.getParameter("data");
+                    String username = request.getParameter("username");
+                    String password = request.getParameter("password");
+                    String confpassword = request.getParameter("confpassword");
+
+                    Utente utenteAgg = new Utente();
+                    utenteAgg.setNome(nome);
+                    utenteAgg.setCognome(cognome);
+                    utenteAgg.setFrasePres(frasePres);
+                    utenteAgg.setDataNascita(data);
+                    utenteAgg.setPassword(password);
+                    utenteAgg.setUsername(username);
+                    utenteAgg.setUrlFotoProfilo(url);
+                    utenteAgg.setId(idUtente);
+
+                    UtenteFactory.getInstance().updateProfilo(utenteAgg);
+
                     request.setAttribute("modificaDati", true);
+                    
+                    String URL = request.getContextPath() + "/profilo.html";
+                    response.sendRedirect(URL);
+                    return;
 
                 }
-                if(request.getParameter("cancella")!=null){
-                try{
-                    UtenteFactory.getInstance().deleteUtente(utente);
-                    session.setAttribute("loggedIn", false);
-                    session.setAttribute("idUtente", null);
-                    
-                    request.getRequestDispatcher("login.html").forward(request, response);
-                    return;
-                    
-                
-                }catch(SQLException e){
-                
-                }                
-                
-            
-            }
+                if (request.getParameter("cancella") != null) {
+                    try {
+                        UtenteFactory.getInstance().deleteUtente(utente);
+                        session.setAttribute("loggedIn", false);
+                        session.setAttribute("idUtente", null);
+
+                        request.getRequestDispatcher("login.html").forward(request, response);
+                        return;
+
+                    } catch (SQLException e) {
+
+                    }
+
+                }
 
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
 
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
-            
-            
 
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

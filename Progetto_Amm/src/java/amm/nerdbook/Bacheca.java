@@ -33,7 +33,7 @@ public class Bacheca extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException if an I/O error occurs 
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -75,6 +75,38 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("gruppi", ListGruppo);
 
                 request.setAttribute("propriaBacheca", true);
+                
+                request.setAttribute("inserimentoPost", 0);
+
+                //Inserimento nuovo post
+                if (request.getParameter("nuovoPost") != null) {
+
+                    //Dati che servono alla jsp
+                    String testoNuovoPost = request.getParameter("frase");
+                    String content = request.getParameter("urlAllegato");
+                    String typePost = request.getParameter("allegato");
+                    Utente utenteDest = utente;
+                    Utente utenteMitt = utente;
+
+                    if (typePost == null) {
+                        typePost = "TEXT";
+                    }
+
+                    int idUtenteDest = utente.getId();
+                    int idUtenteMitt = utente.getId();
+
+                    request.setAttribute("typePost", typePost);
+                    request.setAttribute("content", content);
+                    request.setAttribute("testoNuovoPost", testoNuovoPost);
+                    request.setAttribute("idUtenteDest", idUtenteDest);
+                    request.setAttribute("idUtenteMitt", idUtenteMitt);
+                    request.setAttribute("utenteMitt", utenteMitt);
+                    request.setAttribute("utenteDest", utenteDest);
+
+                    request.setAttribute("nuovoAllegato", true);
+                    request.setAttribute("inserimentoPost", 1);
+
+                }
 
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idDestPost") != null) {
@@ -110,27 +142,76 @@ public class Bacheca extends HttpServlet {
 
                     request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                     return;
-                    
 
-                } else {
-                    request.setAttribute("inserimentoPost", 0);
+                } 
+                
+                if (request.getAttribute("conferma2") != null) {
+                    //Reindirizzamento
+                    String URL = request.getContextPath() + "/bacheca.html";
+                    response.sendRedirect(URL);
+                    return;
+
+                }
+
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+
+            }
+            if (utente != null && idAmico != -1) {
+
+                //Bacheca altro utente
+                Utente utenteEst = UtenteFactory.getInstance().getUtentebyId(idAmico);
+
+                request.setAttribute("utente", utente);
+                request.setAttribute("amico", utenteEst);
+
+                ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
+                request.setAttribute("amici", ListAmici);
+
+                ArrayList<Post> ListPost = PostFactory.getInstance().getPostListBacheca(utenteEst);
+                request.setAttribute("posts", ListPost);
+
+                ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                request.setAttribute("gruppi", ListGruppo);
+                
+                request.setAttribute("inserimentoPost", 0);
+
+                if (this.verificaAmicizia(idAmico, ListAmici) || idAmico==idUtente) {
+                    // amico
+                    request.setAttribute("amicizia", true);
+
+                } else //Altro utente
+                {
+                    request.setAttribute("amicizia", false);
+                }
+
+                request.setAttribute("propriaBacheca", false);
+
+                //Controllo per la richiesta di amicizia
+                if (request.getParameter("richiestaAmicizia") != null) {
+                    UtenteFactory.getInstance().addAmico(idUtente, idAmico);
+                    request.setAttribute("amicizia", true);
+
+                    String URL = request.getContextPath() + "/bacheca.html";
+                    response.sendRedirect(URL);
+                    return;
+
                 }
 
                 //Inserimento nuovo post
                 if (request.getParameter("nuovoPost") != null) {
-
                     //Dati che servono alla jsp
                     String testoNuovoPost = request.getParameter("frase");
                     String content = request.getParameter("urlAllegato");
                     String typePost = request.getParameter("allegato");
-                    Utente utenteDest = utente;
+
+                    Utente utenteDest = utenteEst;
                     Utente utenteMitt = utente;
 
                     if (typePost == null) {
                         typePost = "TEXT";
                     }
 
-                    int idUtenteDest = utente.getId();
+                    int idUtenteDest = utenteEst.getId();
                     int idUtenteMitt = utente.getId();
 
                     request.setAttribute("typePost", typePost);
@@ -146,39 +227,10 @@ public class Bacheca extends HttpServlet {
 
                 }
 
-                /*if ((int) request.getAttribute("inserimentoPost") == 2) {
-                    //Reindirizzamento
-                    String url = request.getContextPath() + request.getServletPath();
-                    response.sendRedirect(url);
-                    return;
-                } else {*/
-                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-                
-
-            }
-            if (utente != null && idAmico != -1) {
-
-                //Bacheca amico
-                Utente amico = UtenteFactory.getInstance().getUtentebyId(idAmico);
-
-                request.setAttribute("utente", utente);
-                request.setAttribute("amico", amico);
-
-                ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
-                request.setAttribute("amici", ListAmici);
-
-                ArrayList<Post> ListPost = PostFactory.getInstance().getPostListBacheca(amico);
-                request.setAttribute("posts", ListPost);
-
-                ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
-                request.setAttribute("gruppi", ListGruppo);
-
-                request.setAttribute("propriaBacheca", false);
-
+                //Controllo per il messaggio di conferma del post
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idDestPost") != null) {
 
-                    //Controllo per il messaggio di conferma
                     request.setAttribute("inserimentoPost", 2);
 
                     //Prendo l'id dell'utente destinatario
@@ -207,41 +259,17 @@ public class Bacheca extends HttpServlet {
                     nuovoPost.setUtenteDest(utenteDest);
 
                     PostFactory.getInstance().addNewPost(nuovoPost);
-                    
+
                     request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                     return;
 
-                } else {
-                    request.setAttribute("inserimentoPost", 0);
-                }
+                } 
 
-                //Inserimento nuovo post
-                if (request.getParameter("nuovoPost") != null) {
-                    //Dati che servono alla jsp
-                    String testoNuovoPost = request.getParameter("frase");
-                    String content = request.getParameter("urlAllegato");
-                    String typePost = request.getParameter("allegato");
-
-                    Utente utenteDest = amico;
-                    Utente utenteMitt = utente;
-
-                    if (typePost == null) {
-                        typePost = "TEXT";
-                    }
-
-                    int idUtenteDest = amico.getId();
-                    int idUtenteMitt = utente.getId();
-
-                    request.setAttribute("typePost", typePost);
-                    request.setAttribute("content", content);
-                    request.setAttribute("testoNuovoPost", testoNuovoPost);
-                    request.setAttribute("idUtenteDest", idUtenteDest);
-                    request.setAttribute("idUtenteMitt", idUtenteMitt);
-                    request.setAttribute("utenteMitt", utenteMitt);
-                    request.setAttribute("utenteDest", utenteDest);
-
-                    request.setAttribute("nuovoAllegato", true);
-                    request.setAttribute("inserimentoPost", 1);
+                if (request.getAttribute("conferma2") != null) {
+                    //Reindirizzamento
+                    String URL = request.getContextPath() + "/bacheca.html";
+                    response.sendRedirect(URL);
+                    return;
 
                 }
 
@@ -258,6 +286,16 @@ public class Bacheca extends HttpServlet {
 
         }
 
+    }
+
+    public boolean verificaAmicizia(int idAmico, ArrayList<Utente> amici) {
+        for (Utente utente : amici) {
+            if (utente.getId() == idAmico) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

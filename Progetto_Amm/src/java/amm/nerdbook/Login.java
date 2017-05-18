@@ -70,6 +70,7 @@ private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
 
             session.invalidate();
             request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
 
         }
 

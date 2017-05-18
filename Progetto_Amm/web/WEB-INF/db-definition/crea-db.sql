@@ -81,6 +81,7 @@ INSERT INTO utente(nome,cognome,urlFotoProfilo,frasePres,dataNasc,username,passw
 VALUES('Giovanni','','img/utente3.jpg','','1994-02-27',
        'ciao94','4325',default);
 
+
 --Inserimento gruppi
 INSERT INTO gruppo(urlFotoGruppo,interesse,nome,idGruppo,idAmministratore)
 VALUES('img/gruppo2.jpg','Studio','Ingegneria',default,2);
@@ -112,6 +113,9 @@ VALUES(2,'https://www.youtube.com/watch?v=-OnRxfhbHB4',
 --Amicizie
 INSERT INTO amicizia(follower,followed)
 VALUES(1,3),(2,1),(2,3); 
+
+INSERT INTO amicizia(follower,followed)
+VALUES (3,1),(1,2),(3,2); 
 
 --Partecipazione ad un gruppo
 INSERT INTO partecipazioneGruppo(idUtente,idGruppo)
