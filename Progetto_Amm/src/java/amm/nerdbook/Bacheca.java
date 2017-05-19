@@ -1,4 +1,4 @@
-/*
+/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -48,20 +48,33 @@ public class Bacheca extends HttpServlet {
 
             int idUtente;
             int idAmico;
+            int idGruppo;
+            
             request.setAttribute("NonAutorizzato", false);
 
             idUtente = (int) session.getAttribute("idUtente");
 
             Utente utente = UtenteFactory.getInstance().getUtentebyId(idUtente);
-
+            
+            
+            // Registrazione id della persona di cui si sta visitando la bacheca
             if (request.getParameter("idAmico") != null && !request.getParameter("idAmico").equals("")) {
                 idAmico = Integer.parseInt(request.getParameter("idAmico"));
 
             } else {
                 idAmico = -1;
             }
+            
+            //Registrazione id del gruppo di cui si sta visitando la bacheca
+            if (request.getParameter("idGruppo") != null && !request.getParameter("idGruppo").equals("")) {
+                idGruppo = Integer.parseInt(request.getParameter("idGruppo"));
 
-            if (utente != null && idAmico == -1) {
+            } else {
+                idGruppo = -1;
+            }
+            
+
+            if (utente != null && idAmico == -1 && idGruppo== -1) {
                 //Bacheca propria
                 request.setAttribute("utente", utente);
 
@@ -156,7 +169,7 @@ public class Bacheca extends HttpServlet {
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
 
             }
-            if (utente != null && idAmico != -1) {
+            if (utente != null && idAmico != -1 && idGruppo==-1) {
 
                 //Bacheca altro utente
                 Utente utenteEst = UtenteFactory.getInstance().getUtentebyId(idAmico);
@@ -191,7 +204,7 @@ public class Bacheca extends HttpServlet {
                     UtenteFactory.getInstance().addAmico(idUtente, idAmico);
                     request.setAttribute("amicizia", true);
 
-                    String URL = request.getContextPath() + "/bacheca.html";
+                    String URL = request.getContextPath() + "/bacheca.html?idAmico=" + idAmico;
                     response.sendRedirect(URL);
                     return;
 
@@ -266,7 +279,7 @@ public class Bacheca extends HttpServlet {
                 } 
 
                 if (request.getAttribute("conferma2") != null) {
-                    //Reindirizzamento
+                    //Reindirizzamento                    
                     String URL = request.getContextPath() + "/bacheca.html";
                     response.sendRedirect(URL);
                     return;
@@ -275,7 +288,15 @@ public class Bacheca extends HttpServlet {
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
 
-            } else {
+            } 
+            if(utente!= null && idGruppo!=-1 && idAmico==-1){
+            
+            
+            }
+            
+            
+            
+            else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
 

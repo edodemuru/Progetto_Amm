@@ -16,7 +16,6 @@
     <body id="bodyBach">
         <c:if test="${NonAutorizzato==false}">
 
-
             <c:set var="page" value="0" scope="request"/>
             <jsp:include page="header.jsp"/>
 
@@ -78,7 +77,7 @@
 
                         <c:if test="${amicizia==false}">
                             <form action="bacheca.html?idAmico=${amico.id}" method="post" id="creaPost">        
-                                <button type="submit" name="richiestaAmicizia" id="pubblica2">Chiedi amicizia</button>
+                                <button type="submit" name="richiestaAmicizia" id="chiediAmicizia">Chiedi amicizia</button>
                             </form>
 
 
