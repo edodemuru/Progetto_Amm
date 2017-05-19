@@ -131,6 +131,7 @@ public class Bacheca extends HttpServlet {
 
                     //Controllo per il messaggio di conferma
                     request.setAttribute("inserimentoPost", 2);
+                    
                     //Prendo l'id dell'utente destinatario
                     int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
 
@@ -302,7 +303,8 @@ public class Bacheca extends HttpServlet {
                 Gruppo gruppo= GruppoFactory.getInstance().getgruppobyId(idGruppo);
 
                 request.setAttribute("utente", utente);
-                request.setAttribute("gruppo", gruppo);
+                request.setAttribute("gruppo", gruppo);                
+                
 
                 //Lista amici Utente
                 ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
@@ -326,8 +328,20 @@ public class Bacheca extends HttpServlet {
                     request.setAttribute("partecipazioneGruppo", false);
                 
                 }
+                
                 request.setAttribute("propriaBacheca", false);
-                request.setAttribute("amicizia", false);
+                
+                //Controllo per la richiesta di amicizia
+                if (request.getParameter("richiestaPartecipazione") != null) {
+                    UtenteFactory.getInstance().addGruppo(idUtente, idGruppo);
+                    request.setAttribute("partecipazioneGruppo", true);
+
+                    String URL = request.getContextPath() + "/bacheca.html?idGruppo" + idGruppo;
+                    response.sendRedirect(URL);
+                    return;
+
+                }
+                
                 
                 //Inserimento nuovo post
                 if (request.getParameter("nuovoPost") != null) {
@@ -361,12 +375,12 @@ public class Bacheca extends HttpServlet {
                 
                 //Controllo per il messaggio di conferma del post
                 if (request.getParameter("conferma") != null
-                        && request.getParameter("idGruppoDest") != null) {
+                        && request.getParameter("idGruppo") != null) {
 
                     request.setAttribute("inserimentoPost", 2);
 
                     //Prendo l'id del gruppo destinatario del post
-                    int idDestGruppo = Integer.parseInt(request.getParameter("idGruppoPost"));
+                    int idDestGruppo = Integer.parseInt(request.getParameter("idGruppo"));
 
                     //Ottengo gli altri dati dell'utente                    
                     Gruppo gruppoDest=GruppoFactory.getInstance().getgruppobyId(idDestGruppo);

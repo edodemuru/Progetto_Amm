@@ -41,8 +41,8 @@ public class GruppoFactory {
     try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
-            String query = "select * from utente "
-                    + "where idUtente=?";
+            String query = "select * from gruppo "
+                    + "where idGruppo=?";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -52,7 +52,7 @@ public class GruppoFactory {
 
             if (res.next()) {
                 Gruppo gruppo= new Gruppo();
-                gruppo.setUrlFotoGruppo(res.getString("urlFotoGruppo"));
+                gruppo.setUrlFotoGruppo(res.getString("urlfotogruppo"));
                 gruppo.setInteresse(res.getString("interesse"));
                 gruppo.setName(res.getString("nome"));
                 gruppo.setId(res.getInt("idGruppo"));

@@ -1,6 +1,6 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template file, choose Tools | Templ
  * and open the template in the editor.
  */
 package amm.nerdbook.classi;
@@ -320,6 +320,34 @@ public class UtenteFactory {
         }
       
 }
+    
+    public void addGruppo(int idUtente,int idGruppo){
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query="insert into partecipazioneGruppo(idUtente,idGruppo) "
+                         +"values (?,?)";
+                          
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, idUtente);
+            stmt.setInt(2, idGruppo);            
+            
+
+            stmt.executeUpdate();
+
+            
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+    
+    }
     
     private boolean checkFormatDate(String dateString){
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd"); 

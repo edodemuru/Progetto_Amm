@@ -148,7 +148,7 @@ public class PostFactory {
             String query
                     = "select * from post "
                     + "join posttype on post.idposttype = posttype.idtype "
-                    + "where idDestinarioGruppo = ?";
+                    + "where idDestinatarioGruppo = ?";
 
             // Prepared Statement
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -172,7 +172,7 @@ public class PostFactory {
                 current.setText(res.getString("text"));
                 current.setPostType(this.postTypeFromString(res.getString("name")));
 
-                if (current.getUtenteDest() != null) {
+                if (current.getGruppoDest() != null) {
                     postList.add(current);
                 }
 
@@ -206,7 +206,7 @@ public class PostFactory {
             if (post.getUtenteDest() != null && post.getGruppoDest() == null) {
                 stmt.setInt(5, post.getUtenteDest().getId());
             } else {
-                stmt.setNull(5, java.sql.Types.INTEGER);;                
+                stmt.setNull(5, java.sql.Types.INTEGER);              
             }
 
             if (post.getGruppoDest() != null && post.getUtenteDest()== null) {
@@ -214,6 +214,7 @@ public class PostFactory {
             } else {               
                stmt.setNull(6, java.sql.Types.INTEGER);
             }
+            
 
             stmt.executeUpdate();
 
@@ -226,6 +227,8 @@ public class PostFactory {
         }
 
     }
+    
+    
 
     public void setConnectionString(String s) {
         this.connectionString = s;

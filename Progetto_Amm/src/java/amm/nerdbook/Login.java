@@ -34,7 +34,7 @@ private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/ammdb";
 private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
 
 @Override
-   public void init(){
+   public void init(){  
        String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
        try {
            Class.forName(JDBC_DRIVER);
