@@ -23,6 +23,8 @@
             <jsp:include page="nav.jsp"/>
             <!-- Lista di post-->
             <div id="posts">
+                <c:if test="${bachecaGruppo==false}">
+                    
                 <c:if test="${propriaBacheca==true}">
                     <div class="nameprofile">
                         <div class="fotoProfilo">
@@ -41,13 +43,25 @@
                         <h2 class="nameuser">${amico.nome} ${amico.cognome}: ${amico.frasePres}</h2>
                     </div>
                 </c:if>
+                
+                </c:if>
+                <c:if test="${bachecaGruppo==true}">
+                    <div class="nameprofile">
+                        <div class="fotoProfilo">
+                            <img title="fotoProfilo" alt="Foto del Profilo" src="${gruppo.urlFotoGruppo}" >
+                        </div>
+                        <h2 class="nameuser">${gruppo.name}</h2>
+                    </div>                    
+                    
+                </c:if>
 
 
                 <c:choose>
+                   
                     <c:when test="${inserimentoPost==0}">
-                        <c:if test="${propriaBacheca==true or amicizia==true}">
+                        <c:if test="${propriaBacheca==true or amicizia==true or partecipazioneGruppo==true}">
                             <!-- Inserimento di un nuovo Post-->
-                            <form action="bacheca.html?idAmico=${amico.id}" method="post" id="creaPost">            
+                            <form action="bacheca.html?idAmico=${amico.id}&idGruppo=${gruppo.id}" method="post" id="creaPost">            
                                 <div class="formitem" id="PostText">
                                     <textarea rows="2" cols="20" name="frase" id="fraseBach">Testo nuovo post</textarea>
                                 </div>
@@ -82,12 +96,22 @@
 
 
                         </c:if>
+                        
+                        <c:if test="${partecipazioneGruppo==false}">
+                            <form action="bacheca.html?idGruppo=${gruppo.id}" method="post" id="creaPost">        
+                                <button type="submit" name="richiestaPartecipazione" id="chiediAmicizia">Richiedi partecipazione</button>
+                            </form>
+
+                        </c:if>
+                            
+                            
                     </c:when>
 
 
                     <c:when test="${inserimentoPost==1}">
                         <!--Riepilogo dati del post-->
-
+                        
+                        <c:if test="${bachecaGruppo==false}">
                         <c:choose>
                             <c:when test="${typePost == 'TEXT'}">
                                 <div class="posts">
@@ -161,10 +185,90 @@
                                 </div>
 
                             </c:when>
+                        
+                        </c:choose> 
+                        </c:if>
+                        
+                        <c:if test="${bachecaGruppo==true}">
+                            
+                            <c:choose>
+                            <c:when test="${typePost == 'TEXT'}">
+                                <div class="posts">
+                                    <div class="fotoProfilo">
+                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${utenteMitt.urlFotoProfilo}">
+                                    </div>              
+                                    <h3 class="nameuser">${utenteMitt.nome} ${utenteMitt.cognome}</h3>            
+                                    <p id='textNewPost'>${testoNuovoPost}</p>
+                                    <div id="utenteDest">
+                                        <p>Pubblicare sulla bacheca di ${gruppo.name}?</p>
+                                        <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
 
+                                            <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
+                                            <input type="text" hidden name="content" value="${urlAllegato}">
+                                            <input type="text" hidden name="typePost" value="${typePost}">
+                                            <input type="text" hidden name="idGruppoDest">
+                                            <input type="text" hidden name="idUtenteMitt">
 
+                                            <button type="submit" name="conferma" id="pubblica">Conferma</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </c:when>
 
-                        </c:choose>   
+                            <c:when test="${typePost =='IMAGE'}">
+                                <div class="posts">
+                                    <div class="fotoProfilo">
+                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${utenteMitt.urlFotoProfilo}">
+                                    </div>
+                                    <h3 class="nameuser">${utenteMitt.nome} ${utenteMitt.cognome}</h3>            
+                                    <p id='textNewPost'>${testoNuovoPost}</p>   
+                                    <img src="${content}" alt="Foto" title="Allegato"/>
+                                    <div id="utenteDest">
+                                        <p>Pubblicare sulla bacheca di ${gruppo.name}?</p>
+                                        <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
+
+                                            <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
+                                            <input type="text" hidden name="content" value="${urlAllegato}">
+                                            <input type="text" hidden name="typePost" value="${typePost}">
+                                            <input type="text" hidden name="idGruppoDest">
+                                            <input type="text" hidden name="idUtenteMitt">
+
+                                            <button type="submit" name="conferma" id="pubblica">Conferma</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </c:when>
+
+                            <c:when test="${typePost =='LINK'}">
+                                <div class="posts">
+                                    <div class="fotoProfilo">
+                                        <img title="fotoProfilo" alt="Foto del Profilo" src="${utenteMitt.urlFotoProfilo}">
+                                    </div>
+                                    <h3 class="nameuser">${utenteMitt.nome} ${utenteMitt.cognome}</h3>            
+                                    <p id='textNewPost'>${testoNuovoPost}</p>
+                                    <a href="${content}">${content}</a> 
+                                    <div id="utenteDest">
+                                        <p>Pubblicare sulla bacheca di ${gruppo.name}?</p>
+                                        <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
+
+                                            <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
+                                            <input type="text" hidden name="content" value="${urlAllegato}">
+                                            <input type="text" hidden name="typePost" value="${typePost}">
+                                            <input type="text" hidden name="idGruppoDest">
+                                            <input type="text" hidden name="idUtenteMitt">
+
+                                            <button type="submit" name="conferma" id="pubblica">Conferma</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </c:when>
+                        
+                        </c:choose>
+                            
+                        </c:if>
+                           
 
 
                     </c:when>
@@ -173,12 +277,24 @@
 
                     <c:when test="${inserimentoPost== 2}">
                         <!--Conferma pubblicazione post-->
-                        <div class="posts">
+                        <c:if test="${bachecaGruppo==false}">
+                            <div class="posts">
                             <p>Hai scritto sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}</p>
                             <form action="bacheca.html?idAmico=${amico.id}" method="post">
                                 <button type="submit" name="conferma2" id="pubblica">Ok!</button>
                             </form>
                         </div>
+                        </c:if>
+                        
+                        
+                        <c:if test="${bachecaGruppo==true}">
+                        <div class="posts">
+                            <p>Hai scritto sul gruppo ${gruppo.name}</p>
+                            <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
+                                <button type="submit" name="conferma2" id="pubblica">Ok!</button>
+                            </form>
+                        </div>
+                        </c:if>
 
 
                     </c:when>

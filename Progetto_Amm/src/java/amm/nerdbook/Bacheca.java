@@ -58,7 +58,8 @@ public class Bacheca extends HttpServlet {
             
             
             // Registrazione id della persona di cui si sta visitando la bacheca
-            if (request.getParameter("idAmico") != null && !request.getParameter("idAmico").equals("")) {
+            if (request.getParameter("idAmico") != null && 
+                    !request.getParameter("idAmico").equals("")) {
                 idAmico = Integer.parseInt(request.getParameter("idAmico"));
 
             } else {
@@ -66,7 +67,8 @@ public class Bacheca extends HttpServlet {
             }
             
             //Registrazione id del gruppo di cui si sta visitando la bacheca
-            if (request.getParameter("idGruppo") != null && !request.getParameter("idGruppo").equals("")) {
+            if (request.getParameter("idGruppo") != null && 
+                    !request.getParameter("idGruppo").equals("")) {
                 idGruppo = Integer.parseInt(request.getParameter("idGruppo"));
 
             } else {
@@ -90,6 +92,9 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("propriaBacheca", true);
                 
                 request.setAttribute("inserimentoPost", 0);
+                
+                request.setAttribute("bachecaGruppo", false);
+                
 
                 //Inserimento nuovo post
                 if (request.getParameter("nuovoPost") != null) {
@@ -187,17 +192,19 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("gruppi", ListGruppo);
                 
                 request.setAttribute("inserimentoPost", 0);
+                request.setAttribute("bachecaGruppo", false);
 
                 if (this.verificaAmicizia(idAmico, ListAmici) || idAmico==idUtente) {
                     // amico
                     request.setAttribute("amicizia", true);
 
-                } else //Altro utente
+                } else // Utente non amico
                 {
                     request.setAttribute("amicizia", false);
                 }
 
                 request.setAttribute("propriaBacheca", false);
+                request.setAttribute("bachecaGruppo", false);
 
                 //Controllo per la richiesta di amicizia
                 if (request.getParameter("richiestaAmicizia") != null) {
@@ -280,7 +287,7 @@ public class Bacheca extends HttpServlet {
 
                 if (request.getAttribute("conferma2") != null) {
                     //Reindirizzamento                    
-                    String URL = request.getContextPath() + "/bacheca.html";
+                    String URL = request.getContextPath() + "/bacheca.html?idAmico=" + idAmico;
                     response.sendRedirect(URL);
                     return;
 
@@ -290,6 +297,115 @@ public class Bacheca extends HttpServlet {
 
             } 
             if(utente!= null && idGruppo!=-1 && idAmico==-1){
+                
+                //Bacheca gruppo                
+                Gruppo gruppo= GruppoFactory.getInstance().getgruppobyId(idGruppo);
+
+                request.setAttribute("utente", utente);
+                request.setAttribute("gruppo", gruppo);
+
+                //Lista amici Utente
+                ArrayList<Utente> ListAmici = UtenteFactory.getInstance().getListAmicibyId(idUtente);
+                request.setAttribute("amici", ListAmici);
+
+                //Lista post del gruppo
+                ArrayList<Post> ListPost=PostFactory.getInstance().getPostListGruppo(gruppo);
+                request.setAttribute("posts", ListPost);
+
+                ArrayList<Gruppo> ListGruppo = GruppoFactory.getInstance().getGruppoListUtente(idUtente);
+                request.setAttribute("gruppi", ListGruppo);
+                
+                request.setAttribute("inserimentoPost", 0);
+                request.setAttribute("bachecaGruppo", true);
+                
+                if(this.verificaAppartenenzaGruppo(idGruppo, ListGruppo)){
+                    request.setAttribute("partecipazioneGruppo", true);
+                
+                }
+                else{
+                    request.setAttribute("partecipazioneGruppo", false);
+                
+                }
+                request.setAttribute("propriaBacheca", false);
+                request.setAttribute("amicizia", false);
+                
+                //Inserimento nuovo post
+                if (request.getParameter("nuovoPost") != null) {
+
+                    //Dati che servono alla jsp
+                    String testoNuovoPost = request.getParameter("frase");
+                    String content = request.getParameter("urlAllegato");
+                    String typePost = request.getParameter("allegato");                    
+                    Gruppo gruppoDest= gruppo;
+                    Utente utenteMitt = utente;
+
+                    if (typePost == null) {
+                        typePost = "TEXT";
+                    }
+                    
+                    int idGruppoDest=gruppo.getId();
+                    int idUtenteMitt = utente.getId();
+
+                    request.setAttribute("typePost", typePost);
+                    request.setAttribute("content", content);
+                    request.setAttribute("testoNuovoPost", testoNuovoPost);
+                    request.setAttribute("idGruppoDest", idGruppoDest);
+                    request.setAttribute("idUtenteMitt", idUtenteMitt);
+                    request.setAttribute("utenteMitt", utenteMitt);
+                    request.setAttribute("gruppoDest", gruppoDest);
+
+                    request.setAttribute("nuovoAllegato", true);
+                    request.setAttribute("inserimentoPost", 1);
+
+                }
+                
+                //Controllo per il messaggio di conferma del post
+                if (request.getParameter("conferma") != null
+                        && request.getParameter("idGruppoDest") != null) {
+
+                    request.setAttribute("inserimentoPost", 2);
+
+                    //Prendo l'id del gruppo destinatario del post
+                    int idDestGruppo = Integer.parseInt(request.getParameter("idGruppoPost"));
+
+                    //Ottengo gli altri dati dell'utente                    
+                    Gruppo gruppoDest=GruppoFactory.getInstance().getgruppobyId(idDestGruppo);
+                    request.setAttribute("gruppoDest", gruppoDest);
+
+                    Post nuovoPost = new Post();
+
+                    String typePost = request.getParameter("typePost");
+
+                    if (typePost.equals("IMAGE")) {
+                        nuovoPost.setPostType(Post.Type.IMAGE);
+                    }
+                    if (typePost.equals("LINK")) {
+                        nuovoPost.setPostType(Post.Type.LINK);
+                    } else {
+                        nuovoPost.setPostType(Post.Type.TEXT);
+                    }
+
+                    nuovoPost.setContent(request.getParameter("content"));
+                    nuovoPost.setText(request.getParameter("testoNuovoPost"));
+                    nuovoPost.setUtenteMitt(utente);
+                    nuovoPost.setGruppoDest(gruppoDest);
+
+                    PostFactory.getInstance().addNewPost(nuovoPost);
+
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                    return;
+
+                } 
+                
+                if (request.getAttribute("conferma2") != null) {
+                    //Reindirizzamento                    
+                    String URL = request.getContextPath() + "/bacheca.html?idGruppo=" + idGruppo;
+                    response.sendRedirect(URL);
+                    return;
+
+                }
+
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
             
             
             }
@@ -318,6 +434,20 @@ public class Bacheca extends HttpServlet {
         }
         return false;
     }
+    
+    public boolean verificaAppartenenzaGruppo(int idGruppo,ArrayList<Gruppo> ListGruppi){
+        for(Gruppo gruppo: ListGruppi){
+            if(gruppo.getId()== idGruppo)
+                return true;
+        }
+        return false;
+        
+        
+        }
+    
+    
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
