@@ -120,17 +120,21 @@ public class Bacheca extends HttpServlet {
                     request.setAttribute("idUtenteMitt", idUtenteMitt);
                     request.setAttribute("utenteMitt", utenteMitt);
                     request.setAttribute("utenteDest", utenteDest);
+                    
 
                     request.setAttribute("nuovoAllegato", true);
                     request.setAttribute("inserimentoPost", 1);
+                    
+                    request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                    return;
 
                 }
 
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idDestPost") != null) {
-
+                    
                     //Controllo per il messaggio di conferma
-                    request.setAttribute("inserimentoPost", 2);
+                    
                     
                     //Prendo l'id dell'utente destinatario
                     int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
@@ -146,9 +150,9 @@ public class Bacheca extends HttpServlet {
                     if (typePost.equals("IMAGE")) {
                         nuovoPost.setPostType(Post.Type.IMAGE);
                     }
-                    if (typePost.equals("LINK")) {
+                    else if (typePost.equals("LINK")) {
                         nuovoPost.setPostType(Post.Type.LINK);
-                    } else {
+                    } else if(typePost.equals("TEXT")) {
                         nuovoPost.setPostType(Post.Type.TEXT);
                     }
 
@@ -158,6 +162,9 @@ public class Bacheca extends HttpServlet {
                     nuovoPost.setUtenteDest(utenteDest);
 
                     PostFactory.getInstance().addNewPost(nuovoPost);
+                    
+                    
+                    request.setAttribute("inserimentoPost", 2);
 
                     request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                     return;
@@ -251,8 +258,7 @@ public class Bacheca extends HttpServlet {
                 //Controllo per il messaggio di conferma del post
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idDestPost") != null) {
-
-                    request.setAttribute("inserimentoPost", 2);
+                    
 
                     //Prendo l'id dell'utente destinatario
                     int idDestPost = Integer.parseInt(request.getParameter("idDestPost"));
@@ -265,12 +271,12 @@ public class Bacheca extends HttpServlet {
 
                     String typePost = request.getParameter("typePost");
 
-                    if (typePost.equals("IMAGE")) {
+                     if (typePost.equals("IMAGE")) {
                         nuovoPost.setPostType(Post.Type.IMAGE);
                     }
-                    if (typePost.equals("LINK")) {
+                    else if (typePost.equals("LINK")) {
                         nuovoPost.setPostType(Post.Type.LINK);
-                    } else {
+                    } else if(typePost.equals("TEXT")) {
                         nuovoPost.setPostType(Post.Type.TEXT);
                     }
 
@@ -278,6 +284,8 @@ public class Bacheca extends HttpServlet {
                     nuovoPost.setText(request.getParameter("testoNuovoPost"));
                     nuovoPost.setUtenteMitt(utente);
                     nuovoPost.setUtenteDest(utenteDest);
+                    
+                    request.setAttribute("inserimentoPost", 2);
 
                     PostFactory.getInstance().addNewPost(nuovoPost);
 
@@ -376,8 +384,7 @@ public class Bacheca extends HttpServlet {
                 //Controllo per il messaggio di conferma del post
                 if (request.getParameter("conferma") != null
                         && request.getParameter("idGruppo") != null) {
-
-                    request.setAttribute("inserimentoPost", 2);
+                    
 
                     //Prendo l'id del gruppo destinatario del post
                     int idDestGruppo = Integer.parseInt(request.getParameter("idGruppo"));
@@ -393,9 +400,9 @@ public class Bacheca extends HttpServlet {
                     if (typePost.equals("IMAGE")) {
                         nuovoPost.setPostType(Post.Type.IMAGE);
                     }
-                    if (typePost.equals("LINK")) {
+                    else if (typePost.equals("LINK")) {
                         nuovoPost.setPostType(Post.Type.LINK);
-                    } else {
+                    } else if(typePost.equals("TEXT")) {
                         nuovoPost.setPostType(Post.Type.TEXT);
                     }
 
@@ -405,6 +412,8 @@ public class Bacheca extends HttpServlet {
                     nuovoPost.setGruppoDest(gruppoDest);
 
                     PostFactory.getInstance().addNewPost(nuovoPost);
+                    
+                    request.setAttribute("inserimentoPost", 2);
 
                     request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                     return;

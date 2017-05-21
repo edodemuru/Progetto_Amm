@@ -61,7 +61,7 @@
                     <c:when test="${inserimentoPost==0}">
                         <c:if test="${propriaBacheca==true or amicizia==true or partecipazioneGruppo==true}">
                             <!-- Inserimento di un nuovo Post-->
-                            <form action="bacheca.html?idAmico=${amico.id}&idGruppo=${gruppo.id}" method="post" id="creaPost">            
+                            <form action="bacheca.html" method="post" id="creaPost">            
                                 <div class="formitem" id="PostText">
                                     <textarea rows="2" cols="20" name="frase" id="fraseBach">Testo nuovo post</textarea>
                                 </div>
@@ -80,9 +80,14 @@
                                         <input type="radio" name="allegato" id="urlradio" value="LINK">    
                                         <label for="urlradio">URL</label>
                                     </div>
+                                    
+                                    <input type="text" hidden name="idAmico" value="${amico.id}">
+                                    <input type="text" hidden name="idGruppo" value="${gruppo.id}">
 
 
                                 </div>
+                                
+                                
 
                                 <button type="submit" name="nuovoPost" id="pubblica2">Pubblica post</button>
 
@@ -122,13 +127,13 @@
                                         <p id='textNewPost'>${testoNuovoPost}</p>
                                         <div id="utenteDest">
                                             <p>Pubblicare sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}?</p>
-                                            <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${idUtenteDest}" method="post">
+                                            <form action="bacheca.html" method="post">
 
                                                 <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
-                                                <input type="text" hidden name="content" value="${urlAllegato}">
+                                                <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
-                                                <input type="text" hidden name="idUtenteDest">
-                                                <input type="text" hidden name="idUtenteMitt">
+                                                <input type="text" hidden name="idAmico" value="${amico.id}">
+                                                <input type="text" hidden name="idDestPost" value="${idUtenteDest}">
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -146,13 +151,13 @@
                                         <img src="${content}" alt="Foto" title="Allegato"/>
                                         <div id="utenteDest">
                                             <p>Pubblicare sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}?</p>
-                                            <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${idUtenteDest}" method="post">
+                                            <form action="bacheca.html" method="post">
 
                                                 <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
-                                                <input type="text" hidden name="content" value="${urlAllegato}">
+                                                <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
-                                                <input type="text" hidden name="idUtenteDest">
-                                                <input type="text" hidden name="idUtenteMitt">
+                                                <input type="text" hidden name="idAmico" value="${amico.id}">
+                                                <input type="text" hidden name="idDestPost" value="${idUtenteDest}">
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -171,13 +176,13 @@
                                         <a href="${content}">${content}</a> 
                                         <div id="utenteDest">
                                             <p>Pubblicare sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}?</p>
-                                            <form action="bacheca.html?idAmico=${amico.id}&idDestPost=${idUtenteDest}" method="post">
+                                            <form action="bacheca.html?" method="post">
 
                                                 <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
-                                                <input type="text" hidden name="content" value="${urlAllegato}">
+                                                <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
-                                                <input type="text" hidden name="idUtenteDest">
-                                                <input type="text" hidden name="idUtenteMitt">
+                                                <input type="text" hidden name="idAmico" value="${amico.id}">
+                                                <input type="text" hidden name="idDestPost" value="${idUtenteDest}">
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -201,13 +206,13 @@
                                         <p id='textNewPost'>${testoNuovoPost}</p>
                                         <div id="utenteDest">
                                             <p>Pubblicare sulla bacheca di ${gruppo.name}?</p>
-                                            <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
+                                            <form action="bacheca.html" method="post">
 
                                                 <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
-                                                <input type="text" hidden name="content" value="${urlAllegato}">
+                                                <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
-                                                <input type="text" hidden name="idGruppoDest">
-                                                <input type="text" hidden name="idUtenteMitt">
+                                                <input type="text" hidden name="idGruppo" value="${gruppo.id}">
+                                                
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -228,10 +233,10 @@
                                             <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
 
                                                 <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
-                                                <input type="text" hidden name="content" value="${urlAllegato}">
+                                                <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
-                                                <input type="text" hidden name="idGruppoDest">
-                                                <input type="text" hidden name="idUtenteMitt">
+                                                <input type="text" hidden name="idGruppo" value="${gruppo.id}">
+                                                
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -250,13 +255,13 @@
                                         <a href="${content}">${content}</a> 
                                         <div id="utenteDest">
                                             <p>Pubblicare sulla bacheca di ${gruppo.name}?</p>
-                                            <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
+                                            <form action="bacheca.html" method="post">
 
                                                 <input type="text" hidden name="testoNuovoPost" value="${testoNuovoPost}">
-                                                <input type="text" hidden name="content" value="${urlAllegato}">
+                                                <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
-                                                <input type="text" hidden name="idGruppoDest">
-                                                <input type="text" hidden name="idUtenteMitt">
+                                                <input type="text" hidden name="idGruppo" value="${gruppo.id}">
+                                                
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -280,7 +285,8 @@
                         <c:if test="${bachecaGruppo==false}">
                             <div class="posts">
                                 <p>Hai scritto sulla bacheca di ${utenteDest.nome} ${utenteDest.cognome}</p>
-                                <form action="bacheca.html?idAmico=${amico.id}" method="post">
+                                <form action="bacheca.html" method="post">
+                                    <input type="text" hidden name="idAmico" value="${amico.id}">
                                     <button type="submit" name="conferma2" id="pubblica">Ok!</button>
                                 </form>
                             </div>
@@ -290,7 +296,8 @@
                         <c:if test="${bachecaGruppo==true}">
                             <div class="posts">
                                 <p>Hai scritto sul gruppo ${gruppo.name}</p>
-                                <form action="bacheca.html?idGruppo=${gruppo.id}" method="post">
+                                <form action="bacheca.html" method="post">
+                                    <input type="text" hidden name="idGruppo" value="${gruppo.id}">
                                     <button type="submit" name="conferma2" id="pubblica">Ok!</button>
                                 </form>
                             </div>

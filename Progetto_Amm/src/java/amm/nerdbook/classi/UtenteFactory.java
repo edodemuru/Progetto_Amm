@@ -32,13 +32,10 @@ public class UtenteFactory {
     }
 
     //private ArrayList<Utente> utenti = new ArrayList<>();
-
     private UtenteFactory() {
 
-        
     }
 
-   
     public Utente getUtentebyId(int id) {
         try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
@@ -58,7 +55,15 @@ public class UtenteFactory {
                 utente.setCognome(res.getString("cognome"));
                 utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
                 utente.setFrasePres(res.getString("frasePres"));
-                utente.setDataNascita(res.getString("dataNasc"));
+                //Controllo formato data di nascita
+                if (this.checkFormatDate(res.getString("dataNasc"))) {
+
+                    utente.setDataNascita(res.getString("dataNasc"));
+
+                } else {
+                    utente.setDataNascita("00/00/0000");
+                }
+                
                 utente.setUsername(res.getString("username"));
                 utente.setPassword(res.getString("password"));
                 utente.setId(res.getInt("idUtente"));
@@ -81,7 +86,6 @@ public class UtenteFactory {
 
     }
 
-  
     public ArrayList<Utente> getListAmicibyId(int id) {
         ArrayList<Utente> ListAmici = new ArrayList<>();
         try {
@@ -118,7 +122,7 @@ public class UtenteFactory {
         try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
             String query = "select * from utente";
-                    
+
             PreparedStatement stmt = conn.prepareStatement(query);
 
             ResultSet res = stmt.executeQuery();
@@ -129,13 +133,22 @@ public class UtenteFactory {
                 utente.setCognome(res.getString("cognome"));
                 utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
                 utente.setFrasePres(res.getString("frasePres"));
-                utente.setDataNascita(res.getString("dataNasc"));
+
+                //Controllo formato data di nascita
+                if (this.checkFormatDate(res.getString("dataNasc"))) {
+
+                    utente.setDataNascita(res.getString("dataNasc"));
+
+                } else {
+                    utente.setDataNascita("00/00/0000");
+                }
+
                 utente.setUsername(res.getString("username"));
                 utente.setPassword(res.getString("password"));
                 utente.setId(res.getInt("idUtente"));
-                
+
                 utenti.add(utente);
-                
+
             }
             stmt.close();
             conn.close();
@@ -143,7 +156,7 @@ public class UtenteFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       
+
         return utenti;
     }
 
@@ -166,14 +179,14 @@ public class UtenteFactory {
                 utente.setCognome(res.getString("cognome"));
                 utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
                 utente.setFrasePres(res.getString("frasePres"));
-                
-                if(this.checkFormatDate(res.getString("dataNasc"))){
-                    
-                utente.setDataNascita(res.getString("dataNasc"));
-                
-                }
-                else{
-                utente.setDataNascita("00/00/0000");
+
+                //Controllo formato data di nascita
+                if (this.checkFormatDate(res.getString("dataNasc"))) {
+
+                    utente.setDataNascita(res.getString("dataNasc"));
+
+                } else {
+                    utente.setDataNascita("00/00/0000");
                 }
                 utente.setUsername(res.getString("username"));
                 utente.setPassword(res.getString("password"));
@@ -196,76 +209,71 @@ public class UtenteFactory {
         return null;
 
     }
-    
-    public void deleteUtente(Utente utente) throws SQLException{
+
+    public void deleteUtente(Utente utente) throws SQLException {
         Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
-        
+
         PreparedStatement stmtPosts = null;
-        PreparedStatement stmtProf=null;
-        
-        
-        String deletePosts= "delete from post "
-                           +"where idMittente=? or idDestinatarioUtente=?";
-        
-        String deleteProfilo="delete from utente "
-                             +"where idUtente=?";
-        
-        try{
-            
-            
+        PreparedStatement stmtProf = null;
+
+        String deletePosts = "delete from post "
+                + "where idMittente=? or idDestinatarioUtente=?";
+
+        String deleteProfilo = "delete from utente "
+                + "where idUtente=?";
+
+        try {
+
             conn.setAutoCommit(false);
-            
+
             stmtPosts = conn.prepareStatement(deletePosts);
-            stmtProf =conn.prepareStatement(deleteProfilo);
-            
+            stmtProf = conn.prepareStatement(deleteProfilo);
+
             stmtPosts.setInt(1, utente.getId());
             stmtPosts.setInt(2, utente.getId());
-            
-            stmtProf.setInt(1,utente.getId());
-            
-            int ver1= stmtPosts.executeUpdate();
-            int ver2=stmtProf.executeUpdate();
-            
-            if(ver1!=1 || ver2!=1)
+
+            stmtProf.setInt(1, utente.getId());
+
+            int ver1 = stmtPosts.executeUpdate();
+            int ver2 = stmtProf.executeUpdate();
+
+            if (ver1 != 1 || ver2 != 1) {
                 conn.rollback();
-            
-            conn.commit();
-          
-        
-        
-        }catch(SQLException e){
-            try{
-                conn.rollback();
-                
-            
-            } catch(SQLException e2){
-            
             }
-        
-        } finally{
-            if(stmtPosts!=null)
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            try {
+                conn.rollback();
+
+            } catch (SQLException e2) {
+
+            }
+
+        } finally {
+            if (stmtPosts != null) {
                 stmtPosts.close();
-            if(stmtProf!=null)
+            }
+            if (stmtProf != null) {
                 stmtProf.close();
-            
+            }
+
             conn.setAutoCommit(true);
             conn.close();
-        
-        
+
         }
-                            
-    
+
     }
-    
-    public void updateProfilo(Utente utente){
-        
+
+    public void updateProfilo(Utente utente) {
+
         try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
             String query = " update utente set "
-                         + "nome=? ,cognome=? ,urlFotoProfilo=? ,frasePres=? ,dataNasc=? ,username=? ,password=? "
-                         +"where idUtente=?";
-                          
+                    + "nome=? ,cognome=? ,urlFotoProfilo=? ,frasePres=? ,dataNasc=? ,username=? ,password=? "
+                    + "where idUtente=?";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -277,29 +285,25 @@ public class UtenteFactory {
             stmt.setString(6, utente.getUsername());
             stmt.setString(7, utente.getPassword());
             stmt.setInt(8, utente.getId());
-            
 
             stmt.executeUpdate();
 
-            
             stmt.close();
             conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
 
     }
-    
-    public void addAmico(int idUtente, int idAmico){
-        
+
+    public void addAmico(int idUtente, int idAmico) {
+
         try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
-            String query="insert into amicizia(follower,followed) "
-                         +"values (?,?),(?,?)";
-                          
+            String query = "insert into amicizia(follower,followed) "
+                    + "values (?,?),(?,?)";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -307,70 +311,62 @@ public class UtenteFactory {
             stmt.setInt(2, idAmico);
             stmt.setInt(3, idAmico);
             stmt.setInt(4, idUtente);
-            
 
             stmt.executeUpdate();
 
-            
             stmt.close();
             conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-      
-}
-    
-    public void addGruppo(int idUtente,int idGruppo){
-        
+
+    }
+
+    public void addGruppo(int idUtente, int idGruppo) {
+
         try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
-            String query="insert into partecipazioneGruppo(idUtente,idGruppo) "
-                         +"values (?,?)";
-                          
+            String query = "insert into partecipazioneGruppo(idUtente,idGruppo) "
+                    + "values (?,?)";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.setInt(1, idUtente);
-            stmt.setInt(2, idGruppo);            
-            
+            stmt.setInt(2, idGruppo);
 
             stmt.executeUpdate();
 
-            
             stmt.close();
             conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    
-    
+
     }
-    
-    private boolean checkFormatDate(String dateString){
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd"); 
+
+    private boolean checkFormatDate(String dateString) {
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
         dt.setLenient(false);
-        
-        if(dateString==null)
+
+        if (dateString == null) {
             return false;
-        
-        try{
-            Date date=dt.parse(dateString);
-        
-        
-        }catch(ParseException e){
+        }
+
+        try {
+            Date date = dt.parse(dateString);
+
+        } catch (ParseException e) {
             e.printStackTrace();
             return false;
-        
+
         }
-        
-        return true;       
-    
-    
+
+        return true;
+
     }
-    
 
     public void setConnectionString(String s) {
         this.connectionString = s;

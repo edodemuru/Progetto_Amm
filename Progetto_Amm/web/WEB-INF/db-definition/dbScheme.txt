@@ -50,6 +50,9 @@ Relazione Partecipazione Gruppo:
 	relazione di partenza: Utente
 	relazione di arrivo: Gruppo
 	cardinalità: molti a molti
+        Attributi: idUtente (integer, chiave esterna di utente)
+                   idGruppo(integer,chiave esterna di Gruppo)
+                   chiave primaria(idUtente,idGruppo)
 
 Relazione Destinatario Post Utente:
 	relazione di partenza: Post
