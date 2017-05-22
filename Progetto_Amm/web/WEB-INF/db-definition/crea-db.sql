@@ -50,7 +50,7 @@ CREATE TABLE post(
     idDestinatarioUtente INTEGER,
     FOREIGN KEY(idDestinatarioUtente) REFERENCES utente(idUtente),
     idDestinatarioGruppo INTEGER,
-    FOREIGN KEY(idDestinatarioGruppo) REFERENCES gruppo(idGruppo)  
+    FOREIGN KEY(idDestinatarioGruppo) REFERENCES gruppo(idGruppo) 
 );
 
 CREATE TABLE amicizia(
@@ -65,7 +65,8 @@ CREATE TABLE partecipazioneGruppo(
     idUtente INTEGER,
     idGruppo INTEGER,
     FOREIGN KEY(idUtente) REFERENCES utente(idUtente),
-    FOREIGN KEY(idGruppo) REFERENCES gruppo(idGruppo)
+    FOREIGN KEY(idGruppo) REFERENCES gruppo(idGruppo),
+    PRIMARY KEY(idUtente, idGruppo)
 );
 
 --Inserimento Utenti
@@ -119,7 +120,7 @@ VALUES (3,1),(1,2),(3,2);
 
 --Partecipazione ad un gruppo
 INSERT INTO partecipazioneGruppo(idUtente,idGruppo)
-VALUES(1,2),(1,3)
+VALUES(1,1),(1,2);
 
 -- Inserimento utenti per test cancellazione profilo
 INSERT INTO utente(nome,cognome,urlFotoProfilo,frasePres,dataNasc,username,password,idUtente)

@@ -133,10 +133,14 @@ public class GruppoFactory {
         Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
         PreparedStatement stmtPosts = null;
+        PreparedStatement stmtPartecipazione=null;
         PreparedStatement stmtGruppo = null;
 
         String deletePosts = "delete from post "
                 + "where idDestinatarioGruppo=?";
+        
+        String deletePartecipazione="delete from partecipazioneGruppo "
+                                   +"where idGruppo=?";
 
         String deleteGruppo = "delete from gruppo "
                 + "where idGruppo=?";
@@ -146,26 +150,28 @@ public class GruppoFactory {
             conn.setAutoCommit(false);
 
             stmtPosts = conn.prepareStatement(deletePosts);
+            stmtPartecipazione=conn.prepareStatement(deletePartecipazione);
             stmtGruppo = conn.prepareStatement(deleteGruppo);
 
             stmtPosts.setInt(1, gruppo.getId());
             
+            stmtPartecipazione.setInt(1,gruppo.getId());       
 
             stmtGruppo.setInt(1, gruppo.getId());
-
-            int ver1 = stmtPosts.executeUpdate();
-            int ver2 = stmtGruppo.executeUpdate();
-
-            if (ver1 != 1 || ver2 != 1) {
-                conn.rollback();
-            }
+            
+            stmtPosts.executeUpdate();
+            stmtPartecipazione.executeUpdate();
+            stmtGruppo.executeUpdate();
+            
 
             conn.commit();
+            
 
         } catch (SQLException e) {
             e.printStackTrace();
             try {
                 conn.rollback();
+                
 
             } catch (SQLException e2) {
                 e2.printStackTrace();
@@ -176,6 +182,11 @@ public class GruppoFactory {
             if (stmtPosts != null) {
                 stmtPosts.close();
             }
+            
+            if(stmtPartecipazione !=null){
+                stmtPartecipazione.close();            
+            }
+            
             if (stmtGruppo != null) {
                 stmtGruppo.close();
             }

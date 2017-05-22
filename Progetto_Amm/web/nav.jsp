@@ -81,7 +81,7 @@
                 <c:forEach var="gruppo" items="${gruppi}">
                     <div class="fotoProfilo2">
                         <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
-                        <p class="group">${gruppo.name}</p>
+                        <p class="group"><a href="bacheca.html?idGruppo=${gruppo.id}">${gruppo.name}</a></p>
                     </div>
 
                 </c:forEach>            
@@ -123,7 +123,7 @@
                     <c:forEach var="gruppo" items="${gruppi}">
                         <div class="fotoProfilo2">
                             <img title="fotoGruppo" alt="Foto di un Gruppo" src="${gruppo.urlFotoGruppo}" >
-                            <p>${gruppo.name}</p>
+                            <p><a href="bacheca.html?idGruppo=${gruppo.id}">${gruppo.name}</a></p>
                         </div>
 
                     </c:forEach>

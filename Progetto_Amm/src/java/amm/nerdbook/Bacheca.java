@@ -446,10 +446,13 @@ public class Bacheca extends HttpServlet {
                     try {
                         GruppoFactory.getInstance().deleteGruppo(gruppo);                       
                         
+                        System.out.println("Dovrei aver eseguito la cancellazione");
+                        
                         request.getRequestDispatcher("bacheca.jsp").forward(request, response);
                         return;
 
                     } catch (SQLException e) {
+                        e.printStackTrace();
 
                     }
                 

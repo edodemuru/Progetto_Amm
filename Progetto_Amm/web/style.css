@@ -987,17 +987,17 @@ textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2,button#chi
 }
 
 #groupsection{
-    position: relative;
-    left: 215px;
-    bottom: 222px;  
+    position: absolute;
+    left: 258px;
+    bottom: 107px;
     width: 182px;
 }
 
 button#cancellaProfilo{
     width: 50%;
     position: relative;
-    top: 50px;    
-    left: 77px;    
+    top: 93px;
+    left: -60px;   
     font-weight: bold;
     font-size: 14px;
     border: 3px solid #ccc;
@@ -1007,8 +1007,9 @@ button#cancellaProfilo{
 }
 
 #peoplesection{
-    position: relative;
-    top:-45px;
+        position: absolute;
+    top: 5px;    
+    left: 60px;
     width: 182px;
 }
 
@@ -1018,16 +1019,16 @@ button#cancellaProfilo{
     right: 20px;
 }
 
-#cancellaGruppo{
-    display: hidden;
+#search, #cancellaGruppo {
+    visibility: hidden;
 }
 
 #linksbacheca{
-    position: relative;
+    /*position: relative;
     left: 215px;
-    bottom: -12px;
-    width: 182px;
-    
+    bottom: 175px;
+    width: 182px;*/
+    visibility: hidden;
 }
 
 p.link{
@@ -1097,7 +1098,7 @@ div #formprofilo{
 #Profiloform{
     position: relative;
     right: 295px;
-    top: 60px;
+    top: 90px;
     width: 345px;
 }
 
@@ -1118,7 +1119,7 @@ img#Profilepic{
     padding-left: 29px;
     padding-top: 0px;
     position:relative;
-    left:49px;
+    left:98px;
 }
 
 header#title{

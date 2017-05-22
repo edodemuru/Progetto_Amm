@@ -212,42 +212,68 @@ public class UtenteFactory {
 
     public void deleteUtente(Utente utente) throws SQLException {
         Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
-
+        
         PreparedStatement stmtPosts = null;
+        PreparedStatement stmtAmicizia = null;
+        PreparedStatement stmtPartecipazione = null;
+        PreparedStatement stmtGruppo = null;
         PreparedStatement stmtProf = null;
 
         String deletePosts = "delete from post "
-                + "where idMittente=? or idDestinatarioUtente=?";
-
+                + "where post.idMittente=? or post.idDestinatarioUtente=?";
+        
+        String deleteAmicizia="delete from amicizia "
+                             +"where follower=? or followed=?";
+        
+        String deletePartecipazione= "delete from partecipazioneGruppo "
+                                    +"where idUtente=?";
+        
+        String deleteGruppo="delete from gruppo "
+                            +"where idAmministratore=?";
+        
         String deleteProfilo = "delete from utente "
-                + "where idUtente=?";
+                + "where utente.idUtente=?";
 
         try {
 
             conn.setAutoCommit(false);
 
             stmtPosts = conn.prepareStatement(deletePosts);
+            stmtAmicizia=conn.prepareStatement(deleteAmicizia);
+            stmtPartecipazione=conn.prepareStatement(deletePartecipazione);
+            stmtGruppo=conn.prepareStatement(deleteGruppo);
             stmtProf = conn.prepareStatement(deleteProfilo);
 
             stmtPosts.setInt(1, utente.getId());
             stmtPosts.setInt(2, utente.getId());
-
+            
+            stmtAmicizia.setInt(1, utente.getId());
+            stmtAmicizia.setInt(2,utente.getId());
+            
+            stmtPartecipazione.setInt(1, utente.getId());
+            
+            stmtGruppo.setInt(1, utente.getId());           
+            
             stmtProf.setInt(1, utente.getId());
 
-            int ver1 = stmtPosts.executeUpdate();
-            int ver2 = stmtProf.executeUpdate();
-
-            if (ver1 != 1 || ver2 != 1) {
-                conn.rollback();
-            }
+            stmtPosts.executeUpdate();
+            stmtAmicizia.executeUpdate();
+            stmtPartecipazione.executeUpdate();
+            stmtGruppo.executeUpdate();            
+            stmtProf.executeUpdate();
+           
 
             conn.commit();
 
         } catch (SQLException e) {
+            e.printStackTrace();
             try {
                 conn.rollback();
+                
+                
 
             } catch (SQLException e2) {
+                e2.printStackTrace();
 
             }
 
@@ -255,6 +281,19 @@ public class UtenteFactory {
             if (stmtPosts != null) {
                 stmtPosts.close();
             }
+            if(stmtAmicizia!=null){
+                stmtAmicizia.close();
+            
+            }
+            
+            if(stmtPartecipazione!=null){
+            stmtPartecipazione.close();
+            }
+            
+            if(stmtGruppo!=null){
+                stmtGruppo.close();
+            }
+            
             if (stmtProf != null) {
                 stmtProf.close();
             }
