@@ -13,6 +13,7 @@ import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -311,7 +312,11 @@ public class Bacheca extends HttpServlet {
                 Gruppo gruppo= GruppoFactory.getInstance().getgruppobyId(idGruppo);
 
                 request.setAttribute("utente", utente);
-                request.setAttribute("gruppo", gruppo);                
+                request.setAttribute("gruppo", gruppo);  
+                
+                //Amministratore del gruppo
+                Utente utenteAmministratore= UtenteFactory.getInstance().getUtentebyId(gruppo.getIdamministratore());                
+                request.setAttribute("utenteAmministratore", utenteAmministratore);
                 
 
                 //Lista amici Utente
@@ -336,6 +341,13 @@ public class Bacheca extends HttpServlet {
                     request.setAttribute("partecipazioneGruppo", false);
                 
                 }
+                
+                if(utenteAmministratore.getId() == utente.getId()){
+                    request.setAttribute("cancellaGruppo", true);
+                
+                }
+                else
+                    request.setAttribute("cancellaGruppo", false);
                 
                 request.setAttribute("propriaBacheca", false);
                 
@@ -426,6 +438,22 @@ public class Bacheca extends HttpServlet {
                     response.sendRedirect(URL);
                     return;
 
+                }
+                
+                //Cancellazione Gruppo
+                if(request.getParameter("cancellaGruppo")!=null){
+                    
+                    try {
+                        GruppoFactory.getInstance().deleteGruppo(gruppo);                       
+                        
+                        request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                        return;
+
+                    } catch (SQLException e) {
+
+                    }
+                
+                
                 }
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);

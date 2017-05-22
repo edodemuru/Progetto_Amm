@@ -50,7 +50,7 @@
                         <div class="fotoProfilo">
                             <img title="fotoProfilo" alt="Foto del Profilo" src="${gruppo.urlFotoGruppo}" >
                         </div>
-                        <h2 class="nameuser">${gruppo.name}</h2>
+                        <h2 class="nameuser">Gruppo di ${gruppo.name} - Amministratore: ${utenteAmministratore.nome} ${utenteAmministratore.cognome}</h2>
                     </div>                    
 
                 </c:if>

@@ -32,7 +32,6 @@ public class PostFactory {
     private ArrayList<Post> post = new ArrayList<>();
 
     private PostFactory() {
-        
 
     }
 
@@ -130,6 +129,29 @@ public class PostFactory {
             e.printStackTrace();
         }
 
+        //Aggiunta alla lista dei post dell'utente, i post dei gruppi di cui l'utente fa parte
+        GruppoFactory gruppoFactory = GruppoFactory.getInstance();
+
+        ArrayList<Gruppo> gruppiUtente = gruppoFactory.getGruppoListUtente(utente.getId());
+        ArrayList<Post> postGruppi = new ArrayList();
+
+        if (gruppiUtente != null) {
+            for (Gruppo gruppo : gruppiUtente) {
+                ArrayList<Post> postGruppo = this.getPostListGruppo(gruppo);
+                for (Post singlePost : postGruppo) {
+                    postGruppi.add(singlePost);
+
+                }
+
+            }
+
+            for (Post singlePost : postGruppi) {
+                postList.add(singlePost);
+
+            }
+
+        }
+
         return postList;
 
     }
@@ -206,15 +228,14 @@ public class PostFactory {
             if (post.getUtenteDest() != null && post.getGruppoDest() == null) {
                 stmt.setInt(5, post.getUtenteDest().getId());
             } else {
-                stmt.setNull(5, java.sql.Types.INTEGER);              
+                stmt.setNull(5, java.sql.Types.INTEGER);
             }
 
-            if (post.getGruppoDest() != null && post.getUtenteDest()== null) {
+            if (post.getGruppoDest() != null && post.getUtenteDest() == null) {
                 stmt.setInt(6, post.getGruppoDest().getId());
-            } else {               
-               stmt.setNull(6, java.sql.Types.INTEGER);
+            } else {
+                stmt.setNull(6, java.sql.Types.INTEGER);
             }
-            
 
             stmt.executeUpdate();
 
@@ -227,8 +248,6 @@ public class PostFactory {
         }
 
     }
-    
-    
 
     public void setConnectionString(String s) {
         this.connectionString = s;

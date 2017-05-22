@@ -466,7 +466,14 @@ div#lateral4{
     width: 160px;
 }
 
-#search{
+#cancellaGruppo{
+    border: 3px solid #ccc;
+    padding-bottom: 45px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#search, #cancellaGruppo{
     width: 142px;
     height: 45px;
 }
@@ -708,7 +715,7 @@ position: relative;
     
 }
 
-#search{
+#search,#cancellaGruppo{
     margin-top: 16px;
     position: relative;
     right: 20px;
@@ -865,7 +872,7 @@ textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2,button#chi
     width: 500px;
 }
 
-#search{
+#search,#cancellaGruppo{
     margin-top: 16px;
     position: relative;
     right: 20px;
@@ -1009,6 +1016,10 @@ button#cancellaProfilo{
     position: relative;
     top:180px;
     right: 20px;
+}
+
+#cancellaGruppo{
+    display: hidden;
 }
 
 #linksbacheca{

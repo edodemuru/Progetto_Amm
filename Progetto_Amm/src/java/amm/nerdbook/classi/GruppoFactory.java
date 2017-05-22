@@ -128,6 +128,64 @@ public class GruppoFactory {
     
     
     }
+    
+     public void deleteGruppo(Gruppo gruppo) throws SQLException {
+        Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+        PreparedStatement stmtPosts = null;
+        PreparedStatement stmtGruppo = null;
+
+        String deletePosts = "delete from post "
+                + "where idDestinatarioGruppo=?";
+
+        String deleteGruppo = "delete from gruppo "
+                + "where idGruppo=?";
+
+        try {
+
+            conn.setAutoCommit(false);
+
+            stmtPosts = conn.prepareStatement(deletePosts);
+            stmtGruppo = conn.prepareStatement(deleteGruppo);
+
+            stmtPosts.setInt(1, gruppo.getId());
+            
+
+            stmtGruppo.setInt(1, gruppo.getId());
+
+            int ver1 = stmtPosts.executeUpdate();
+            int ver2 = stmtGruppo.executeUpdate();
+
+            if (ver1 != 1 || ver2 != 1) {
+                conn.rollback();
+            }
+
+            conn.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+
+            }
+
+        } finally {
+            if (stmtPosts != null) {
+                stmtPosts.close();
+            }
+            if (stmtGruppo != null) {
+                stmtGruppo.close();
+            }
+
+            conn.setAutoCommit(true);
+            conn.close();
+
+        }
+
+    }
      
      public void setConnectionString(String s){
 	this.connectionString = s;

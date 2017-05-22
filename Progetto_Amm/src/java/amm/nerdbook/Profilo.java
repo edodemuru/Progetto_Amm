@@ -91,6 +91,7 @@ public class Profilo extends HttpServlet {
                     return;
 
                 }
+                //Cancellazione profilo 
                 if (request.getParameter("cancella") != null) {
                     try {
                         UtenteFactory.getInstance().deleteUtente(utente);
