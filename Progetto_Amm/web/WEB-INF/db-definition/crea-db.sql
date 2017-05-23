@@ -127,6 +127,10 @@ INSERT INTO utente(nome,cognome,urlFotoProfilo,frasePres,dataNasc,username,passw
 VALUES('Marco','Salvemini','img/utente4.png','Siamo tutti destinati a morire','1980-07-09',
        'marco','123',default);
 
+-- Inserimento utente Amministratore
+INSERT INTO utente(nome,cognome,urlFotoProfilo,frasePres,dataNasc,username,password,idUtente)
+VALUES('Amministratore','Nerdbook','http://blog.soldionline.it/condominioaiuto/wp-content/uploads/2011/06/amministratore-condominio.jpg','Ho il controllo su tutto','2000-01-01',
+       'amm','amm',default);
 
 
 

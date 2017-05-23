@@ -96,6 +96,14 @@ public class Bacheca extends HttpServlet {
                 
                 request.setAttribute("bachecaGruppo", false);
                 
+                //Validazione Amministratore
+                if(utente.getNome().equals("Amministratore") && utente.getCognome().equals("Nerdbook")){
+                    request.setAttribute("amministratore", true);
+                
+                }
+                else
+                    request.setAttribute("Amministratore", false);
+                
 
                 //Inserimento nuovo post
                 if (request.getParameter("nuovoPost") != null) {
@@ -241,6 +249,14 @@ public class Bacheca extends HttpServlet {
 
                 request.setAttribute("propriaBacheca", false);
                 request.setAttribute("bachecaGruppo", false);
+                
+                //Validazione Amministratore
+                if(utente.getNome().equals("Amministratore") && utente.getCognome().equals("Nerdbook")){
+                    request.setAttribute("amministratore", true);
+                
+                }
+                else
+                    request.setAttribute("Amministratore", false);
 
                 //Controllo per la richiesta di amicizia
                 if (request.getParameter("richiestaAmicizia") != null) {
@@ -369,7 +385,8 @@ public class Bacheca extends HttpServlet {
                 
                 }
                 
-                if(utenteAmministratore.getId() == utente.getId()){
+                if(utenteAmministratore.getId() == utente.getId() || (utente.getNome().equals("Amministratore")
+                        && utente.getCognome().equals("Nerdbook"))){
                     request.setAttribute("cancellaGruppo", true);
                 
                 }
@@ -378,12 +395,12 @@ public class Bacheca extends HttpServlet {
                 
                 request.setAttribute("propriaBacheca", false);
                 
-                //Controllo per la richiesta di amicizia
+                //Controllo per la richiesta di partecipazione al gruppo
                 if (request.getParameter("richiestaPartecipazione") != null) {
                     UtenteFactory.getInstance().addGruppo(idUtente, idGruppo);
                     request.setAttribute("partecipazioneGruppo", true);
 
-                    String URL = request.getContextPath() + "/bacheca.html?idGruppo" + idGruppo;
+                    String URL = request.getContextPath() + "/bacheca.html?idGruppo=" + idGruppo;
                     response.sendRedirect(URL);
                     return;
 

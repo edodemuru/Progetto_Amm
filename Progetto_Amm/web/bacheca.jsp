@@ -80,14 +80,14 @@
                                         <input type="radio" name="allegato" id="urlradio" value="LINK">    
                                         <label for="urlradio">URL</label>
                                     </div>
-                                    
+
                                     <input type="text" hidden name="idAmico" value="${amico.id}">
                                     <input type="text" hidden name="idGruppo" value="${gruppo.id}">
 
 
                                 </div>
-                                
-                                
+
+
 
                                 <button type="submit" name="nuovoPost" id="pubblica2">Pubblica post</button>
 
@@ -212,7 +212,7 @@
                                                 <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
                                                 <input type="text" hidden name="idGruppo" value="${gruppo.id}">
-                                                
+
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -236,7 +236,7 @@
                                                 <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
                                                 <input type="text" hidden name="idGruppo" value="${gruppo.id}">
-                                                
+
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -261,7 +261,7 @@
                                                 <input type="text" hidden name="content" value="${content}">
                                                 <input type="text" hidden name="typePost" value="${typePost}">
                                                 <input type="text" hidden name="idGruppo" value="${gruppo.id}">
-                                                
+
 
                                                 <button type="submit" name="conferma" id="pubblica">Conferma</button>
                                             </form>
@@ -312,6 +312,11 @@
                     <c:choose>
                         <c:when test="${post.postType == 'TEXT'}">
                             <div class="posts">
+                                <c:if test="${amministratore==true}">
+                                <form action="bacheca.html" method="post">
+                                    <button type="submit" name="amm" id="amm">Cancella</button>
+                                </form>
+                                </c:if>
                                 <div class="fotoProfilo">
                                     <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
                                 </div>              
