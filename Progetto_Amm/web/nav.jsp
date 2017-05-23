@@ -14,8 +14,9 @@
         <div id="lateral">
 
             <c:if test="${cancellaGruppo==true}">
-                <form action="bacheca.html" method="post" id="cancellaSection">
+                <form action="bacheca.html?" method="post" id="cancellaSection">
                     <button type="submit" name="cancellaGruppo" id="cancellaGruppo">Cancella gruppo</button>
+                     <input type="text" hidden name="idGruppodaCancellare" value="${gruppo.id}">
                 </form>
 
             </c:if>

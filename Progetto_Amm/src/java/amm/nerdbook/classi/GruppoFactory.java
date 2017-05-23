@@ -131,6 +131,8 @@ public class GruppoFactory {
     
      public void deleteGruppo(Gruppo gruppo) throws SQLException {
         Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+        
+        System.out.println("Inizio cancellazione gruppo");
 
         PreparedStatement stmtPosts = null;
         PreparedStatement stmtPartecipazione=null;

@@ -179,6 +179,29 @@ public class Bacheca extends HttpServlet {
                     return;
 
                 }
+                
+                //Cancellazione Gruppo
+                if(request.getParameter("cancellaGruppo")!=null){
+                    System.out.println("controllo bacheca.java");
+                    
+                    idGruppo=Integer.parseInt(request.getParameter("idGruppodaCancellare"));
+                    Gruppo gruppoDaCancellare= GruppoFactory.getInstance().getgruppobyId(idGruppo);
+                    
+                    try {
+                        GruppoFactory.getInstance().deleteGruppo(gruppoDaCancellare);                       
+                        
+                        System.out.println("Dovrei aver eseguito la cancellazione");
+                        
+                        request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                        return;
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+
+                    }
+                
+                
+                }
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
 
@@ -438,26 +461,8 @@ public class Bacheca extends HttpServlet {
                     response.sendRedirect(URL);
                     return;
 
-                }
+                }                
                 
-                //Cancellazione Gruppo
-                if(request.getParameter("cancellaGruppo")!=null){
-                    
-                    try {
-                        GruppoFactory.getInstance().deleteGruppo(gruppo);                       
-                        
-                        System.out.println("Dovrei aver eseguito la cancellazione");
-                        
-                        request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-                        return;
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-
-                    }
-                
-                
-                }
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
             
