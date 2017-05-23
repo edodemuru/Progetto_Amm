@@ -192,8 +192,12 @@ public class Bacheca extends HttpServlet {
                         
                         System.out.println("Dovrei aver eseguito la cancellazione");
                         
-                        request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-                        return;
+                        //request.getRequestDispatcher("bacheca.html").forward(request, response);
+                        //return;
+                        
+                    String URL = request.getContextPath() + "/bacheca.html";
+                    response.sendRedirect(URL);
+                    return;
 
                     } catch (SQLException e) {
                         e.printStackTrace();

@@ -120,7 +120,7 @@ VALUES (3,1),(1,2),(3,2);
 
 --Partecipazione ad un gruppo
 INSERT INTO partecipazioneGruppo(idUtente,idGruppo)
-VALUES(1,1),(1,2),(2,2);
+VALUES(1,1),(1,2),(2,2),(2,1);
 
 -- Inserimento utenti per test cancellazione profilo
 INSERT INTO utente(nome,cognome,urlFotoProfilo,frasePres,dataNasc,username,password,idUtente)
