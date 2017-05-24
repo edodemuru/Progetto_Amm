@@ -541,6 +541,11 @@ div#lateral4{
     padding-left: 317px;
 }
 
+#ProfiloformGruppo{
+    padding-left: 30px;
+    padding-right: 210px;
+}
+
 .formitem{
     padding-bottom: 15px;
 }
@@ -697,6 +702,8 @@ button.amm{
     margin-left: 350px;
     
 }
+
+
 
 #headerArticle.descr{
     margin-top: 87px;
@@ -1294,7 +1301,7 @@ width: 40px;
 
 /* Questa immagine è decorativa in quanto è un'icona che rappresenta la pagina di
    informazioni del social network*/
-p.link::before{
+p.link#info::before{
     position: relative;
     overflow: hidden;
     float: left;
@@ -1308,6 +1315,22 @@ p.link::before{
     right: 10px;
     margin-bottom: 20px
 } 
+
+p.link#crea::before{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    background-image:url(img/add.png);
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+    content: "";
+    bottom:7px;
+    right: 10px;
+    margin-bottom: 20px
+} 
+
 
 /*Questa immagine è lo stesso decorativa in quanto rappresenta l'icona di login all'account*/
 #loginid::before{

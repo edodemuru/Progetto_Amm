@@ -19,18 +19,15 @@
     </head>
 
     <body>
-        <c:if test="${NonAutorizzato==false}">
-            <c:set var="page" value="0" scope="request"/>
-            <jsp:include page="header.jsp"/>
+        <c:if test="${NonAutorizzato==false}">            
 
-            <div id="contentPage">     
-                <jsp:include page="nav.jsp"/>  
+            <div id="contentPage">    
+                 
 
-                <div id="formProfilo">
-                    <img title="fotoProfilo" alt="Foto del Profilo" src="${utente.urlFotoProfilo}" id="Profilepic">
+                <div id="formProfilo">                   
                                        
                     
-                    <form action="bacheca.html" method="post" id="Profiloform">
+                    <form action="CreaGruppo.html" method="post" id="ProfiloformGruppo">
                         <div id="formContent">                  
                             <h3>Crea nuovo gruppo</h3>
 

@@ -11,7 +11,10 @@ import amm.nerdbook.classi.Utente;
 import amm.nerdbook.classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,9 +72,17 @@ public class CreaGruppo extends HttpServlet {
                     gruppo.setName(nomeGruppo);
                     gruppo.setInteresse(interesse);
                     gruppo.setUrlFotoGruppo(urlFoto);
-                    gruppo.setIdamministratore(idUtente);
+                    gruppo.setIdamministratore(idUtente);                    
                     
-                    GruppoFactory.getInstance().creaGruppo(gruppo);
+                    
+                    try {
+                        GruppoFactory.getInstance().creaGruppo(gruppo);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    
+                    request.getRequestDispatcher("bacheca.html").forward(request, response);
+                    return;
                 
                 
                 }

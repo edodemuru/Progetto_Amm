@@ -50,8 +50,8 @@
 
             <nav id="linksbacheca">
                 <h2 class="lateraltitle">Link</h2>
-                <p class="link"><a href="descrizione.html">Informazioni sul Social Network</a></p>   
-                <p class="link"><a href="CreaGruppo.html">Crea nuovo Gruppo</a></p>
+                <p class="link" id="info"><a href="descrizione.html">Informazioni sul Social Network</a></p>   
+                <p class="link" id="crea"><a href="CreaGruppo.html">Crea nuovo Gruppo</a></p>
             </nav>
 
 

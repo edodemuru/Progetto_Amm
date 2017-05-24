@@ -200,29 +200,112 @@ public class GruppoFactory {
 
     }
      
-     public void creaGruppo(Gruppo gruppo){
-         try {
+     public Gruppo getGruppoByName(String name) {
+        try {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
-            String query = "insert into gruppo (urlFotoGruppo,interesse,nome,idGruppo,idAmministratore) "
-                    + "values(?,?,?,default,?)";
+            String query = "select * from gruppo "
+                    + "where nome=?";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 
-            stmt.setString(1, gruppo.getUrlFotoGruppo());
-            stmt.setString(2, gruppo.getInteresse());
-            stmt.setString(3, gruppo.getName());
-            stmt.setInt(4, gruppo.getIdamministratore());            
+            stmt.setString(1,name);
 
-            stmt.executeUpdate();
+            ResultSet res = stmt.executeQuery();
 
+            if (res.next()) {
+                Gruppo gruppo = new Gruppo();
+                gruppo.setId(res.getInt("idGruppo"));
+                gruppo.setIdamministratore(res.getInt("idAmministratore"));
+                gruppo.setInteresse(res.getString("interesse"));
+                gruppo.setName(res.getString("nome"));
+                gruppo.setUrlFotoGruppo(res.getString("urlFotoGruppo"));
+                
+
+                stmt.close();
+                conn.close();
+
+                return gruppo;
+
+            }
+
+            //Nel caso la ricerca non dia risultati
             stmt.close();
             conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
+        return null;
+
+    }
+     
+     public void creaGruppo(Gruppo gruppo) throws SQLException{
+         Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+         
+         PreparedStatement stmtInserimento=null;
+         PreparedStatement stmtPartecipazione=null;
+         
+         String creazione = "insert into gruppo (urlFotoGruppo,interesse,nome,idGruppo,idAmministratore) "
+                    + "values(?,?,?,default,?)";
+         
+         String aggiuntaPartecipazione="insert into partecipazioneGruppo(idUtente,idGruppo) "
+                                      +"values(?,?)";
+         
+         try {
+            
+            conn.setAutoCommit(false);
+            stmtInserimento = conn.prepareStatement(creazione);
+
+            stmtInserimento.setString(1, gruppo.getUrlFotoGruppo());
+            stmtInserimento.setString(2, gruppo.getInteresse());
+            stmtInserimento.setString(3, gruppo.getName());
+            stmtInserimento.setInt(4, gruppo.getIdamministratore());  
+            
+            stmtInserimento.executeUpdate();
+            
+            conn.commit();
+            
+            Gruppo gruppoCreato= this.getGruppoByName(gruppo.getName());
+            
+            stmtPartecipazione=conn.prepareStatement(aggiuntaPartecipazione);
+            
+            stmtPartecipazione.setInt(1, gruppo.getIdamministratore());
+            stmtPartecipazione.setInt(2,gruppoCreato.getId());
+            
+            stmtPartecipazione.executeUpdate();
+            
+            conn.commit();
+
+            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+                
+                
+
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+
+            }
+
+        } finally{
+             
+             if(stmtInserimento!= null){
+                 stmtInserimento.close();
+             
+             }
+             if(stmtPartecipazione!=null){
+                 stmtPartecipazione.close();
+             
+             }
+             
+            conn.setAutoCommit(true);
+            conn.close();
+         
+         } 
 
      
      
