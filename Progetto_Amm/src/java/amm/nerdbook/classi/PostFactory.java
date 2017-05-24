@@ -248,6 +248,30 @@ public class PostFactory {
         }
 
     }
+    
+    public void deletePost(Post post){
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "delete from post "
+                    + "where idPost=?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, post.getId());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    
+    }
 
     public void setConnectionString(String s) {
         this.connectionString = s;

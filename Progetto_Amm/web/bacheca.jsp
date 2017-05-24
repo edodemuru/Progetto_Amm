@@ -313,8 +313,8 @@
                         <c:when test="${post.postType == 'TEXT'}">
                             <div class="posts">
                                 <c:if test="${amministratore==true}">
-                                <form action="bacheca.html" method="post">
-                                    <button type="submit" name="amm" id="amm">Cancella</button>
+                                <form action="bacheca.html?idAmico=${post.utenteDest.id}&idPost=${post.id}" method="post">
+                                    <button type="submit" name="amm" class="amm">Cancella</button>
                                 </form>
                                 </c:if>
                                 <div class="fotoProfilo">
@@ -327,6 +327,11 @@
 
                         <c:when test="${post.postType =='IMAGE'}">
                             <div class="posts">
+                                <c:if test="${amministratore==true}">
+                                <form action="bacheca.html?idAmico=${post.utenteDest.id}&idPost=${post.id}" method="post">
+                                    <button type="submit" name="amm" class="amm">Cancella</button>
+                                </form>
+                                </c:if>
                                 <div class="fotoProfilo">
                                     <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
                                 </div>
@@ -339,6 +344,11 @@
 
                         <c:when test="${post.postType =='LINK'}">
                             <div class="posts">
+                                <c:if test="${amministratore==true}">
+                                <form action="bacheca.html?idAmico=${post.utenteDest.id}&idPost=${post.id}" method="post">
+                                    <button type="submit" name="amm" class="amm">Cancella</button>
+                                </form>
+                                </c:if>
                                 <div class="fotoProfilo">
                                     <img title="fotoProfilo" alt="Foto del Profilo" src="${post.utenteMitt.urlFotoProfilo}">
                                 </div>

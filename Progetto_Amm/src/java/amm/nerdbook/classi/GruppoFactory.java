@@ -200,6 +200,34 @@ public class GruppoFactory {
 
     }
      
+     public void creaGruppo(Gruppo gruppo){
+         try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "insert into gruppo (urlFotoGruppo,interesse,nome,idGruppo,idAmministratore) "
+                    + "values(?,?,?,default,?)";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, gruppo.getUrlFotoGruppo());
+            stmt.setString(2, gruppo.getInteresse());
+            stmt.setString(3, gruppo.getName());
+            stmt.setInt(4, gruppo.getIdamministratore());            
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+     
+     
+     }
+     
      public void setConnectionString(String s){
 	this.connectionString = s;
 }

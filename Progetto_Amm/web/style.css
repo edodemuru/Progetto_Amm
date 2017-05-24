@@ -659,6 +659,13 @@ img#Profilepic{
     line-height: 60px;
 }
 
+button.amm{
+    margin-top: 0px;
+    margin-bottom: 11px;
+    
+    
+}
+
 
 
 @media only screen and (min-width:1024px){

@@ -189,8 +189,7 @@ public class Bacheca extends HttpServlet {
                 }
                 
                 //Cancellazione Gruppo
-                if(request.getParameter("cancellaGruppo")!=null){
-                    System.out.println("controllo bacheca.java");
+                if(request.getParameter("cancellaGruppo")!=null){                    
                     
                     idGruppo=Integer.parseInt(request.getParameter("idGruppodaCancellare"));
                     Gruppo gruppoDaCancellare= GruppoFactory.getInstance().getgruppobyId(idGruppo);
@@ -198,10 +197,9 @@ public class Bacheca extends HttpServlet {
                     try {
                         GruppoFactory.getInstance().deleteGruppo(gruppoDaCancellare);                       
                         
-                        System.out.println("Dovrei aver eseguito la cancellazione");
                         
-                        //request.getRequestDispatcher("bacheca.html").forward(request, response);
-                        //return;
+                        
+                       
                         
                     String URL = request.getContextPath() + "/bacheca.html";
                     response.sendRedirect(URL);
@@ -344,6 +342,20 @@ public class Bacheca extends HttpServlet {
                     response.sendRedirect(URL);
                     return;
 
+                }
+                
+                //Cancellazione Post
+                if(request.getParameter("amm")!=null){
+                    int idPost=Integer.parseInt(request.getParameter("idPost"));
+                    Post postDaCancellare=PostFactory.getInstance().getPostbyId(idPost);
+                    
+                    PostFactory.getInstance().deletePost(postDaCancellare);
+                    
+                    String URL = request.getContextPath() + "/bacheca.html?idAmico=" + idAmico;
+                    response.sendRedirect(URL);
+                    return;
+                
+                
                 }
 
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
