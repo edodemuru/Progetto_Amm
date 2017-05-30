@@ -10,6 +10,8 @@
         <meta name="keywords" content="Nerdbook Social Network sogni bacheca personale">
         <meta name="description" content="Bacheca personale utente">
         <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+        <script src="js/javascript.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
 
     </head>
 

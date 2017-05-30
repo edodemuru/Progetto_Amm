@@ -21,10 +21,12 @@
 
             </c:if>
 
-            <form id="searchsection" action="bacheca.html">
-                <input type="search" id="search" name="search" value="cerca">
+            <div id="searchsection">
+                <input type="search" id="search" name="search" placeholder="Cerca" value="">
+                <button type="submit" id="searchButton" method="post"></button>
+                
 
-            </form>
+            </div>
 
             <div id="peoplesection">
                 <h2 class="lateraltitle">Persone</h2>
@@ -61,11 +63,6 @@
     </c:when>
 
     <c:when test="${page==1}">
-
-        <div id="lateral2">
-            <form id="searchsection" action="bacheca.jsp">
-                <input type="search" id="search" name="search" value="cerca">     
-            </form>
 
             <div id="peoplesection">
                 <h2 class="lateraltitle">Persone</h2>
