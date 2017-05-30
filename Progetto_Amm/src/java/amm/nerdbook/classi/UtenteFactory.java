@@ -385,6 +385,62 @@ public class UtenteFactory {
         }
 
     }
+    
+    public ArrayList <Utente> searchUtente(String value){
+        
+        ArrayList<Utente> userFound= new ArrayList<>();
+        
+        try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "select * from utente "
+                    + "where nome LIKE ? and cognome LIKE ?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setString(1, "%" + value + "%");
+            stmt.setString(2, "%" + value + "%");
+
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                Utente utente = new Utente();
+                utente.setNome(res.getString("nome"));
+                utente.setCognome(res.getString("cognome"));
+                utente.setUrlFotoProfilo(res.getString("urlFotoProfilo"));
+                utente.setFrasePres(res.getString("frasePres"));
+
+                //Controllo formato data di nascita
+                if (this.checkFormatDate(res.getString("dataNasc"))) {
+
+                    utente.setDataNascita(res.getString("dataNasc"));
+
+                } else {
+                    utente.setDataNascita("00/00/0000");
+                }
+                utente.setUsername(res.getString("username"));
+                utente.setPassword(res.getString("password"));
+                utente.setId(res.getInt("idUtente"));
+
+                userFound.add(utente);
+
+                
+
+            }
+
+            
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userFound;
+
+        
+    
+    
+    }
 
     private boolean checkFormatDate(String dateString) {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
