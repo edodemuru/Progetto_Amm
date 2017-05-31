@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/javascript.js"></script>
 
 <c:choose>
     <c:when test="${page==0}">        
@@ -63,6 +65,7 @@
     </c:when>
 
     <c:when test="${page==1}">
+        <div id="lateral2">
 
             <div id="peoplesection">
                 <h2 class="lateraltitle">Persone</h2>

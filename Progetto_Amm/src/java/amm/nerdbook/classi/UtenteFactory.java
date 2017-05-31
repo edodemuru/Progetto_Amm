@@ -394,7 +394,7 @@ public class UtenteFactory {
             Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
 
             String query = "select * from utente "
-                    + "where nome LIKE ? and cognome LIKE ?";
+                    + "where nome like ? or cognome like ?";
 
             PreparedStatement stmt = conn.prepareStatement(query);
 

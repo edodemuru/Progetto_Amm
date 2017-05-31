@@ -1374,6 +1374,15 @@ p.link#crea::before{
     
 }
 
+#searchButton:focus{
+  border: 3px solid #2980B9;
+  border-radius: 10px;
+  box-sizing: border-box;
+  outline:none;
+  
+
+}
+
 
     
 
