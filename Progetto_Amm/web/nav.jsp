@@ -78,7 +78,7 @@
 
             </div>
 
-            <div id="groupsection">
+            <div id="groupsection2">
                 <h2 class="lateraltitle" id="groups">Gruppi</h2>
                 <c:forEach var="gruppo" items="${gruppi}">
                     <div class="fotoProfilo2">
@@ -120,7 +120,7 @@
                     </c:forEach>
                 </div>
 
-                <div id="groupsection">
+                <div id="groupsection2">
                     <h2 class="lateraltitle" id="groups">Gruppi</h2>            
                     <c:forEach var="gruppo" items="${gruppi}">
                         <div class="fotoProfilo2">

@@ -59,6 +59,7 @@ function stateFailure(data, state) {
 }
 
 $(document).ready(function () {
+    
     $("#search").on('input', function () {
         var userSearched = $("#search")[0].value;
 
@@ -80,6 +81,7 @@ $(document).ready(function () {
         });
 
     });
+    
 
 });
 

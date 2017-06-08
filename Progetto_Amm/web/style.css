@@ -306,7 +306,7 @@ div#linkdif{
 
 div#lateral,div#lateral2,div#lateral5{
     float:left;
-    width: 142px;
+    width: 149px;
     padding-left: 40px;
     border-left:2px solid #B9BCBD;
     background-color: white;
@@ -1003,7 +1003,13 @@ textarea#fraseBach,input#urlAllegato,button#pubblica,button#pubblica2,button#chi
 #groupsection{
     position: absolute;
     left: 258px;
-    bottom: 107px;
+    bottom: 190px;
+    width: 182px;
+}
+#groupsection2{
+    position: absolute;
+    left: 258px;
+    bottom: 201px;
     width: 182px;
 }
 

@@ -64,12 +64,12 @@
                             <!-- Inserimento di un nuovo Post-->
                             <form action="bacheca.html" method="post" id="creaPost">            
                                 <div class="formitem" id="PostText">
-                                    <textarea rows="2" cols="20" name="frase" id="fraseBach">Testo nuovo post</textarea>
+                                    <textarea rows="2" cols="20" name="frase" id="fraseBach" placeholder="Testo nuovo Post"></textarea>
                                 </div>
 
 
                                 <div class="formitem" id="PostUrl">
-                                    <input type="url" name="urlAllegato" id="urlAllegato" value="URL allegato (opzionale)">
+                                    <input type="url" name="urlAllegato" id="urlAllegato" placeholder="URL allegato (opzionale)" value="">
                                 </div>
 
                                 <div id="options">
