@@ -74,6 +74,45 @@ public class GruppoFactory {
         }
         return null;
     }
+    
+    
+    public Gruppo getgruppobyIdAmministratore(int id){
+    try {
+            Connection conn = DriverManager.getConnection(connectionString, "utente", "password");
+
+            String query = "select * from gruppo "
+                    + "where idAmministratore=?";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, id);
+
+            ResultSet res = stmt.executeQuery();
+
+            if (res.next()) {
+                Gruppo gruppo= new Gruppo();
+                gruppo.setUrlFotoGruppo(res.getString("urlfotogruppo"));
+                gruppo.setInteresse(res.getString("interesse"));
+                gruppo.setName(res.getString("nome"));
+                gruppo.setId(res.getInt("idGruppo"));
+                gruppo.setIdamministratore(res.getInt("idAmministratore"));
+                
+                stmt.close();
+                conn.close();
+
+                return gruppo;
+
+            }
+
+            //Nel caso la ricerca non dia risultati
+            stmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
      
   
     

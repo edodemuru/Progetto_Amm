@@ -216,6 +216,8 @@ public class UtenteFactory {
         PreparedStatement stmtPosts = null;
         PreparedStatement stmtAmicizia = null;
         PreparedStatement stmtPartecipazione = null;
+        PreparedStatement stmtPartecipazioneAltri=null;
+        PreparedStatement stmtPostGruppo=null;
         PreparedStatement stmtGruppo = null;
         PreparedStatement stmtProf = null;
 
@@ -227,6 +229,13 @@ public class UtenteFactory {
         
         String deletePartecipazione= "delete from partecipazioneGruppo "
                                     +"where idUtente=?";
+        
+        String deletePostsGruppo = "delete from post "
+                + "where idDestinatarioGruppo=?";
+        
+        String deletePartecipazioneAltri="delete from partecipazioneGruppo "
+                                   +"where idGruppo=?";
+        
         
         String deleteGruppo="delete from gruppo "
                             +"where idAmministratore=?";
@@ -241,6 +250,8 @@ public class UtenteFactory {
             stmtPosts = conn.prepareStatement(deletePosts);
             stmtAmicizia=conn.prepareStatement(deleteAmicizia);
             stmtPartecipazione=conn.prepareStatement(deletePartecipazione);
+            stmtPartecipazioneAltri=conn.prepareStatement(deletePartecipazioneAltri);
+            stmtPostGruppo=conn.prepareStatement(deletePostsGruppo);
             stmtGruppo=conn.prepareStatement(deleteGruppo);
             stmtProf = conn.prepareStatement(deleteProfilo);
 
@@ -252,6 +263,10 @@ public class UtenteFactory {
             
             stmtPartecipazione.setInt(1, utente.getId());
             
+            stmtPartecipazioneAltri.setInt(1, GruppoFactory.getInstance().getgruppobyIdAmministratore(utente.getId()).getId());
+            
+            stmtPostGruppo.setInt(1, GruppoFactory.getInstance().getgruppobyIdAmministratore(utente.getId()).getId());
+            
             stmtGruppo.setInt(1, utente.getId());           
             
             stmtProf.setInt(1, utente.getId());
@@ -259,6 +274,8 @@ public class UtenteFactory {
             stmtPosts.executeUpdate();
             stmtAmicizia.executeUpdate();
             stmtPartecipazione.executeUpdate();
+            stmtPostGruppo.executeUpdate();
+            stmtPartecipazioneAltri.executeUpdate();
             stmtGruppo.executeUpdate();            
             stmtProf.executeUpdate();
            
